@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-c_=2$^yczi2gdf8bz1yfge6px8o84^*m08t7(u!q=frhpi=k6(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['chebotop.pythonanywhere.com']
+ALLOWED_HOSTS = ['chebotop.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
