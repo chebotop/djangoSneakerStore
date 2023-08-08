@@ -5,11 +5,7 @@ body {
     padding: 20px;
 }
 
-h1 {
-    color: #47cdd5;
-}
-
-p {
+h1, p {
     color: #47cdd5;
 }
 .header {
@@ -36,6 +32,8 @@ p {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     list-style-type: none;
     padding: 0;
+    top: 100%;
+    left: 0;
 }
 .header-item:hover .submenu {
     display: block; 
@@ -47,6 +45,7 @@ p {
 .submenu li a {
     text-decoration: none;
     color: #333;
+    transition: background-color 0.3s ease;
 }
 
 .submenu li a:hover {
