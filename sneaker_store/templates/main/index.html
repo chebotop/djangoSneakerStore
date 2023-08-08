@@ -3,39 +3,46 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Моя страница</title>
+    <title>{% block title %} My portfolio {% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/styles.css' %}">
 </head>
 <body>
     <div class="header">
         <div class="logo">
             <img src="{% static 'main/images/brand_logo.png' %}" alt="brand_logo">
-            <p>Логотип</p>
+            <p style="color: black">Chebotop ©</p>
         </div>
         <div class="header-item">
-            <p>Пункт меню</p>
+            <p>Apps</p>
             <ul class="submenu">
-                <li><a href="#">Подпункт 1</a></li>
-                <li><a href="#">Подпункт 2</a></li>
-                <li><a href="#">Подпункт 3</a></li>
+                <li><a href="#">Google Sheets API & Telegram bot</a></li>
+                <li><a href="#">Crossboost catalog</a></li>
+                <li><a href="#">Home Surveillance Server</a></li>
             </ul>
         </div>
         <div class="header-item">
-            <p>Пункт меню</p>
+            <p>Gamification</p>
             <ul class="submenu">
-                <li><a href="#">Подпункт 1</a></li>
-                <li><a href="#">Подпункт 2</a></li>
-                <li><a href="#">Подпункт 3</a></li>
+                <li><a href="#">Snake</a></li>
+                <li><a href="#">Habit tracker</a></li>
+                <li><a href="#">Pinball</a></li>
             </ul>
         </div>
         <div class="header-item">
-            <p>Пункт меню</p>
+            <p>Privacy</p>
             <ul class="submenu">
-                <li><a href="#">Подпункт 1</a></li>
-                <li><a href="#">Подпункт 2</a></li>
-                <li><a href="#">Подпункт 3</a></li>
+                <li><a href="#">Admin panel</a></li>
+                <li><a href="#">Curricullum vitae</a></li>
+                <li><a href="#">Callback polls</a></li>
             </ul>
         </div>
     </div>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+
+    </footer>
 </body>
 </html>
