@@ -26,6 +26,7 @@ h1, p {
     margin-right: 10px;
 }
 .submenu {
+    font-weight: lighter;
     margin-top: -1px;
     display: none; 
     position: absolute; 
