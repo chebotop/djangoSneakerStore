@@ -20,6 +20,13 @@ h1, p {
     margin-right: 10%;
     font-weight: bold;
 }
+.header-item:hover,
+.header-item p {
+    cursor: pointer;
+}
+.header-item:hover .submenu {
+    display: block; 
+}
 .logo img {
     max-width: 350px;
     height: auto;
@@ -37,9 +44,6 @@ h1, p {
     top: 100%;
     left: 0;
 }
-.header-item:hover .submenu {
-    display: block; 
-}
 .submenu li {
     padding: 10px;
 }
@@ -52,4 +56,5 @@ h1, p {
 
 .submenu li a:hover {
     background-color: #f0f0f0;
+    cursor: pointer;
 }

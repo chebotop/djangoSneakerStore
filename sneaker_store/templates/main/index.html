@@ -16,7 +16,7 @@
             <p>Apps</p>
             <ul class="submenu">
                 <li><a href="{% url 'sheets_bot' %}">Google Sheets API & Telegram bot</a></li>
-                <li><a href="#">Crossboost catalog</a></li>
+                <li><a href="{% url 'catalog' %}">Crossboost catalog</a></li>
                 <li><a href="#">Home Surveillance Server</a></li>
             </ul>
         </div>
@@ -36,6 +36,10 @@
                 <li><a href="#">Callback polls</a></li>
             </ul>
         </div>
+        <div class="header-item">
+            <p><a href="/admin">Sign in</a></p>
+            <ul class="submenu">
+            </ul>
     </div>
     <main>
         {% block content %}

@@ -13,6 +13,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+
+SCOPE_SHEETS = os.getenv('SCOPE_SHEETS')
+SCOPE_DRIVE = os.getenv('SCOPE_DRIVE')
+TOKEN = os.getenv('TOKEN')
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main',
+    'telegram_bot',
 ]
 
 MIDDLEWARE = [
