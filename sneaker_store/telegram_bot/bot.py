@@ -90,7 +90,7 @@ async def save_response(callback_query: types.CallbackQuery, state: FSMContext):
     # Тут добавьте ваш код для сохранения ответа
     await callback_query.message.answer(f"You've chosen to save the response for car {numberplate}.")
     await state.reset_state()
-    print(numberplate)
+
 
 @dp.callback_query_handler(lambda c: c.data == "continue", state=Form.awaiting_additional_data)
 async def continue_without_saving(callback_query: types.CallbackQuery, state: FSMContext):
