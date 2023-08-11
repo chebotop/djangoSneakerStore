@@ -80,17 +80,6 @@ async def process_input_data(message: types.Message, state: FSMContext):
     await message.answer(f'Car #{combined_data} added')
     await state.reset_state()
 
-@dp.callback_query_handler(lambda c: c.data == "save_response", state=Form.awaiting_additional_data)
-async def save_response(callback_query: types.CallbackQuery, state: FSMContext):
-    await bot.answer_callback_query(callback_query.id)
-    # Сохраните ответ пользователя, например:
-    user_data = await state.get_data()
-    numberplates = {}
-    numberplates[user_data.get("numberplate")] = "empty value"
-    # Тут добавьте ваш код для сохранения ответа
-    await callback_query.message.answer(f"You've chosen to save the response for car {numberplate}.")
-    await state.reset_state()
-
 
 @dp.callback_query_handler(lambda c: c.data == "continue", state=Form.awaiting_additional_data)
 async def continue_without_saving(callback_query: types.CallbackQuery, state: FSMContext):
