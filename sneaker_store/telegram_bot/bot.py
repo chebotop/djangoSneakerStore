@@ -81,6 +81,7 @@ async def process_input_data(message: types.Message, state: FSMContext):
     await state.reset_state()
 
 
+
 @dp.callback_query_handler(lambda c: c.data == "continue", state=Form.awaiting_additional_data)
 async def continue_without_saving(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.answer_callback_query(callback_query.id)

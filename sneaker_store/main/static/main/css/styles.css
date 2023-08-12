@@ -1,8 +1,22 @@
 body {
+    height: 100%;
     font-family: Arial, sans-serif;
     background-color: #ffffff;
     margin: 0;
     padding: 20px;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+.content {
+    flex: 1;
+}
+main {
+    clear: both;
+    width: 100%;
+    display: block;
 }
 
 h1, p {
@@ -53,8 +67,11 @@ h1, p {
     color: #333;
     transition: background-color 0.3s ease;
 }
-
 .submenu li a:hover {
     background-color: #f0f0f0;
     cursor: pointer;
+}
+footer {
+    background-color: #333;
+    color: white;
 }
