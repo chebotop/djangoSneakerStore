@@ -22,20 +22,23 @@ def fetch_data_from_gsheets():
 
 def is_number_exist(keyword):
     data = fetch_data_from_gsheets().get_all_values()
-    respond = [' '.join(sublist) for sublist in data if keyword.lower() in sublist[0].lower()]
-    return '\n'.join(respond) if respond else False
-
+    # respond = [' '.join(sublist) for sublist in data if keyword.lower() in sublist[0].lower()]
+    # return '\n'.join(respond) if respond else False
+    for sublist in data:
+        if keyword.lower() in sublist[0].lower():
+            return True
+    return False
 
 def add_new_data(data):
     fetch_data_from_gsheets().append_row(data.split(' '))
 
 
-def choice_keyboard():
-    markup = InlineKeyboardMarkup()
-    item1 = InlineKeyboardButton("1. Сохранить ответ", callback_data="save_response")
-    item2 = InlineKeyboardButton("2. Продолжить", callback_data="continue")
-    markup.add(item1, item2)
-    return markup
+# def choice_keyboard():
+#     markup = InlineKeyboardMarkup()
+#     item1 = InlineKeyboardButton("1. Сохранить ответ", callback_data="save_response")
+#     item2 = InlineKeyboardButton("2. Продолжить", callback_data="continue")
+#     markup.add(item1, item2)
+#     return markup
 
 
 TOKEN = os.getenv('TOKEN')
@@ -50,42 +53,33 @@ class Form(StatesGroup):
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    await message.answer("Hey, it's a database of cars and tips. Enter the numberplate or model name of a car")
+    await message.answer("Enter numberplate")
 
 
 @dp.message_handler(content_types=types.ContentType.TEXT)
 async def process_message(message: types.Message, state: FSMContext):
     text = message.text
-    current_state = await state.get_state()
-    try:
-        if current_state != 'Form:awaiting_additional_data':
-            num = is_number_exist(text)
-            if not num:
-                markup = choice_keyboard()
-                await message.answer(f"Have you the full data for add data {text} to sheets?", reply_markup=markup)
-                await state.update_data(numberplate=text)
-                await Form.awaiting_additional_data.set()
-                await message.answer(f"Enter additional data for car #{text} in format: 'model tip'")
-            elif text.split(' ')[0].isdigit() and text.split(' ')[2].isdigit():
-                add_new_data(text)
-                await message.answer(f'Car #{text} added')
-    except IndexError:
-        await message.answer(num)
 
-#добавление комбинированных данных
-@dp.message_handler(state=Form.awaiting_additional_data, content_types=types.ContentType.TEXT)
-async def process_input_data(message: types.Message, state: FSMContext):
-    combined_data = f"{(await state.get_data()).get('numberplate')} {message.text}"
-    add_new_data(combined_data)
-    await message.answer(f'Car #{combined_data} added')
-    await state.reset_state()
+    if not is_number_exist(text):
+        await message.answer("Введите группы из трех аргументов (номер, модель, бонус) через пробел:")
+        await state.set_data({"awaiting_args": True})
 
+@dp.message_handler(content_types=types.ContentType.TEXT)
+async def process_args_if_needed(message: types.Message, state: FSMContext):
+    data = await state.get_data()
 
+    if data.get("awaiting_args", False):
+        words = message.text.split()
 
-@dp.callback_query_handler(lambda c: c.data == "continue", state=Form.awaiting_additional_data)
-async def continue_without_saving(callback_query: types.CallbackQuery, state: FSMContext):
-    await bot.answer_callback_query(callback_query.id)
-    await callback_query.message.answer("Please, enter the additional data in format: 'model tip'.")
+        if len(words) % 3 == 0:
+            for i in range(0, len(words), 3):
+                args = words[i:i+3]
+                add_new_data(args)
+            await message.answer(f"Данные добавлены.")
+            await state.reset_state()  # Сброс состояния
+        else:
+            await message.answer("Количество слов в сообщении должно быть кратно трем. Пожалуйста, проверьте ваш ввод.")
+
 
 
 def run_bot():
