@@ -3,6 +3,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher, FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
+from aiogram.dispatcher.filters import Text
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from dotenv import load_dotenv
@@ -13,32 +14,32 @@ logging.basicConfig(level=logging.INFO)
 
 load_dotenv()
 creds = ServiceAccountCredentials.from_json_keyfile_name('telegram_bot/data/secret_key.json')
-scopes=[os.getenv('SCOPE_SHEETS'), os.getenv('SCOPE_DRIVE')]
+scopes = [os.getenv('SCOPE_SHEETS'), os.getenv('SCOPE_DRIVE')]
 
 
 def fetch_data_from_gsheets():
     return gspread.authorize(creds).open('Cars and tip').sheet1
 
 
-def is_number_exist(keyword):
+def is_number_exist(text_input):
     data = fetch_data_from_gsheets().get_all_values()
-    # respond = [' '.join(sublist) for sublist in data if keyword.lower() in sublist[0].lower()]
-    # return '\n'.join(respond) if respond else False
+    keyword = text_input.split()[0]  # Берем только первое слово из строки, так как это номер
     for sublist in data:
         if keyword.lower() in sublist[0].lower():
             return True
     return False
 
+
+def return_existing_data(number):
+    data = fetch_data_from_gsheets().get_all_values()
+    keyword = number.split()[0]  # Берем только первое слово из строки, так как это номер
+    for sublist in data:
+        if keyword.lower() in sublist[0].lower():
+            return ' '.join(sublist)
+
+
 def add_new_data(data):
-    fetch_data_from_gsheets().append_row(data.split(' '))
-
-
-# def choice_keyboard():
-#     markup = InlineKeyboardMarkup()
-#     item1 = InlineKeyboardButton("1. Сохранить ответ", callback_data="save_response")
-#     item2 = InlineKeyboardButton("2. Продолжить", callback_data="continue")
-#     markup.add(item1, item2)
-#     return markup
+    fetch_data_from_gsheets().append_row(data)
 
 
 TOKEN = os.getenv('TOKEN')
@@ -48,38 +49,36 @@ dp = Dispatcher(bot, storage=MemoryStorage())
 
 
 class Form(StatesGroup):
-    awaiting_additional_data = State()
+    awaiting_args = State()
 
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-    await message.answer("Enter numberplate")
+    await message.answer("Введите номерной знак")
 
 
 @dp.message_handler(content_types=types.ContentType.TEXT)
-async def process_message(message: types.Message, state: FSMContext):
-    text = message.text
-
-    if not is_number_exist(text):
-        await message.answer("Введите группы из трех аргументов (номер, модель, бонус) через пробел:")
-        await state.set_data({"awaiting_args": True})
-
-@dp.message_handler(content_types=types.ContentType.TEXT)
-async def process_args_if_needed(message: types.Message, state: FSMContext):
-    data = await state.get_data()
-
-    if data.get("awaiting_args", False):
-        words = message.text.split()
-
-        if len(words) % 3 == 0:
-            for i in range(0, len(words), 3):
-                args = words[i:i+3]
-                add_new_data(args)
-            await message.answer(f"Данные добавлены.")
-            await state.reset_state()  # Сброс состояния
+async def process_args(message: types.Message, state: FSMContext):
+    lines = message.text.split('\n')
+    added_count = 0
+    
+    for line in lines:
+        args = line.split()
+        number = args[0]
+        
+        if len(args) == 3 and not is_number_exist(number):
+            add_new_data(args)
+            added_count += 1
+        elif len(args) == 3 and is_number_exist(number):
+            previous_data = return_existing_data(number)
+            await message.answer(f"Запись с номером '{number}' уже существует и была проигнорирована.\nПрошлая запись: {previous_data}")
         else:
-            await message.answer("Количество слов в сообщении должно быть кратно трем. Пожалуйста, проверьте ваш ввод.")
+            await message.answer(f"Строка '{line}' не соответствует формату и была пропущена.")
 
+    if added_count:
+        await message.answer(f"Добавлено {added_count} записей.")
+    else:
+        await message.answer("Не было добавлено ни одной записи.")
 
 
 def run_bot():
