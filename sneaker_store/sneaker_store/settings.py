@@ -35,7 +35,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['www.crossboost.ru',
                  'crossboost.ru',
                  'localhost',
-                 '127.0.0.1',]
+                 '127.0.0.1',
+                 'chebotop.pythonanywhere.com',]
 
 
 # Application definition
