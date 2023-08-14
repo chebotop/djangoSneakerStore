@@ -5,12 +5,19 @@ body {
 .jumbotron {
     background: url('../images/jumbotron.jpg') no-repeat;
     background-size: cover;
+    background-position: center;
     padding-left: 15px;
-    height: 110vh;
+    height: 55vh;
     width: 100vw;
     color: rgb(195, 195, 195);
 }
 
 .card {
     border: none;
+}
+img.logo-img {
+    max-width: 200px;
+}
+p.lead {
+margin-right: 50px;
 }

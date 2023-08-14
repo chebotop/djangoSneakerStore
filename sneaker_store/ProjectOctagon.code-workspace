@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "../../ProjectOctagon"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"previewLimit": 50,
+				"driver": "SQLite",
+				"name": "db.sqlite3",
+				"group": "store",
+				"database": "${workspaceFolder:website}/sneaker_store/db.sqlite3"
+			}
+		],
+		"sqltools.useNodeRuntime": true,
+	}
+}

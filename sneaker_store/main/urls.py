@@ -2,13 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('sheets_bot/', views.sheets_bot, name='sheets_bot'),
-    path('catalog/', views.catalog, name='catalog'),  # Список всех товаров
-    path('catalog/<int:product_id>/', views.product_detail, name='product_detail'),  # Детали конкретного товара
-    # path('catalog/category/<int:category_id>/', views.category, name='category_detail'),  # Список товаров определенной категории
-
-    # Пути из проекта sneaker-shop
+    path('', views.index),
     path('browse', views.catalog_page),
     path('admin/add_shoe_page', views.add_shoe_page),
     path('admin/add_shoe', views.add_shoe),
