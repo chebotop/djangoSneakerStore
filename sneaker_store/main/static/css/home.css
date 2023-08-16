@@ -21,3 +21,16 @@ img.logo-img {
 p.lead {
 margin-right: 50px;
 }
+@media (max-width: 576px) {
+    .jumbotron {
+        height: 40vh;
+    }
+    p.lead {
+        font-size: 10px;
+        margin-right: 0px;
+    }
+    .display-3 {
+        font-size: 30px;
+        margin-top: 20px;
+    }
+}
