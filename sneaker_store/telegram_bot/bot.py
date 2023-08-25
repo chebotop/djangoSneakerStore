@@ -30,7 +30,16 @@ class Data:
     
     def add_new_data(self, data):
         self.data.append_row(data)
-    
+
+
+
+
+
+
+
+
+
+
 
 data = Data(gc)
 
