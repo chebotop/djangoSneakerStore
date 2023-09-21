@@ -93,6 +93,8 @@ async def process_args(message: types.Message, state: FSMContext):
         answer = return_existing_data(message.text.split()[0])
         await message.answer(f"Найдена запись: {answer}")
         return True
+    elif len(message.text.split()) == 1 and is_number_exist(message.text) == False:
+        await message.answer(f"Запись не найдена")
     elif len(message.text.split()) == 3 or len(message.text.split('\n')) > 1:
         lines = message.text.split('\n')
         logging.info(f"Получены аргументы: {lines}")
