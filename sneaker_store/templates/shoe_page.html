@@ -1,96 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'base_head.html' %}
 
-    <!-- favicon -->
-    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico/favicon.png' %}">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico/favicon.png' %}">
+{% block head %}
+{% block title %}Обзор | Crossboost{% endblock %}
+    {{ block.super }}
+{% endblock %}
 
-    <!-- end favicon -->
-
-    <title>{{shoe.color}} {{shoe.model.brand.name}} {{shoe.model.model}} | Sneaker Shop</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/shoe_page.css' %}">
-
-    <!-- Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <!-- end Bootstrap -->
-</head>
-<body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/"><img class="logo-img" src="{% static 'images/logo.png' %}"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">HOME</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    AIR JORDAN
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {% for air_jordan in air_jordans %}
-                        <a class="dropdown-item" href="/browse/{{air_jordan.id}}">{{air_jordan.model}}</a>
-                        {% endfor %}
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/browse/air jordan">Browse Air Jordan</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    NIKE
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {% for nike in nikes %}
-                        <a class="dropdown-item" href="/browse/{{nike.id}}">{{nike.model}}</a>
-                        {% endfor %}
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/browse/nike">Browse Nike</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    ADIDAS
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {% for adidas in adidases %}
-                        <a class="dropdown-item" href="/browse/{{adidas.id}}">{{adidas.model}}</a>
-                        {% endfor %}
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/browse/adidas">Browse Adidas</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="/browse" class="nav-link">BROWSE ALL</a>
-                </li>
-            </ul>
-                
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-danger" href="/admin">Visit the Admin Site</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cart">Cart <img src="{% static 'images/cart.png' %}" height="15vh" alt=""></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+{% block navbar %}
+    {{ block.super }}
+{% endblock %}
+{% block content %}
     <main role="main">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
                     <img src='{{shoe.image.url}}' class='image-responsive' width='100%'>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" style="
+                padding-top: 20px;">
+                
                     <div class="row">
                         <div class="col-md-12">
                             <h2>{{shoe.model.brand.name}} {{shoe.model.model}} {{shoe.color}}</h2>
@@ -105,7 +32,7 @@
                     <hr class="my-4">
                     <div class="row">
                         <div class="col-md-12 bottom-rule">
-                         <h2 class="product-price">${{shoe.model.price}}</h2>
+                         <h2 class="product-price">₽{{shoe.model.price}}</h2>
                         </div>
                     </div>
                     <div class="row">
@@ -123,7 +50,7 @@
                                     {% endfor %}
                                 </select>
                         
-                                <button class="btn btn-dark btn-sm">Add to Cart</button>
+                                <button class="btn btn-dark btn-sm">Добавить в корзину</button>
                             </form>
                         </div>
                     </div>
@@ -132,7 +59,7 @@
             </div>
             <!-- close row -->
             <hr class="my-4">
-            <h3 class="text-center">You might also like:</h3>
+            <h3 class="text-center">Вам может понравиться:</h3>
             <div class="row text-center justify-content-center">
                 {% for shoe in related_shoes %}
                 <div class="col-lg-2 col-md-2 col-sm-4 mb-5">
@@ -151,5 +78,4 @@
         </div>
         <!-- close container -->
     </main>
-</body>
-</html>
+    {% endblock %}

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     {% load static %}
+    {% block head %}
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico/favicon.png' %}">
         <!-- end favicon -->
 
-        <title>Home | Sneaker Shop</title>
+        {% block title %}{% endblock title %}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'css/home.css' %}">
 
@@ -21,13 +22,15 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
     </head>
+    {% endblock %}
     <body>
+    {%block navbar %}
         <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/"><img class="logo-img" src="{% static 'images/logo.png' %}" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-    
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
@@ -84,4 +87,7 @@
                 </ul>
             </div>
         </nav>
-    
+    {% endblock %}
+        {% block content %}{% endblock %}
+    </body> 
+</html>

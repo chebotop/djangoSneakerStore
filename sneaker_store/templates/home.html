@@ -1,118 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-    {% load static %}
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'base_head.html' %}
 
-        <!-- favicon -->
-        <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico/favicon.png' %}">
-        <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico/favicon.png' %}">
-        <!-- end favicon -->
+{% block head %}
+    {% block title %}Home | Sneaker Shop{% endblock %}
+    {{ block.super }}
+{% endblock %}
 
-        <title>Home | Sneaker Shop</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% block navbar %}
+    {{ block.super }}  
+{% endblock %}
 
-        <!-- Bootstrap -->
-
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
-    </head>
-<body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/"><img class="logo-img" src="{% static 'images/logo.png' %}" alt=""></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">HOME<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    AIR JORDAN
+{% block content %}
+<main role="main">
+    <div class="jumbotron jumbotron-fluid">
+        <h1 class="display-3">Air Jordan 6 DMP</h1>
+        <p class="lead text-white font-weight-bold" 
+            style="text-shadow: 2px 2px 4px black;">
+            Релиз "Defining Moments Pack" (DMP): успей заполучить часть истории Майкла Джордана.
+        </p>
+        <!-- <hr class="my-4"> -->
+        <p class="lead">
+            <a class="btn btn-dark btn-lg" href="/shoe/13" role="button">Узнать больше</a>
+        </p>
+    </div>
+    <h2 class="text-center">Актуальное</h2>
+    <div class="container">
+        <div class="row text-center">
+            {% for shoe in recent_shoes %}
+            <div class="col-4 col-lg-2 col-md-3 col-sm-4 mb-4"> <!-- Определение размеров колонок для разных экранов -->
+                <div class="card h-100">
+                    <a href="/shoe/{{shoe.id}}">
+                        <img src="{{shoe.image.url}}" alt="" width="100%">
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {% for air_jordan in air_jordans %}
-                        <a class="dropdown-item" href="/browse/{{air_jordan.id}}">{{air_jordan.model}}</a>
-                        {% endfor %}
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/browse/air jordan">Browse Air Jordan</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    NIKE
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {% for nike in nikes %}
-                        <a class="dropdown-item" href="/browse/{{nike.id}}">{{nike.model}}</a>
-                        {% endfor %}
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/browse/nike">Browse Nike</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    ADIDAS
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {% for adidas in adidases %}
-                        <a class="dropdown-item" href="/browse/{{adidas.id}}">{{adidas.model}}</a>
-                        {% endfor %}
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/browse/adidas">Browse Adidas</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="/browse" class="nav-link">BROWSE ALL</a>
-                </li>
-            </ul>
-                
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-danger" href="/admin">Visit the Admin Site</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cart">Cart <img src="{% static 'images/cart.png' %}" height="15vh" alt=""></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <main role="main">
-        <div class="jumbotron jumbotron-fluid">
-            <h1 class="display-3">Air Jordan 6 DMP</h1>
-            <p class="lead text-white font-weight-bold" 
-                style="text-shadow: 2px 2px 4px black;">
-                Релиз "Defining Moments Pack" (DMP): успей заполучить часть истории Майкла Джордана.
-            </p>
-            <!-- <hr class="my-4"> -->
-            <p class="lead">
-                <a class="btn btn-dark btn-lg" href="/shoe/13" role="button">Узнать больше</a>
-            </p>
-        </div>
-        <h2 class="text-center">Актуальное</h2>
-        <div class="container">
-            <div class="row text-center">
-                {% for shoe in recent_shoes %}
-                <div class="col-4 col-lg-2 col-md-3 col-sm-4 mb-4"> <!-- Определение размеров колонок для разных экранов -->
-                    <div class="card h-100">
-                        <a href="/shoe/{{shoe.id}}">
-                            <img src="{{shoe.image.url}}" alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <p class="card-title"><a class="text-secondary" href="/shoe/{{shoe.id}}">{{shoe.model.brand.name}} {{shoe.model.model}} {{shoe.color}}</a></p>
-                        </div>
+                    <div class="card-body">
+                        <p class="card-title"><a class="text-secondary" href="/shoe/{{shoe.id}}">{{shoe.model.brand.name}} {{shoe.model.model}} {{shoe.color}}</a></p>
                     </div>
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
-            </main>
-</body>
+    </div>
+</main>
+{% endblock %}
+    
+<!-- </body> -->
 </html>
