@@ -54,11 +54,11 @@
                                             <input type='text' name='new_price' size='5'><button class="btn btn-sm btn-dark">Update</button>
                                         </td>
                                     </form>
-                                    <form action='/admin/update_inv' method='post'>
+                                    <form action='/admin/update_desc' method='post'>
                                         {% csrf_token %}
                                         <td>{{shoe.inventory}}
                                             <input type='hidden' name='shoe_id' value='{{shoe.id}}'>
-                                            <input type='text' name='new_inventory' size='3'><button class="btn btn-sm btn-dark">Update</button>
+                                            <input type='text' name='new_description' size='3'><button class="btn btn-sm btn-dark">Update</button>
                                         </td>
                                     </form>
                                     <td>{{shoe.quantity_sold}}</td>

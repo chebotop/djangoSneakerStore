@@ -11,7 +11,7 @@ def index(request):
         request.session['cart_id']=cart.id
 
     # Grabs the 6 most recent shoes created in the DB.
-    recent_shoes = ShoeColor.objects.all().order_by('-created_at')[0:6]
+    recent_shoes = ShoeModel.objects.all().order_by('-created_at')[0:6]
 
     # Also grabs all the models of the three brands, for display in the top bar.
     context = {
@@ -46,33 +46,33 @@ def catalog_page(request, browse_filter = "all"):
     # Assigns display_shoes to either all, a brand, or a specific model in the else statement. "browse_filter" can include brand or model info. Always filters for price as well. 
     if browse_filter == "all":
         category = "All Sneakers"
-        display_shoes = ShoeColor.objects.filter(model__price__gte=min_price).filter(model__price__lte=max_price)
+        display_shoes = ShoeModel.objects.filter(price__gte=min_price, price__lte=max_price)
     elif browse_filter == "air jordan":
         category = "Air Jordan"
-        display_shoes = ShoeColor.objects.filter(model__brand__name="Air Jordan").filter(model__price__gte=min_price).filter(model__price__lte=max_price)
+        display_shoes = ShoeModel.objects.filter(model__brand__name="Air Jordan", price__gte=min_price, price__lte=max_price)
     elif browse_filter == "nike":
         category = "Nike"
-        display_shoes = ShoeColor.objects.filter(model__brand__name="Nike").filter(model__price__gte=min_price).filter(model__price__lte=max_price)
+        display_shoes = ShoeModel.objects.filter(model__brand__name="Nike", price__gte=min_price, price__lte=max_price)
     elif browse_filter == "adidas":
         category = "Adidas"
-        display_shoes = ShoeColor.objects.filter(model__brand__name="Adidas").filter(model__price__gte=min_price).filter(model__price__lte=max_price)
+        display_shoes = ShoeModel.objects.filter(model__brand__name="Adidas", price__gte=min_price, price__lte=max_price)
     else:
-        model = ShoeModel.objects.get(id = int(browse_filter))
+        model = ShoeModel.objects.get(id=int(browse_filter))
         category = model.model
-        display_shoes = ShoeColor.objects.filter(model = model).filter(model__price__gte=min_price).filter(model__price__lte=max_price)
+        display_shoes = ShoeModel.objects.filter(model=model, price__gte=min_price, price__lte=max_price)
 
-    context = {
-        'shoes': display_shoes,
-        'all_brands': all_brands,
-        'all_models': all_models,
-        'category': category,
-        'air_jordans': Brand.objects.get(name="Air Jordan").models.all(),
-        'nikes': Brand.objects.get(name="Nike").models.all(),
-        'adidases': Brand.objects.get(name="Adidas").models.all(),
-        'max_price': max_price,
-        'min_price': min_price,
-    }
-    return render(request, 'catalog.html', context)
+        context = {
+            'shoes': display_shoes,
+            'all_brands': all_brands,
+            'all_models': all_models,
+            'category': category,
+            'air_jordans': Brand.objects.get(name="Air Jordan").models.all(),
+            'nikes': Brand.objects.get(name="Nike").models.all(),
+            'adidases': Brand.objects.get(name="Adidas").models.all(),
+            'max_price': max_price,
+            'min_price': min_price,
+        }
+        return render(request, 'catalog.html', context)
 
 # Add a shoe form page.
 def add_shoe_page(request):
@@ -87,59 +87,62 @@ def add_shoe_page(request):
 
 # Add shoe function.
 def add_shoe(request):
-    # Checks to see if brand already exists. Form was originally a text field for Brand input, but has since been changed to a drop down.
-    if len(Brand.objects.filter(name=request.POST['brand']))>0:
-        brand = Brand.objects.get(name=request.POST['brand'])
-    else:
-        brand = Brand.objects.create(name = request.POST['brand'])
+    if request.method == 'POST':
+        brand_name = request.POST.get('brand')
+        model_name = request.POST.get('model')
 
-    # Checks to see if the model already exists. This is if you are adding new colors to an already existing model in the database.
-    if len(ShoeModel.objects.filter(model=request.POST['model']))>0:
-        model = ShoeModel.objects.get(model=request.POST['model'])
-    else:
-        model = ShoeModel.objects.create(model = request.POST['model'], price = request.POST['price'], brand=brand, desc=request.POST['desc'])
-    
-    # Gets the colors and images for the colors, then creates the color objects for all colors.
-    colors = request.POST.getlist('colors[]')
-    images = request.FILES.getlist('images[]')
-    for i in range(0, len(colors), 1):
-        new_color = ShoeColor.objects.create(color = colors[i], image = images[i], model = model)
-        # Creates a default inventory size of 5 for each possible size between 6.0 and 12.0 at increments of .5. These can later be changed in the manage inventory page.
-        for counter in range(0, 13, 1):
-            size = 6 + counter*0.5
-            ShoeSize.objects.create(size = size, inventory = 5, quantity_sold = 0, color = new_color)
-    # Shoes have been added to inventory. Each shoe is a ShoeSize model. Model structure is ShoeSize -> ShoeColor -> ShoeModel -> Brand.
-    return redirect('/admin/shoe_list')
+        # Check if the brand already exists or create a new one
+        brand, created = Brand.objects.get_or_create(name=brand_name)
+
+        # Check if the model already exists or create a new one
+        model, created = ShoeModel.objects.get_or_create(
+            model=model_name,
+            brand=brand,
+            defaults={
+                'price': request.POST.get('price', 0),
+                'desc': request.POST.get('desc', ''),
+                'color': request.POST.get('color', ''),  # Assuming color is a field in your ShoeModel.
+                'size': request.POST.get('size', ''),  # Assuming size is a field in your ShoeModel.
+            }
+        )
+
+        # Optionally, you can set the image field here based on your form handling.
+
+        return redirect('/admin/shoe_list')
+
+
+
 
 # Inventory Management Page.
 def shoe_list(request):
     if 'admin' not in request.session:
         return redirect('/admin')
 
-    # Checks if there is a Model filter applied before retrieving shoes.
-    model_id = request.POST.get('model_id', 0)
-    if(model_id == 0 or model_id == "all"):
-        shoes = ShoeSize.objects.all()
-    else:
-        shoes = ShoeSize.objects.filter(color__model__id = model_id)
+    shoes = ShoeModel.objects.all()
+
     context = {
         'shoes': shoes,
-        'models': ShoeModel.objects.all(),
     }
 
     return render(request, 'shoe_list.html', context)
 
 # Updates inventory of specific size.
-def update_inv(request):
-    shoe = ShoeSize.objects.get(id=request.POST['shoe_id'])
-    shoe.inventory = request.POST['new_inventory']
+# def update_desc(request):
+#     shoe = ShoeSize.objects.get(id=request.POST['shoe_id'])
+#     shoe.inventory = request.POST['new_inventory']
+#     shoe.save()
+
+#     return redirect('/admin/shoe_list')
+def update_desc(request):
+    shoe = ShoeModel.objects.get(id=request.POST['desc'])
+    shoe.desc = request.POST['new_description']
     shoe.save()
 
     return redirect('/admin/shoe_list')
 
 # Updates image upload of specific color. Applies to all sizes.
 def update_img(request):
-    shoe = ShoeColor.objects.get(id=request.POST['shoe_color_id'])
+    shoe = ShoeModel.objects.get(id=request.POST['shoe_color_id'])
     shoe.image = request.FILES.get('new_image', False)
     shoe.save()
 
@@ -170,12 +173,12 @@ def shoe_page(request, shoe_id):
         cart = Cart.objects.create(total=0)
         request.session['cart']=cart.id
 
-    shoe = ShoeColor.objects.get(id=shoe_id)
-    current_brand_id = shoe.model.brand.id
-    related_shoes = ShoeColor.objects.filter(model__brand__id = current_brand_id).exclude(id = shoe.id)[0:6]
+    shoe = ShoeModel.objects.get(id=shoe_id)
+    current_brand_id = shoe.brand.id
+    related_shoes = ShoeModel.objects.filter(brand_id = current_brand_id).exclude(id = shoe.id)[0:6]
 
     context = {
-        'shoe': ShoeColor.objects.get(id=shoe_id),
+        'shoe': ShoeModel.objects.get(id=shoe_id),
         'related_shoes': related_shoes,
         'air_jordans': Brand.objects.get(name="Air Jordan").models.all(),
         'nikes': Brand.objects.get(name="Nike").models.all(),
@@ -194,7 +197,7 @@ def refresh_cart_total(cart):
 
 # Add shoe size instance to cart.
 def add_to_cart(request):
-    shoe = ShoeSize.objects.get(id=request.POST['size_id'])
+    shoe = ShoeModel.objects.get(id=request.POST['size_id'])
     cart = Cart.objects.get(id=request.session['cart_id'])
     cart_item = CartItem.objects.create(shoe=shoe, quantity=1, cart=cart)
 

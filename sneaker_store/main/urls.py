@@ -7,7 +7,7 @@ urlpatterns = [
     path('admin/add_shoe_page', views.add_shoe_page),
     path('admin/add_shoe', views.add_shoe),
     path('admin/shoe_list', views.shoe_list),
-    path('admin/update_inv', views.update_inv),
+    path('admin/update_desc', views.update_desc),
     path('admin/update_img', views.update_img),
     path('admin/update_price', views.update_price),
     path('shoe/<int:shoe_id>', views.shoe_page),

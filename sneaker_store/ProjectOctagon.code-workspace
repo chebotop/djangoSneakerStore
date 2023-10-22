@@ -8,15 +8,16 @@
 		}
 	],
 	"settings": {
-		"sqltools.connections": [
+		"folder-color.pathColors": [
 			{
-				"previewLimit": 50,
-				"driver": "SQLite",
-				"name": "db.sqlite3",
-				"group": "store",
-				"database": "${workspaceFolder:website}/sneaker_store/db.sqlite3"
+				"folderPath": "c:\\Users\\admin\\Documents\\ProjectOctagon/",
+				"color": "foldercolorizer.violet",
+				"badge": "WS"
+			},
+			{
+				"folderPath": "c:\\Users\\admin\\Documents\\ProjectOctagon\\sneaker-shop/",
+				"color": "foldercolorizer.coral"
 			}
-		],
-		"sqltools.useNodeRuntime": true,
+		]
 	}
 }
