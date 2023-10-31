@@ -4,6 +4,14 @@ from django.db import models
 class Brand(models.Model):
     name = models.CharField(max_length=45)
 
+
+class Sizes(models.Model):
+    size_value = models.CharField(max_length=12)
+
+    def __str__(self):
+        return self.size_value
+
+
 class ShoeModel(models.Model):
     model = models.CharField(max_length=45)
     price = models.DecimalField(max_digits=6, decimal_places=2)
@@ -11,13 +19,12 @@ class ShoeModel(models.Model):
     brand = models.ForeignKey(Brand, related_name="models", on_delete=models.CASCADE)
     color = models.CharField(max_length=45, default='')
     image = models.ImageField(upload_to='gallery', default='')
-    size = models.CharField(max_length=16, default='SomeDefaultValue')
+    size = models.ForeignKey(Sizes, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
 
-
-class Cart(models.Model):
+class Cart(models.Model): 
     total = models.DecimalField(max_digits=8, decimal_places=2)
 
 

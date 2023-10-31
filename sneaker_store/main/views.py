@@ -85,11 +85,11 @@ def add_shoe_page(request):
     }
     return render(request,"add_shoe_page.html", context)
 
-# Add shoe function.
 def add_shoe(request):
     if request.method == 'POST':
         brand_name = request.POST.get('brand')
         model_name = request.POST.get('model')
+        sizes = request.POST.getlist('size')
 
         # Check if the brand already exists or create a new one
         brand, created = Brand.objects.get_or_create(name=brand_name)
@@ -102,7 +102,7 @@ def add_shoe(request):
                 'price': request.POST.get('price', 0),
                 'desc': request.POST.get('desc', ''),
                 'color': request.POST.get('color', ''),  # Assuming color is a field in your ShoeModel.
-                'size': request.POST.get('size', ''),  # Assuming size is a field in your ShoeModel.
+                'sizes': sizes,
             }
         )
 

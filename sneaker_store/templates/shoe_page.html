@@ -37,21 +37,18 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <form action='/add_to_cart' method='post'>
+                            <form action="/add_to_cart" method="post">
                                 {% csrf_token %}
-                                <label for="sizes">Sizes:</label>
-                                <select id="sizes" name = 'size_id'>
-                                    {% for size in shoe.sizes.all %}
-                                    {% if size.inventory > 0 %}
-                                    <option value="{{size.id}}">{{size.size}}</option>
-                                    {% else %}
-                                    <option disabled>{{size.size}} Sold Out</option>
-                                    {% endif %}
+                                
+                                <label for="sizes">Размеры:</label>
+                                <select id="sizes" name="size" multiple>
+                                    <option value="">Выбрать</option>
+                                    {% for size in shoe_sizes %}
+                                    <option value="{{ size.id }}">{{ size.size_value }}</option>
                                     {% endfor %}
                                 </select>
-                        
-                                <button class="btn btn-dark btn-sm">Добавить в корзину</button>
-                            </form>
+                                
+                                <button type="submit" class="btn btn-dark">В корзину</button>
                         </div>
                     </div>
                 </div>

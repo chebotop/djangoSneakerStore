@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../ProjectOctagon/sneaker-shop"
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"previewLimit": 50,
+				"driver": "SQLite",
+				"name": "website",
+				"database": "${workspaceFolder:website}/sneaker_store/db.sqlite3"
+			}
+		],
+		"folder-color.pathColors": [
+			{
+				"folderPath": "c:\\Users\\admin\\Documents\\ProjectOctagon\\sneaker-shop/",
+				"color": "foldercolorizer.LightRed"
+			}
+		]
+	}
+}
