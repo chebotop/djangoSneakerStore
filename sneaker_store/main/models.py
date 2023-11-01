@@ -8,6 +8,9 @@ class Brand(models.Model):
 class Sizes(models.Model):
     size_value = models.CharField(max_length=12)
 
+    class Meta:
+        db_table = 'main_size'
+        
     def __str__(self):
         return self.size_value
 

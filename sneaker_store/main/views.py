@@ -102,11 +102,12 @@ def add_shoe(request):
                 'price': request.POST.get('price', 0),
                 'desc': request.POST.get('desc', ''),
                 'color': request.POST.get('color', ''),  # Assuming color is a field in your ShoeModel.
-                'sizes': sizes,
             }
         )
 
-        # Optionally, you can set the image field here based on your form handling.
+        sizes = Sizes.objects.filter(id__in=sizes)
+
+        model.size.set(sizes)
 
         return redirect('/admin/shoe_list')
 
@@ -176,8 +177,10 @@ def shoe_page(request, shoe_id):
     shoe = ShoeModel.objects.get(id=shoe_id)
     current_brand_id = shoe.brand.id
     related_shoes = ShoeModel.objects.filter(brand_id = current_brand_id).exclude(id = shoe.id)[0:6]
+    sizes = Sizes.objects.all()
 
     context = {
+        'sizes': sizes,
         'shoe': ShoeModel.objects.get(id=shoe_id),
         'related_shoes': related_shoes,
         'air_jordans': Brand.objects.get(name="Air Jordan").models.all(),

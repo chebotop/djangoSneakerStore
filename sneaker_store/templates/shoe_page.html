@@ -41,14 +41,18 @@
                                 {% csrf_token %}
                                 
                                 <label for="sizes">Размеры:</label>
-                                <select id="sizes" name="size" multiple>
+                                <select id="sizes" name="size">
                                     <option value="">Выбрать</option>
-                                    {% for size in shoe_sizes %}
-                                    <option value="{{ size.id }}">{{ size.size_value }}</option>
+                                    {% for size in sizes %}
+                                    <option value="{{ main_size.id }}">{{ size.size_value }}</option>
                                     {% endfor %}
                                 </select>
                                 
+                                
+                                
+                                
                                 <button type="submit" class="btn btn-dark">В корзину</button>
+                            </form>
                         </div>
                     </div>
                 </div>
