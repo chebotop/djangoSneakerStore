@@ -105,7 +105,7 @@ def add_shoe(request):
             }
         )
 
-        sizes = Sizes.objects.filter(id__in=sizes)
+        sizes = Size.objects.filter(id__in=sizes)
 
         model.size.set(sizes)
 
@@ -177,7 +177,7 @@ def shoe_page(request, shoe_id):
     shoe = ShoeModel.objects.get(id=shoe_id)
     current_brand_id = shoe.brand.id
     related_shoes = ShoeModel.objects.filter(brand_id = current_brand_id).exclude(id = shoe.id)[0:6]
-    sizes = Sizes.objects.all()
+    sizes = Size.objects.all()
 
     context = {
         'sizes': sizes,

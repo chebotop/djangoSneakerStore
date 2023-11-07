@@ -128,7 +128,7 @@
                                 {% csrf_token %}
                                 <label for="sizes">Sizes:</label>
                                 <select id="sizes" name = 'size_id'>
-                                    {% for size in shoe.sizes.all %}
+                                    {% for size in shoe.size.all %}
                                     {% if size.inventory > 0 %}
                                     <option value="{{size.id}}">{{size.size}}</option>
                                     {% else %}
