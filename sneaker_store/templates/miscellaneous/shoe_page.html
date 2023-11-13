@@ -127,7 +127,7 @@
                             <form action='/add_to_cart' method='post'>
                                 {% csrf_token %}
                                 <label for="sizes">Sizes:</label>
-                                <select id="sizes" name = 'size_id'>
+                                <select id="sizes" name = 'sizes'>
                                     {% for size in shoe.size.all %}
                                     {% if size.inventory > 0 %}
                                     <option value="{{size.id}}">{{size.size}}</option>

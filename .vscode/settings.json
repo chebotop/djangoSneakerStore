@@ -6,5 +6,15 @@
             "database": "${workspaceFolder:website}/sneaker_store/db.sqlite3",
             "name": "new"
         }
+    ],
+    "folder-color.pathColors": [
+        {
+            "folderPath": "website\\sneaker_store\\main\\models.py\\",
+            "color": "foldercolorizer.CarrotOrange"
+        },
+        {
+            "folderPath": "website\\sneaker_store\\db.sqlite3\\",
+            "color": "foldercolorizer.LightRed"
+        }
     ]
 }

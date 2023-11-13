@@ -40,11 +40,13 @@
                             <form action="/add_to_cart" method="post">
                                 {% csrf_token %}
                                 
+                                <input type="hidden" name="id" value="{{ shoe.id }}">
+
                                 <label for="sizes">Размеры:</label>
                                 <select id="sizes" name="size">
                                     <option value="">Выбрать</option>
                                     {% for size in sizes %}
-                                    <option value="{{ main_size.id }}">{{ size.size_value }}</option>
+                                    <option value="{{ size.id }}">{{ size.size_value }}</option>
                                     {% endfor %}
                                 </select>
                                 

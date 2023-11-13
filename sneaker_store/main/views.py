@@ -200,9 +200,9 @@ def refresh_cart_total(cart):
 
 # Add shoe size instance to cart.
 def add_to_cart(request):
-    shoe = ShoeModel.objects.get(id=request.POST['size_id'])
+    shoe = ShoeModel.objects.get(id=request.POST['id'])
     cart = Cart.objects.get(id=request.session['cart_id'])
-    cart_item = CartItem.objects.create(shoe=shoe, quantity=1, cart=cart)
+    cart_item = CartItem.objects.create(shoe=shoe, cart=cart)
 
     refresh_cart_total(cart)
 

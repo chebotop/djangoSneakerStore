@@ -37,7 +37,8 @@ class CartItem(models.Model):
     shoe = models.ForeignKey(ShoeModel, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     cart = models.ForeignKey(Cart, related_name="cart_items", on_delete=models.CASCADE)
-
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
 
 class Address(models.Model):
     address = models.CharField(max_length=45)
@@ -74,3 +75,5 @@ class Order(models.Model):
     )
     user = models.ForeignKey(User, related_name="orders", on_delete=models.CASCADE)
     credit_card = models.ForeignKey(CreditCard, related_name="orders", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
