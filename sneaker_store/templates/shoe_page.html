@@ -9,19 +9,41 @@
     {{ block.super }}
 {% endblock %}
 {% block content %}
+{% load static %}
     <main role="main">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <img src='{{shoe.image.url}}' class='image-responsive' width='100%'>
-                </div>
+                    {% if shoe.image and shoe.image.url %}
+                        <img src='{{ shoe.image.url }}' class='image-responsive' width='100%'>
+                    {% else %}
+                        <img src="{% static 'images/Jordan-Mars-270-Green-Glow.jpg' %}" alt="Заглушка" width="100%">
+                    {% endif %}
+                    <div class="container">
+                        <form action="/add_to_cart" method="post">
+                            {% csrf_token %}
+                            
+                            <select class="select" name="id" value="{{ shoe.id }}">
+                            <!-- <label for="sizes">Размеры:</label> -->
+                            <div class="form-select" id="sizes" name="size">
+                                <option value="">Выбрать</option>
+                                {% for size in sizes %}
+                                <option value="{{ size.id }}">{{ size.size_value }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-dark">В корзину</button>
+                        </form>
+                    </div>
+                </div> 
+
+
                 <div class="col-md-6" style="
                 padding-top: 20px;">
                 
                     <div class="row">
                         <div class="col-md-12">
                             <h2>{{shoe.brand.name}} {{shoe.model}} {{shoe.color}}</h2>
-                        </div>
+                        </div>  
                     </div>
                     <hr class="my-4">
                     <div class="row">
@@ -37,32 +59,13 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="/add_to_cart" method="post">
-                                {% csrf_token %}
-                                
-                                <input type="hidden" name="id" value="{{ shoe.id }}">
 
-                                <label for="sizes">Размеры:</label>
-                                <select id="sizes" name="size">
-                                    <option value="">Выбрать</option>
-                                    {% for size in sizes %}
-                                    <option value="{{ size.id }}">{{ size.size_value }}</option>
-                                    {% endfor %}
-                                </select>
-                                
-                                
-                                
-                                
-                                <button type="submit" class="btn btn-dark">В корзину</button>
-                            </form>
                         </div>
                     </div>
                 </div>
-                <!-- close right column -->
             </div>
-            <!-- close row -->
-            <hr class="my-4">
-            <h3 class="text-center">Вам может понравиться:</h3>
+                <hr class="my-4">
+                <h3 class="text-center">Вам может понравиться:</h3>
             <div class="row text-center justify-content-center">
                 {% for shoe in related_shoes %}
                 <div class="col-lg-2 col-md-2 col-sm-4 mb-5">

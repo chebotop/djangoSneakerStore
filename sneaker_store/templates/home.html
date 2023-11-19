@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block content %}
+{% load static %}
 <main role="main">
     <div class="jumbotron jumbotron-fluid">
         <h1 class="display-3">Air Jordan 6 DMP</h1>
@@ -29,7 +30,11 @@
             <div class="col-4 col-lg-2 col-md-3 col-sm-4 mb-4"> <!-- Определение размеров колонок для разных экранов -->
                 <div class="card h-100">
                     <a href="/shoe/{{shoe.id}}">
-                        <img src="{{shoe.image.url}}" alt="" width="100%">
+                    {% if shoe.image and shoe.image.url %}
+                        <img src="{{ shoe.image.url}}" alt="" width="100%">
+                    {% else %}
+                        <img src="{% static 'images\Jordan-Mars-270-Green-Glow.jpg' %}" alt="Заглушка" width="100%">
+                    {% endif %}
                     </a>
                     <div class="card-body">
                         <p class="card-title"><a class="text-secondary" href="/shoe/{{shoe.id}}">{{shoe.brand.name}} {{shoe.model}} {{shoe.color}}</a></p>

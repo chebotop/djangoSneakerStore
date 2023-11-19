@@ -4,7 +4,7 @@
             "previewLimit": 50,
             "driver": "SQLite",
             "database": "${workspaceFolder:website}/sneaker_store/db.sqlite3",
-            "name": "new"
+            "name": "1"
         }
     ],
     "folder-color.pathColors": [
@@ -15,6 +15,14 @@
         {
             "folderPath": "website\\sneaker_store\\db.sqlite3\\",
             "color": "foldercolorizer.LightRed"
+        },
+        {
+            "folderPath": "website\\uikit\\src\\components\\Select\\",
+            "color": "foldercolorizer.Coral"
+        },
+        {
+            "folderPath": "website\\sneaker_store\\templates\\",
+            "color": "foldercolorizer.LightBlue"
         }
     ]
 }

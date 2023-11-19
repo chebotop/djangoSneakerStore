@@ -6,14 +6,8 @@ class Brand(models.Model):
 
 
 class Size(models.Model):
-    size_value = models.CharField(max_length=12)
-
-    class Meta:
-        db_table = 'main_size'
-        
-    def __str__(self):
-        return self.size_value
-
+    size_value = models.CharField(max_length=20)
+    size_gender = models.CharField(max_length = 10)
 
 class ShoeModel(models.Model):
     model = models.CharField(max_length=45)
@@ -22,7 +16,7 @@ class ShoeModel(models.Model):
     brand = models.ForeignKey(Brand, related_name="models", on_delete=models.CASCADE)
     color = models.CharField(max_length=45, default='')
     image = models.ImageField(upload_to='gallery', default='')
-    size = models.ForeignKey(Size, on_delete=models.CASCADE)
+    size = models.ManyToManyField(Size)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 

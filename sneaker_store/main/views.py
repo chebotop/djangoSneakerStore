@@ -89,7 +89,7 @@ def add_shoe(request):
     if request.method == 'POST':
         brand_name = request.POST.get('brand')
         model_name = request.POST.get('model')
-        sizes = request.POST.getlist('size')
+        images = request.POST.getlist('images[]')
 
         # Check if the brand already exists or create a new one
         brand, created = Brand.objects.get_or_create(name=brand_name)
@@ -105,9 +105,9 @@ def add_shoe(request):
             }
         )
 
-        sizes = Size.objects.filter(id__in=sizes)
+        # sizes = Size.objects.filter(id__in=sizes)
 
-        model.size.set(sizes)
+        # model.size.set(sizes)
 
         return redirect('/admin/shoe_list')
 
@@ -177,10 +177,11 @@ def shoe_page(request, shoe_id):
     shoe = ShoeModel.objects.get(id=shoe_id)
     current_brand_id = shoe.brand.id
     related_shoes = ShoeModel.objects.filter(brand_id = current_brand_id).exclude(id = shoe.id)[0:6]
-    sizes = Size.objects.all()
+    # sizes = Size.objects.all()
+    size_list = [36, 37] # СДЕЛАТЬ СПИСОК
 
     context = {
-        'sizes': sizes,
+        'sizes': size_list,
         'shoe': ShoeModel.objects.get(id=shoe_id),
         'related_shoes': related_shoes,
         'air_jordans': Brand.objects.get(name="Air Jordan").models.all(),
