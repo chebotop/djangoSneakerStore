@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('browse', views.catalog_page),
+    path('browse', views.catalog_page, name="catalog_page_all"),
     path('admin/add_shoe_page', views.add_shoe_page),
     path('admin/add_shoe', views.add_shoe),
     path('admin/shoe_list', views.shoe_list),
@@ -23,6 +23,6 @@ urlpatterns = [
     path('admin', views.admin_menu),
     path('admin/login', views.admin_login),
     path('admin/logout', views.admin_logout),
-    path('browse/<str:browse_filter>', views.catalog_page),
+    path('browse/<str:browse_filter>', views.catalog_page, name='catalog_page_filter'),
 
 ]

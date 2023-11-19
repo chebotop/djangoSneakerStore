@@ -23,10 +23,10 @@ def index(request):
     return render(request, 'home.html', context)
 
 # Catalog Page, works for Browse all, but also catagories and filters. Default filter is "all".
-def catalog_page(request, browse_filter = "all"):
+def catalog_page(request, browse_filter="all"):
     if 'cart' not in request.session:
         cart = Cart.objects.create(total=0)
-        request.session['cart']=cart.id
+        request.session['cart'] = cart.id
 
     # Info for the side-bar.
     all_brands = Brand.objects.all().order_by('name')
@@ -43,36 +43,39 @@ def catalog_page(request, browse_filter = "all"):
     else:
         max_price = 10000
 
-    # Assigns display_shoes to either all, a brand, or a specific model in the else statement. "browse_filter" can include brand or model info. Always filters for price as well. 
+    # Assigns display_shoes to either all, a brand, or a specific model in the else statement. "browse_filter" can include brand or model info. Always filters for price as well.
     if browse_filter == "all":
         category = "All Sneakers"
         display_shoes = ShoeModel.objects.filter(price__gte=min_price, price__lte=max_price)
     elif browse_filter == "air jordan":
         category = "Air Jordan"
-        display_shoes = ShoeModel.objects.filter(model__brand__name="Air Jordan", price__gte=min_price, price__lte=max_price)
+        display_shoes = ShoeModel.objects.filter(brand__name="Air Jordan", price__gte=min_price,
+                                                price__lte=max_price)
     elif browse_filter == "nike":
         category = "Nike"
-        display_shoes = ShoeModel.objects.filter(model__brand__name="Nike", price__gte=min_price, price__lte=max_price)
+        display_shoes = ShoeModel.objects.filter(brand__name="Nike", price__gte=min_price, price__lte=max_price)
     elif browse_filter == "adidas":
         category = "Adidas"
-        display_shoes = ShoeModel.objects.filter(model__brand__name="Adidas", price__gte=min_price, price__lte=max_price)
+        display_shoes = ShoeModel.objects.filter(brand__name="Adidas", price__gte=min_price,
+                                                 price__lte=max_price)
     else:
         model = ShoeModel.objects.get(id=int(browse_filter))
         category = model.model
         display_shoes = ShoeModel.objects.filter(model=model, price__gte=min_price, price__lte=max_price)
 
-        context = {
-            'shoes': display_shoes,
-            'all_brands': all_brands,
-            'all_models': all_models,
-            'category': category,
-            'air_jordans': Brand.objects.get(name="Air Jordan").models.all(),
-            'nikes': Brand.objects.get(name="Nike").models.all(),
-            'adidases': Brand.objects.get(name="Adidas").models.all(),
-            'max_price': max_price,
-            'min_price': min_price,
-        }
-        return render(request, 'catalog.html', context)
+    context = {
+        'shoes': display_shoes,
+        'all_brands': all_brands,
+        'all_models': all_models,
+        'category': category,
+        'air_jordans': Brand.objects.get(name="Air Jordan").models.all(),
+        'nikes': Brand.objects.get(name="Nike").models.all(),
+        'adidases': Brand.objects.get(name="Adidas").models.all(),
+        'max_price': max_price,
+        'min_price': min_price,
+    }
+    return render(request, 'catalog.html', context)
+
 
 # Add a shoe form page.
 def add_shoe_page(request):

@@ -12,7 +12,7 @@ class CatalogPageTest(TestCase):
 
     def test_view_properties(self):
         # Создание запроса GET к вашему представлению
-        url = reverse('catalog_page')  # Замените `catalog_page` на имя вашего представления
+        url = reverse('catalog_page_all')  # Замените `catalog_page` на имя вашего представления
         response = self.client.get(url)
 
         # Проверка свойств объектов в ответе
