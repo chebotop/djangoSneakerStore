@@ -5,22 +5,23 @@ from main.models import *
 
 
 def index(request):
-    # This checks if a cart already exists in session. If not, it creates a cart and saves its id to session.
+    # Проверяет, существует ли уже корзина в сессии. В противном случае создает корзину и сохраняет ее id в сессии.
     if 'cart_id' not in request.session:
         cart = Cart.objects.create(total=0)
-        request.session['cart_id']=cart.id
+        request.session['cart_id'] = cart.id
 
-    # Grabs the 6 most recent shoes created in the DB.
+    # Получает 6 самых недавно созданных кроссовок в БД.
     recent_shoes = ShoeModel.objects.all().order_by('-created_at')[0:6]
 
-    # Also grabs all the models of the three brands, for display in the top bar.
+    # Также получает все модели трех брендов
     context = {
         'recent_shoes': recent_shoes,
-        'air_jordans': ShoeModel.objects.get(brand="Air Jordan").models.all(),
-        'nikes': ShoeModel.objects.get(brand="Nike").models.all(),
-        'adidases': ShoeModel.objects.get(brand="Adidas").models.all(),
+        'air_jordans': ShoeModel.objects.filter(brand="Air Jordan"),
+        'nikes': ShoeModel.objects.filter(brand="Nike"),
+        'adidases': ShoeModel.objects.filter(brand="Adidas"),
     }
     return render(request, 'home.html', context)
+
 
 # Catalog Page, works for Browse all, but also catagories and filters. Default filter is "all".
 def catalog_page(request, browse_filter="all"):
