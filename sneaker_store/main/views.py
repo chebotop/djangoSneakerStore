@@ -16,9 +16,9 @@ def index(request):
     # Also grabs all the models of the three brands, for display in the top bar.
     context = {
         'recent_shoes': recent_shoes,
-        'air_jordans': Brand.objects.get(name="Air Jordan").models.all(),
-        'nikes': Brand.objects.get(name="Nike").models.all(),
-        'adidases': Brand.objects.get(name="Adidas").models.all(),
+        'air_jordans': ShoeModel.objects.get(brand="Air Jordan").models.all(),
+        'nikes': ShoeModel.objects.get(brand="Nike").models.all(),
+        'adidases': ShoeModel.objects.get(brand="Adidas").models.all(),
     }
     return render(request, 'home.html', context)
 
@@ -29,7 +29,7 @@ def catalog_page(request, browse_filter="all"):
         request.session['cart'] = cart.id
 
     # Info for the side-bar.
-    all_brands = Brand.objects.all().order_by('name')
+    all_brands = ShoeModel.objects.all().order_by('name')
     all_models = ShoeModel.objects.all().order_by('model')
 
     # Checks if there are min and max price filters in the GET url, otherwise sets min and max to default values.
@@ -68,9 +68,9 @@ def catalog_page(request, browse_filter="all"):
         'all_brands': all_brands,
         'all_models': all_models,
         'category': category,
-        'air_jordans': Brand.objects.get(name="Air Jordan").models.all(),
-        'nikes': Brand.objects.get(name="Nike").models.all(),
-        'adidases': Brand.objects.get(name="Adidas").models.all(),
+        'air_jordans': ShoeModel.objects.get(brand="Air Jordan").models.all(),
+        'nikes': ShoeModel.objects.get(brand="Nike").models.all(),
+        'adidases': ShoeModel.objects.get(brand="Adidas").models.all(),
         'max_price': max_price,
         'min_price': min_price,
     }
@@ -95,7 +95,7 @@ def add_shoe(request):
         images = request.POST.getlist('images[]')
 
         # Check if the brand already exists or create a new one
-        brand, created = Brand.objects.get_or_create(name=brand_name)
+        brand, created = ShoeModel.objects.get_or_create(name=brand_name)
 
         # Check if the model already exists or create a new one
         model, created = ShoeModel.objects.get_or_create(

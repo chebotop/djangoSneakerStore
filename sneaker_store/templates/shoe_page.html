@@ -22,15 +22,23 @@
                     <div class="container">
                         <form action="/add_to_cart" method="post">
                             {% csrf_token %}
-                            
-                            <select class="select" name="id" value="{{ shoe.id }}">
-                            <!-- <label for="sizes">Размеры:</label> -->
-                            <div class="form-select" id="sizes" name="size">
-                                <option value="">Выбрать</option>
-                                {% for size in sizes %}
-                                <option value="{{ size.id }}">{{ size.size_value }}</option>
-                                {% endfor %}
-                            </select>
+                            <div class="product-size__container">
+                                <div>
+                                  <input class="size-input size-input--green" type="radio" name="jshop_attr_id[17]" id="jshop_attr_id1717" value="17">
+                                  <label class="size-label size-label--green size-label--last" for="jshop_attr_id1717">
+                                    <span class="radio_attr_label">41</span>
+                                    <div class="size-label__hint">
+                                      <span class="size-label__hint-inner">
+                                        <b>Длина стельки - 26 см.</b><br>
+                                        Количество этого размера <b>1 шт.</b><br>
+                                        Поторопитесь!
+                                      </span>
+                                    </div>
+                                  </label>
+                                </div>
+                                <!-- Остальные блоки размеров здесь -->
+                              </div>
+
                             <button type="submit" class="btn btn-dark">В корзину</button>
                         </form>
                     </div>

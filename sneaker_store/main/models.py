@@ -1,25 +1,14 @@
 from django.db import models
 
 
-class Brand(models.Model):
-    name = models.CharField(max_length=45)
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
-
-
-
-class Size(models.Model):
-    size_value = models.CharField(max_length=20)
-    size_gender = models.CharField(max_length = 10)
-
 class ShoeModel(models.Model):
     model = models.CharField(max_length=45)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     desc = models.TextField()
-    brand = models.ForeignKey(Brand, related_name="models", on_delete=models.CASCADE)
+    brand = models.CharField(max_length=45)
     color = models.CharField(max_length=45, default='')
     image = models.ImageField(upload_to='gallery', default='')
-    size = models.ManyToManyField(Size)
+    size = models.JSONField()
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
