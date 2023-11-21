@@ -16,9 +16,9 @@ def index(request):
     # Также получает все модели трех брендов
     context = {
         'recent_shoes': recent_shoes,
-        'air_jordans': ShoeModel.objects.filter(brand="Air Jordan"),
-        'nikes': ShoeModel.objects.filter(brand="Nike"),
-        'adidases': ShoeModel.objects.filter(brand="Adidas"),
+        'air_jordans': ShoeModel.objects.filter(name="Air Jordan"),
+        'nikes': ShoeModel.objects.filter(name="Nike"),
+        'adidases': ShoeModel.objects.filter(name="Adidas"),
     }
     return render(request, 'home.html', context)
 
@@ -30,7 +30,7 @@ def catalog_page(request, browse_filter="all"):
         request.session['cart'] = cart.id
 
     # Info for the side-bar.
-    all_brands = ShoeModel.objects.all().order_by('name')
+    all_brands = ShoeModel.objects.all().order_by('brand')
     all_models = ShoeModel.objects.all().order_by('model')
 
     # Checks if there are min and max price filters in the GET url, otherwise sets min and max to default values.
@@ -127,6 +127,7 @@ def shoe_list(request):
 
     context = {
         'shoes': shoes,
+        'models': ShoeModel.objects.all(),
     }
 
     return render(request, 'shoe_list.html', context)

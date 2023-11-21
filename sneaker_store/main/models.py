@@ -1,5 +1,7 @@
 from django.db import models
 
+class Brand(models.Model):
+    brand = models.CharField(max_length=20)
 
 class ShoeModel(models.Model):
     model = models.CharField(max_length=45)
