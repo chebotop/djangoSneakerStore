@@ -1,9 +1,11 @@
 from django.urls import path
 from . import views
+from django.contrib import admin
 
 urlpatterns = [
     path('', views.index),
     path('browse', views.catalog_page, name="catalog_page_all"),
+    path('admin/', admin.site.urls),
     # path('admin/add_shoe_page', views.add_shoe_page),
     # path('admin/add_shoe', views.add_shoe),
     # path('admin/shoe_list', views.shoe_list),

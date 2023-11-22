@@ -29,14 +29,12 @@
                                     <span class="radio_attr_label">41</span>
                                     <div class="size-label__hint">
                                       <span class="size-label__hint-inner">
-                                        <b>Длина стельки - 26 см.</b><br>
-                                        Количество этого размера <b>1 шт.</b><br>
-                                        Поторопитесь!
+                                    {% for size in sizes %}
+                                    { size }
                                       </span>
                                     </div>
                                   </label>
                                 </div>
-                                <!-- Остальные блоки размеров здесь -->
                               </div>
 
                             <button type="submit" class="btn btn-dark">В корзину</button>

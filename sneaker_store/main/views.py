@@ -16,9 +16,9 @@ def index(request):
     # Также получает все модели трех брендов
     context = {
         'recent_shoes': recent_shoes,
-        'air_jordans': ShoeModel.objects.filter(name="Air Jordan"),
-        'nikes': ShoeModel.objects.filter(name="Nike"),
-        'adidases': ShoeModel.objects.filter(name="Adidas"),
+        # 'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
+        # 'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
+        # 'adidases': ShoeBrand.objects.get(name="Adidas").models.all(),
     }
     return render(request, 'home.html', context)
 
@@ -44,34 +44,34 @@ def catalog_page(request, browse_filter="all"):
     else:
         max_price = 10000
 
-    # Assigns display_shoes to either all, a brand, or a specific model in the else statement. "browse_filter" can include brand or model info. Always filters for price as well.
-    if browse_filter == "all":
-        category = "All Sneakers"
-        display_shoes = ShoeModel.objects.filter(price__gte=min_price, price__lte=max_price)
-    elif browse_filter == "air jordan":
-        category = "Air Jordan"
-        display_shoes = ShoeModel.objects.filter(brand__name="Air Jordan", price__gte=min_price,
-                                                price__lte=max_price)
-    elif browse_filter == "nike":
-        category = "Nike"
-        display_shoes = ShoeModel.objects.filter(brand__name="Nike", price__gte=min_price, price__lte=max_price)
-    elif browse_filter == "adidas":
-        category = "Adidas"
-        display_shoes = ShoeModel.objects.filter(brand__name="Adidas", price__gte=min_price,
-                                                 price__lte=max_price)
-    else:
-        model = ShoeModel.objects.get(id=int(browse_filter))
-        category = model.model
-        display_shoes = ShoeModel.objects.filter(model=model, price__gte=min_price, price__lte=max_price)
+    # # Assigns display_shoes to either all, a brand, or a specific model in the else statement. "browse_filter" can include brand or model info. Always filters for price as well.
+    # if browse_filter == "all":
+    #     category = "All Sneakers"
+    #     display_shoes = ShoeModel.objects.filter(price__gte=min_price, price__lte=max_price)
+    # elif browse_filter == "air jordan":
+    #     category = "Air Jordan"
+    #     display_shoes = ShoeModel.objects.filter(brand__name="Air Jordan", price__gte=min_price,
+    #                                             price__lte=max_price)
+    # elif browse_filter == "nike":
+    #     category = "Nike"
+    #     display_shoes = ShoeModel.objects.filter(brand__name="Nike", price__gte=min_price, price__lte=max_price)
+    # elif browse_filter == "adidas":
+    #     category = "Adidas"
+    #     display_shoes = ShoeModel.objects.filter(brand__name="Adidas", price__gte=min_price,
+    #                                              price__lte=max_price)
+    # else:
+    #     model = ShoeModel.objects.get(id=int(browse_filter))
+    #     category = model.model
+    #     display_shoes = ShoeModel.objects.filter(model=model, price__gte=min_price, price__lte=max_price)
 
     context = {
-        'shoes': display_shoes,
+        # 'shoes': display_shoes,
         'all_brands': all_brands,
         'all_models': all_models,
-        'category': category,
-        'air_jordans': ShoeModel.objects.get(brand="Air Jordan").models.all(),
-        'nikes': ShoeModel.objects.get(brand="Nike").models.all(),
-        'adidases': ShoeModel.objects.get(brand="Adidas").models.all(),
+        # 'category': category,
+        # 'air_jordans': ShoeModel.objects.get(name="Air Jordan").models.all(),
+        # 'nikes': ShoeModel.objects.get(name="Nike").models.all(),
+        # 'adidases': ShoeModel.objects.get(name="Adidas").models.all(),
         'max_price': max_price,
         'min_price': min_price,
     }
@@ -189,9 +189,9 @@ def shoe_page(request, shoe_id):
         'sizes': size_list,
         'shoe': ShoeModel.objects.get(id=shoe_id),
         'related_shoes': related_shoes,
-        'air_jordans': Brand.objects.get(name="Air Jordan").models.all(),
-        'nikes': Brand.objects.get(name="Nike").models.all(),
-        'adidases': Brand.objects.get(name="Adidas").models.all(),
+        'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
+        'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
+        'adidases': ShoeBrand.objects.get(name="Adidas").models.all(),
     }
 
     return render(request, 'shoe_page.html', context)

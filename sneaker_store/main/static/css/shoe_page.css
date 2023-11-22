@@ -5,3 +5,22 @@ body {
 .card {
     border: none;
 }
+.size {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-box-direction: normal;
+    box-sizing: border-box;
+    display: inline-block;
+    max-width: 100%;
+    position: relative;
+    cursor: pointer;
+    font: 300 14px "Open Sans";
+    color: #7a7a7a;
+    text-align: center;
+    background-color: rgba(0,0,0,0);
+    transition: color .3s,background-color .3s,border .3s;
+    border: .5px solid #b9b9b9;
+    padding: 10px 0px;
+    width: 100%;
+    margin: 0;
+}
