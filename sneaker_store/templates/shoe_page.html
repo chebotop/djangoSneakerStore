@@ -3,186 +3,106 @@
 {% block head %}
 {% block title %}Обзор | Crossboost{% endblock %}
     {% block extra_styles %}
-    <style>
-        .sizes-container, .submit-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 0 auto;
-            
-        }
-
-        .size-box {
-            position: relative; /* Для позиционирования тултипа */
-            background-color: #f5f5f5;
-            margin: 5px;
-            padding: 10px 20px;
-            text-align: center;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .submit-container {
-            width: 100%;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .btn-dark {
-            margin-top: 10px;
-
-            width: 100%;
-        }
-
-        .size-box:hover, size-box.size-selected {
-            background-color: #40E0D0;
-            color: white;
-        }
-
-        /* Скрытие тултипа по умолчанию */
-        .tooltip {
-            visibility: hidden;
-            width: 120px;
-            background-color: black;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 100%;
-            left: 50%;
-            margin-left: -60px; /* Отрицательный отступ, чтобы центрировать тултип */
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        /* Отображение тултипа при наведении */
-        .size-box:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .size-selected {
-            background-color: #40E0D0;
-            color: white;
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="{% static 'css/shoe.css %'}">
     {% endblock %}
-
     {{ block.super }}
 {% endblock %}
-
 {% block navbar %}
     {{ block.super }}
 {% endblock %}
 {% block content %}
 {% load static %}
-    <main role="main">
-        <div class="container">
-            <div class="row">
-                <div class="col-6">
-                    # Изображение
-                    {% if shoe.image and shoe.image.url %}
-                        <img src='{{ shoe.image.url }}' class='image-responsive' width='100%'>
-                    {% else %}
-                        <img src="{% static 'images/Jordan-Mars-270-Green-Glow.jpg' %}" alt="Заглушка" width="100%">
-                    {% endif %}
-                </div>
-                <div class="col-6">
-                    # Тайтл + Дескрипшн
-
-                </div>
+<main role="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                {% if shoe.image and shoe.image.url %}
+                    <img src='{{ shoe.image.url }}' class='image-responsive' style="max-width: 100%;height: auto;">
+                {% else %}
+                    <img src="{% static 'images/Jordan-Mars-270-Green-Glow.jpg' %}" alt="Заглушка" width="100%">
+                {% endif %}
             </div>
-            <div class="row">
-                <div class="col-6">
-                    # размерная сетка
-                    
-                </div>
-                <div class="col-6">
-                    # Цена
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-
-                    <div class="container">
-                        <form id="size-form" action="/add_to_cart" method="post">
-                            {% csrf_token %}
-                            <div class="sizes-container">
-                                {% for size, measure in women_sizes.items %}
-                                    <div class="size-box">
-                                        {{ size }}
-                                        <div class="tooltip">{{ measure }}</div>
-                                    </div>
-                                {% endfor %}
-                                {% for size, measure in men_sizes.items %}
-                                <div class="size-box">
-                                    {{ size }}
-                                    <div class="tooltip">{{ measure }}</div>
-                                </div>
-                            {% endfor %}
-                            </div>
-                        
-                        <input type="hidden" id="selected_size" name="selected_size" value="">
-
-                        <button type="submit" class="btn btn-dark" style="align-items: center;">В корзину</button>
-                        </form>
-                    </div>
-                </div> 
-
-
-                <div class="col-md-6" style="
-                padding-top: 20px;">
-                
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>{{shoe.brand.name}} {{shoe.model}} {{shoe.color}}</h2>
-                        </div>  
-                    </div>
+            <div class="col-6">
+                <div class="col-md-12" id="pageShoeName">
+                    <h2>{{shoe.brand.name}} {{shoe.model}} {{shoe.color}}</h2>
                     <hr class="my-4">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p class="description">{{shoe.desc}}</p>
-                        </div>
-                    </div>
-                    <hr class="my-4">
-                    <div class="row">
-                        <div class="col-md-12 bottom-rule">
-                         <h2 class="product-price">₽{{shoe.price}}</h2>
-                        </div>
-                    </div>
-                    <!-- <div class="row">
-                        <div class="col-md-12">
-
-                        </div>
-                    </div> -->
-                </div>
-            </div>
-                <hr class="my-4">
-                <h3 class="text-center">Вам может понравиться:</h3>
-            <div class="row text-center justify-content-center">
-                {% for shoe in related_shoes %}
-                <div class="col-lg-2 col-md-2 col-sm-4 mb-5">
-                    <div class="card h-100">
-                        <a href="/shoe/{{shoe.id}}">
-                            <img src="{{shoe.image.url}}" alt="" width="100%">
-                        </a>
-                        <div class="card-body">
-                            <p class="card-title"><a class ="text-secondary" href="/shoe/{{shoe.id}}">{{shoe.model.brand.name}} {{shoe.model.model}} {{shoe.color}}</a></p>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-                
+                    <p class="description">{{shoe.desc}}</p>
+                </div>  
             </div>
         </div>
-        <!-- close container -->
-    </main>
-    <script src="{% static 'js/size-selection.js' %}"></script>
-    {% endblock %}
+        <div class="row">
+            <div class="col-6">
+                <div class="sizes-container">
+                    {% for size, measure in women_sizes.items %}
+                        <div class="size-box">
+                            {{ size }}
+                            <div class="tooltip">{{ measure }}</div>
+                        </div>
+                    {% endfor %}
+                    {% for size, measure in men_sizes.items %}
+                    <div class="size-box">
+                        {{ size }}
+                        <div class="tooltip">{{ measure }}</div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="col-6">
+                <h2 class="product-price">₽{{shoe.price}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="container">
+                    <form id="size-form" action="/add_to_cart" method="post">
+                        {% csrf_token %}
+                    
+                    <input type="hidden" id="selected_size" name="selected_size" value="">
+                    <button type="submit" class="btn btn-dark" style="align-items: center;">В корзину</button>
+                    </form>
+                </div>
+            </div> 
+            <div class="col-md-6" style="
+            padding-top: 20px;">
+            
+                <div class="row">
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                    </div>
+                </div>
+                <hr class="my-4">
+                <div class="row">
+                    <div class="col-md-12 bottom-rule">
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-md-12">
+                    </div>
+                </div> -->
+            </div>
+        </div>
+            <hr class="my-4">
+            <h3 class="text-center">Вам может понравиться:</h3>
+        <div class="row text-center justify-content-center">
+            {% for shoe in related_shoes %}
+            <div class="col-lg-2 col-md-2 col-sm-4 mb-5">
+                <div class="card h-100">
+                    <a href="/shoe/{{shoe.id}}">
+                        <img src="{{shoe.image.url}}" alt="" width="100%">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-title"><a class ="text-secondary" href="/shoe/{{shoe.id}}">{{shoe.model.brand.name}} {{shoe.model.model}} {{shoe.color}}</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+    <!-- close container -->
+</main>
+<script src="{% static 'js/size-selection.js' %}"></script>
+{% endblock %}
