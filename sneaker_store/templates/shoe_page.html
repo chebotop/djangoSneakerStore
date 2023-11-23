@@ -85,12 +85,32 @@
     <main role="main">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-6">
+                    # Изображение
                     {% if shoe.image and shoe.image.url %}
                         <img src='{{ shoe.image.url }}' class='image-responsive' width='100%'>
                     {% else %}
                         <img src="{% static 'images/Jordan-Mars-270-Green-Glow.jpg' %}" alt="Заглушка" width="100%">
                     {% endif %}
+                </div>
+                <div class="col-6">
+                    # Тайтл + Дескрипшн
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    # размерная сетка
+                    
+                </div>
+                <div class="col-6">
+                    # Цена
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+
                     <div class="container">
                         <form id="size-form" action="/add_to_cart" method="post">
                             {% csrf_token %}
@@ -137,11 +157,11 @@
                          <h2 class="product-price">₽{{shoe.price}}</h2>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-12">
 
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
                 <hr class="my-4">
