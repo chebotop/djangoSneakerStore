@@ -89,32 +89,32 @@ def add_shoe_page(request):
     }
     return render(request,"add_shoe_page.html", context)
 
+
 def add_shoe(request):
     if request.method == 'POST':
         brand_name = request.POST.get('brand')
         model_name = request.POST.get('model')
-        images = request.POST.getlist('images[]')
+        price = request.POST.get('price')
+        description = request.POST.get('desc')
+        color_name = request.POST.get('color')
+        sizes = request.POST.get('sizes') 
 
-        # Check if the brand already exists or create a new one
-        brand, created = ShoeModel.objects.get_or_create(name=brand_name)
+        brand, created = ShoeBrand.objects.get_or_create(name=brand_name)
 
-        # Check if the model already exists or create a new one
-        model, created = ShoeModel.objects.get_or_create(
+        color, created = ShoeColor.objects.get_or_create(name=color_name)
+
+        shoe_model, created = ShoeModel.objects.update_or_create(
             model=model_name,
             brand=brand,
+            color=color,
             defaults={
-                'price': request.POST.get('price', 0),
-                'desc': request.POST.get('desc', ''),
-                'color': request.POST.get('color', ''),  # Assuming color is a field in your ShoeModel.
+                'price': price,
+                'desc': description,
+                'sizes': sizes, 
             }
         )
 
-        # sizes = Size.objects.filter(id__in=sizes)
-
-        # model.size.set(sizes)
-
         return redirect('/admin/shoe_list')
-
 
 
 
@@ -182,11 +182,10 @@ def shoe_page(request, shoe_id):
     shoe = ShoeModel.objects.get(id=shoe_id)
     current_brand_id = shoe.brand.id
     related_shoes = ShoeModel.objects.filter(brand_id = current_brand_id).exclude(id = shoe.id)[0:6]
-    # sizes = Size.objects.all()
-    size_list = [36, 37] # СДЕЛАТЬ СПИСОК
+    sizes = shoe.sizes 
 
     context = {
-        'sizes': size_list,
+        'sizes': sizes,
         'shoe': ShoeModel.objects.get(id=shoe_id),
         'related_shoes': related_shoes,
         'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),

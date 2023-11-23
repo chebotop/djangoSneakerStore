@@ -23,20 +23,21 @@
                         <form action="/add_to_cart" method="post">
                             {% csrf_token %}
                             <div class="product-size__container">
-                                <div>
-                                  <input class="size-input size-input--green" type="radio" name="jshop_attr_id[17]" id="jshop_attr_id1717" value="17">
-                                  <label class="size-label size-label--green size-label--last" for="jshop_attr_id1717">
-                                    <span class="radio_attr_label">41</span>
-                                    <div class="size-label__hint">
-                                      <span class="size-label__hint-inner">
-                                    {% for size in sizes %}
-                                    { size }
-                                      </span>
+                                {% for size, measure in sizes.women.items %}
+                                    <div class="sizes-style">
+                                        <input class="size-input size-input--green" type="radio" name="size" id="size{{ size }}" value="{{ size }}">
+                                        <label class="size-label size-label--green size-label--last" for="size{{ size }}">
+                                            <span class="radio_attr_label">{{ size }}</span>
+                                            <div class="size-label__hint">
+                                                <span class="size-label__hint-inner">
+                                                    {{ measure }}
+                                                </span>
+                                            </div>
+                                        </label>
                                     </div>
-                                  </label>
-                                </div>
-                              </div>
-
+                                {% endfor %}
+                            </div>
+                        
                             <button type="submit" class="btn btn-dark">В корзину</button>
                         </form>
                     </div>
