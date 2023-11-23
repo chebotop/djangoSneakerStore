@@ -182,11 +182,13 @@ def shoe_page(request, shoe_id):
     shoe = ShoeModel.objects.get(id=shoe_id)
     current_brand_id = shoe.brand.id
     related_shoes = ShoeModel.objects.filter(brand_id = current_brand_id).exclude(id = shoe.id)[0:6]
-    sizes = shoe.sizes 
+    women_sizes = shoe.sizes.get('women', {})
+    men_sizes = shoe.sizes.get('men', {})
 
     context = {
-        'sizes': sizes,
-        'shoe': ShoeModel.objects.get(id=shoe_id),
+        'shoe': ShoeModel.objects.get(id=shoe_id),                                                                                        
+        'women_sizes': women_sizes,
+        'men_sizes': men_sizes,
         'related_shoes': related_shoes,
         'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
         'nikes': ShoeBrand.objects.get(name="Nike").models.all(),

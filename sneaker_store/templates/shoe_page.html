@@ -2,6 +2,78 @@
 
 {% block head %}
 {% block title %}Обзор | Crossboost{% endblock %}
+    {% block extra_styles %}
+    <style>
+        .sizes-container, .submit-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 auto;
+            
+        }
+
+        .size-box {
+            position: relative; /* Для позиционирования тултипа */
+            background-color: #f5f5f5;
+            margin: 5px;
+            padding: 10px 20px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-container {
+            width: 100%;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn-dark {
+            margin-top: 10px;
+
+            width: 100%;
+        }
+
+        .size-box:hover, size-box.size-selected {
+            background-color: #40E0D0;
+            color: white;
+        }
+
+        /* Скрытие тултипа по умолчанию */
+        .tooltip {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -60px; /* Отрицательный отступ, чтобы центрировать тултип */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* Отображение тултипа при наведении */
+        .size-box:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .size-selected {
+            background-color: #40E0D0;
+            color: white;
+        }
+
+
+    </style>
+    {% endblock %}
+
     {{ block.super }}
 {% endblock %}
 
@@ -20,25 +92,26 @@
                         <img src="{% static 'images/Jordan-Mars-270-Green-Glow.jpg' %}" alt="Заглушка" width="100%">
                     {% endif %}
                     <div class="container">
-                        <form action="/add_to_cart" method="post">
+                        <form id="size-form" action="/add_to_cart" method="post">
                             {% csrf_token %}
-                            <div class="product-size__container">
-                                {% for size, measure in sizes.women.items %}
-                                    <div class="sizes-style">
-                                        <input class="size-input size-input--green" type="radio" name="size" id="size{{ size }}" value="{{ size }}">
-                                        <label class="size-label size-label--green size-label--last" for="size{{ size }}">
-                                            <span class="radio_attr_label">{{ size }}</span>
-                                            <div class="size-label__hint">
-                                                <span class="size-label__hint-inner">
-                                                    {{ measure }}
-                                                </span>
-                                            </div>
-                                        </label>
+                            <div class="sizes-container">
+                                {% for size, measure in women_sizes.items %}
+                                    <div class="size-box">
+                                        {{ size }}
+                                        <div class="tooltip">{{ measure }}</div>
                                     </div>
                                 {% endfor %}
+                                {% for size, measure in men_sizes.items %}
+                                <div class="size-box">
+                                    {{ size }}
+                                    <div class="tooltip">{{ measure }}</div>
+                                </div>
+                            {% endfor %}
                             </div>
                         
-                            <button type="submit" class="btn btn-dark">В корзину</button>
+                        <input type="hidden" id="selected_size" name="selected_size" value="">
+
+                        <button type="submit" class="btn btn-dark" style="align-items: center;">В корзину</button>
                         </form>
                     </div>
                 </div> 
@@ -91,4 +164,5 @@
         </div>
         <!-- close container -->
     </main>
+    <script src="{% static 'js/size-selection.js' %}"></script>
     {% endblock %}
