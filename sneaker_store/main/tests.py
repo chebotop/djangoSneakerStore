@@ -1,24 +1,25 @@
 from django.test import TestCase
 from django.urls import reverse
-from main.models import Cart, Brand, ShoeModel  # Замените `your_app` на имя вашего приложения
+from .models import ShoeModel, Cart, CartItem
 
-class CatalogPageTest(TestCase):
+class CartTests(TestCase):
     def setUp(self):
-        # Создание тестовых объектов
-        self.cart = Cart.objects.create(total=0)
-        self.brand = Brand.objects.create(name="Test Brand")
-        self.shoe_model = ShoeModel.objects.create(brand=self.brand, model="Test Model", price=100.00)
-        # Добавьте другие объекты, если необходимо
+        # Создание тестовой обуви
+        self.shoe = ShoeModel.objects.create(...)
 
-    def test_view_properties(self):
-        # Создание запроса GET к вашему представлению
-        url = reverse('catalog_page_all')  # Замените `catalog_page` на имя вашего представления
-        response = self.client.get(url)
+        # Другие необходимые настройки для теста
 
-        # Проверка свойств объектов в ответе
+    def test_add_to_cart(self):
+        # ID созданной обуви
+        shoe_id = self.shoe.id
+
+        # Создание POST-запроса для добавления обуви в корзину
+        response = self.client.post(reverse('add_to_cart'), {'shoe_id': shoe_id, 'selected_size': '42'})
+
+        # Проверка, что запрос был успешно обработан
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['cart'], self.cart)
-        self.assertEqual(response.context['all_brands'].count(), 1)
-        self.assertEqual(response.context['all_models'].count(), 1)
-        # Добавьте другие проверки, если необходимо
 
+        # Проверка, что обувь добавлена в корзину
+        self.assertTrue(CartItem.objects.filter(shoe_id=shoe_id).exists())
+
+        # Дополнительные проверки (например, правильно ли добавлен размер)

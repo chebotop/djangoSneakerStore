@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
+from django.http import HttpResponseBadRequest
 from django.contrib import messages
 import datetime
 from main.models import *
@@ -189,6 +190,7 @@ def shoe_page(request, shoe_id):
         'shoe': ShoeModel.objects.get(id=shoe_id),                                                                                        
         'women_sizes': women_sizes,
         'men_sizes': men_sizes,
+        'all_sizes': women_sizes | men_sizes,
         'related_shoes': related_shoes,
         'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
         'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
@@ -196,6 +198,25 @@ def shoe_page(request, shoe_id):
     }
 
     return render(request, 'shoe_page.html', context)
+
+# Add shoe size instance to cart.
+def add_to_cart(request):
+    shoe_id = request.POST.get('shoe_id')
+    selected_size = request.POST.get('selected_size')
+    if not shoe_id or not selected_size:
+        return HttpResponseBadRequest("Shoe ID not found")
+
+    shoe = get_object_or_404(ShoeModel, id=shoe_id)
+
+    cart_id = request.session.get('cart_id')
+    if not cart_id:
+        return HttpResponseBadRequest("No cart found")
+
+    cart = Cart.objects.get(id=cart_id)
+    CartItem.objects.create(shoe=shoe, cart=cart)
+    refresh_cart_total(cart)
+    return redirect('/cart')
+
 
 # Function used within views.py for refreshing the total of a cart when things are added or removed.
 def refresh_cart_total(cart):
@@ -205,15 +226,6 @@ def refresh_cart_total(cart):
     cart.total = total
     cart.save()
 
-# Add shoe size instance to cart.
-def add_to_cart(request):
-    shoe = ShoeModel.objects.get(id=request.POST['id'])
-    cart = Cart.objects.get(id=request.session['cart_id'])
-    cart_item = CartItem.objects.create(shoe=shoe, cart=cart)
-
-    refresh_cart_total(cart)
-
-    return redirect('/cart')
 
 # Show cart to user.
 def cart(request):
@@ -222,9 +234,9 @@ def cart(request):
         request.session['cart_id']=cart.id
     context = {
         'cart': Cart.objects.get(id=request.session['cart_id']),
-        'air_jordans': Brand.objects.get(name="Air Jordan").models.all(),
-        'nikes': Brand.objects.get(name="Nike").models.all(),
-        'adidases': Brand.objects.get(name="Adidas").models.all(),
+        'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
+        'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
+        'adidases': ShoeBrand.objects.get(name="Adidas").models.all(),
     }
 
     return render(request, 'cart.html', context)
@@ -306,22 +318,22 @@ def checkout_process_guest(request):
     # Credit Card expiration date set as a datetime, where it's the first of the month of the MM/YYYY provided
     expiration_date = datetime.date(int(request.POST['expireYYYY']),int(request.POST['expireM']),1)
     # Creates the credit card.
-    credit_card = CreditCard.objects.create(
-        number = request.POST['cc_number'],
-        security_code = request.POST['cc_security_code'],
-        expiration_date = expiration_date,
-        first_name = cc_first_name,
-        last_name = cc_last_name,
-        address = billing_address,
-        user = guest_user,
-    )
+    # credit_card = CreditCard.objects.create(
+    #     number = request.POST['cc_number'],
+    #     security_code = request.POST['cc_security_code'],
+    #     expiration_date = expiration_date,
+    #     first_name = cc_first_name,
+    #     last_name = cc_last_name,
+    #     address = billing_address,
+    #     user = guest_user,
+    # )
     # Retrieves the cart from the session cart_id. Creates an Order object with it, the User, and Credit Card
     cart = Cart.objects.get(id=request.session['cart_id'])
     new_order = Order.objects.create(
         status = "Processing",
         cart = cart,
         user = guest_user,
-        credit_card = credit_card,
+        # credit_card = credit_card,
     )
 
     # Removes the purchased items from the store inventory.

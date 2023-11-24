@@ -14,4 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
           this.classList.add('size-selected'); // Добавить класс к выбранной кнопке
       });
   });
+    var selectElement = document.getElementById('mobile-size-select');
+    if (selectElement) {
+        selectElement.addEventListener('change', function() {
+            var selectedSize = this.value;
+            document.getElementById('selected_size').value = selectedSize;
+            // Очищаем визуальное выделение с .size-box
+            document.querySelectorAll('.size-box').forEach(function(sizeBox) {
+                sizeBox.classList.remove('size-selected');
 });

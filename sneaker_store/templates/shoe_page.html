@@ -1,9 +1,11 @@
 {% extends 'base_head.html' %}
 
 {% block head %}
-{% block title %}Обзор | Crossboost{% endblock %}
+    {% block title %}Обзор | Crossboost{% endblock %}
     {% block extra_styles %}
-    <link rel="stylesheet" href="{% static 'css/shoe.css %'}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/shoe_page.css' %}">
+    <script src="{% static js/size-selection.js}"></script>
     {% endblock %}
     {{ block.super }}
 {% endblock %}
@@ -12,6 +14,123 @@
 {% endblock %}
 {% block content %}
 {% load static %}
+<style>
+#pageShoeName {
+    margin-top: 100px;
+}
+.description {
+    text-align: justify;
+}
+.sizes-container, .submit-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    
+}
+
+.size-box {
+    position: relative; 
+    background-color: #f5f5f5;
+    margin: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-container {
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-dark {
+    margin-top: 10px;
+
+    width: 100%;
+}
+
+.size-box:hover, size-box.size-selected {
+    background-color: #40E0D0;
+    color: white;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 100%;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    opacity: 0;
+    transform: translateX(-50%);
+    transition: opacity 0.3s; visibility: 0.3s;
+    pointer-events: none;
+}
+
+/* Отображение тултипа при наведении */
+.size-box:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.size-selected {
+    background-color: #40E0D0;
+    color: white;
+}
+
+
+
+@media only screen and (min-width: 600px) {
+    .mobile-select {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+.sizes-container {
+    display: none;
+}
+
+.mobile-select {
+    display: block;
+}
+
+.sizes-container {
+    flex-direction: column;
+    align-items: center; /* Центрирование элементов в одном столбце */
+    flex-wrap: nowrap; /* Это предотвращает обтекание элементов */
+}
+
+.size-box {
+    width: 100%; /* Растягивание элементов на всю ширину контейнера */
+    margin: 5px 0; /* Добавление отступа сверху и снизу для каждого элемента */
+}
+
+.submit-container {
+    width: 100%; /* Растягивание контейнера кнопки на всю ширину */
+    justify-content: center; /* Центрирование кнопки внутри контейнера */
+}
+
+.btn-dark {
+    width: 100%; /* Растягивание кнопки на всю ширину контейнера */
+}
+.col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+}
+
+</style>
 <main role="main">
     <div class="container">
         <div class="row">
@@ -32,6 +151,9 @@
         </div>
         <div class="row">
             <div class="col-6">
+                <form id="size-form" action="/add_to_cart" method="post">
+                {% csrf_token %}
+
                 <div class="sizes-container">
                     {% for size, measure in women_sizes.items %}
                         <div class="size-box">
@@ -44,7 +166,16 @@
                         {{ size }}
                         <div class="tooltip">{{ measure }}</div>
                     </div>
-                {% endfor %}
+                    {% endfor %}
+
+                </div>
+                <div>
+                    <select class="form-select form-select-lg mb-3 mobile-select" aria-label=".form-select-lg example">
+                        <option selected>Выбрать размер</option>
+                          {% for size in all_sizes.items %}
+                              <option value="{{ size.0 }}">{{ size.0 }} {{ size.1 }}</option>
+                          {% endfor %}
+                      </select>
                 </div>
             </div>
             <div class="col-6">
@@ -54,10 +185,9 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="container">
-                    <form id="size-form" action="/add_to_cart" method="post">
-                        {% csrf_token %}
                     
                     <input type="hidden" id="selected_size" name="selected_size" value="">
+                    <input type="hidden" name="shoe_id" value="{{ shoe.id }}">
                     <button type="submit" class="btn btn-dark" style="align-items: center;">В корзину</button>
                     </form>
                 </div>
