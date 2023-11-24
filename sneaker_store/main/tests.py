@@ -1,25 +1,30 @@
 from django.test import TestCase
-from django.urls import reverse
+from django.urls import reverse, get_resolver
 from .models import ShoeModel, Cart, CartItem
+from django.core.management import call_command
 
-class CartTests(TestCase):
-    def setUp(self):
-        # Создание тестовой обуви
-        self.shoe = ShoeModel.objects.create(...)
+for pattern in get_resolver().url_patterns:
+    print(pattern)
 
-        # Другие необходимые настройки для теста
 
-    def test_add_to_cart(self):
-        # ID созданной обуви
-        shoe_id = self.shoe.id
+class MyTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        call_command('loaddata', 'fixtures.json')
+
+
+class CartTests(MyTestCase):
+    def test_add_to_cart_with_existing_shoe(self):
+        shoe = ShoeModel.objects.first()  # Получаем первый объект обуви из БД
+        if not shoe:
+            self.skipTest("Нет доступной обуви в БД для тестирования")
 
         # Создание POST-запроса для добавления обуви в корзину
-        response = self.client.post(reverse('add_to_cart'), {'shoe_id': shoe_id, 'selected_size': '42'})
+        response = self.client.post(reverse('add_to_cart'), {'shoe_id': shoe.id})
 
         # Проверка, что запрос был успешно обработан
         self.assertEqual(response.status_code, 200)
 
         # Проверка, что обувь добавлена в корзину
-        self.assertTrue(CartItem.objects.filter(shoe_id=shoe_id).exists())
+        self.assertTrue(CartItem.objects.filter(shoe=shoe).exists())
 
-        # Дополнительные проверки (например, правильно ли добавлен размер)
