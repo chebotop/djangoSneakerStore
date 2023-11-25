@@ -1,30 +1,45 @@
 from django.test import TestCase
-from django.urls import reverse, get_resolver
-from .models import ShoeModel, Cart, CartItem
-from django.core.management import call_command
+from django.urls import reverse
+from .models import ShoeModel, ShoeBrand, Cart, ShoeColor
+from django.shortcuts import get_object_or_404
 
-for pattern in get_resolver().url_patterns:
-    print(pattern)
-
-
-class MyTestCase(TestCase):
+class ShoePageTests(TestCase):
     @classmethod
     def setUpTestData(cls):
-        call_command('loaddata', 'fixtures.json')
+        # Создаем тестовые данные для бренда и цвета
+        brand = ShoeBrand.objects.create(name="Test Brand")
+        color = ShoeColor.objects.create(color="Test Color")
 
+        # Теперь создаем обувь с указанием цвета
+        ShoeModel.objects.create(model="Test Shoe", brand=brand, color=color, sizes={"women": {"36EUR": "22.5см"}}, price="1000")
 
-class CartTests(MyTestCase):
-    def test_add_to_cart_with_existing_shoe(self):
-        shoe = ShoeModel.objects.first()  # Получаем первый объект обуви из БД
-        if not shoe:
-            self.skipTest("Нет доступной обуви в БД для тестирования")
+    def test_shoe_page_get_request(self):
+        # Получаем первый объект обуви из базы данных
+        shoe = ShoeModel.objects.first()
+        
+        # Отправляем GET-запрос на страницу обуви
+        response = self.client.get(reverse('shoe_page', args=[shoe.id]))
 
-        # Создание POST-запроса для добавления обуви в корзину
-        response = self.client.post(reverse('add_to_cart'), {'shoe_id': shoe.id})
-
-        # Проверка, что запрос был успешно обработан
+        # Проверяем, что страница успешно загружена
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, shoe.model)
 
-        # Проверка, что обувь добавлена в корзину
-        self.assertTrue(CartItem.objects.filter(shoe=shoe).exists())
+    def test_shoe_page_post_request_add_to_cart(self):
+        # Получаем первый объект обуви и создаем корзину
+        shoe = ShoeModel.objects.first()
+        cart = Cart.objects.create(total=0)
+
+        # Создаем сессию для корзины
+        session = self.client.session
+        session['cart_id'] = cart.id
+        session.save()
+
+        # Отправляем POST-запрос на добавление обуви в корзину
+        response = self.client.post(reverse('shoe_page', args=[shoe.id]), {
+            'selected_size': '36EUR'
+        })
+
+        # Проверяем, что запрос был успешно обработан
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(cart.items.filter(shoe=shoe).exists())
 

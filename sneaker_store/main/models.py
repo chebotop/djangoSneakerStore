@@ -56,7 +56,7 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     shoe = models.ForeignKey(ShoeModel, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=1) 
     cart = models.ForeignKey(Cart, related_name="cart_items", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)

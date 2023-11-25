@@ -178,16 +178,30 @@ def update_price(request):
 def shoe_page(request, shoe_id):
     if 'cart' not in request.session:
         cart = Cart.objects.create(total=0)
-        request.session['cart']=cart.id
+        request.session['cart'] = cart.id
 
-    shoe = ShoeModel.objects.get(id=shoe_id)
+    shoe = get_object_or_404(ShoeModel, id=shoe_id)
     current_brand_id = shoe.brand.id
-    related_shoes = ShoeModel.objects.filter(brand_id = current_brand_id).exclude(id = shoe.id)[0:6]
+    related_shoes = ShoeModel.objects.filter(brand_id=current_brand_id).exclude(id=shoe.id)[:6]
     women_sizes = shoe.sizes.get('women', {})
     men_sizes = shoe.sizes.get('men', {})
 
+    if request.method == 'POST':
+        selected_size = request.POST.get('selected_size')
+        if not selected_size:
+            return HttpResponseBadRequest("Selected size not found")
+
+        cart_id = request.session.get('cart_id')
+        if not cart_id:
+            return HttpResponseBadRequest("No cart found")
+
+        cart = Cart.objects.get(id=cart_id)
+        CartItem.objects.create(shoe=shoe, cart=cart)
+        refresh_cart_total(cart)
+        # Возможно, здесь стоит добавить перенаправление или другую логику
+
     context = {
-        'shoe': ShoeModel.objects.get(id=shoe_id),                                                                                        
+        'shoe': shoe,
         'women_sizes': women_sizes,
         'men_sizes': men_sizes,
         'all_sizes': women_sizes | men_sizes,
@@ -199,30 +213,18 @@ def shoe_page(request, shoe_id):
 
     return render(request, 'shoe_page.html', context)
 
+
 # Add shoe size instance to cart.
-def add_to_cart(request):
-    shoe_id = request.POST.get('shoe_id')
-    selected_size = request.POST.get('selected_size')
-    if not shoe_id or not selected_size:
-        return HttpResponseBadRequest("Shoe ID not found")
+# def add_to_cart(request):
 
-    shoe = get_object_or_404(ShoeModel, id=shoe_id)
-
-    cart_id = request.session.get('cart_id')
-    if not cart_id:
-        return HttpResponseBadRequest("No cart found")
-
-    cart = Cart.objects.get(id=cart_id)
-    CartItem.objects.create(shoe=shoe, cart=cart)
-    refresh_cart_total(cart)
-    return redirect('/cart')
+#     return redirect('/cart')
 
 
 # Function used within views.py for refreshing the total of a cart when things are added or removed.
 def refresh_cart_total(cart):
     total = 0
     for item in cart.cart_items.all():
-        total+= item.quantity * item.shoe.color.model.price
+        total+= item.shoe.price
     cart.total = total
     cart.save()
 
@@ -232,8 +234,13 @@ def cart(request):
     if 'cart_id' not in request.session:
         cart = Cart.objects.create(total=0)
         request.session['cart_id']=cart.id
+
+    cart = Cart.objects.get(id=request.session['cart_id'])
+    cart_items = cart.cart_items.all()
+
     context = {
         'cart': Cart.objects.get(id=request.session['cart_id']),
+        'cart_items': cart_items,
         'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
         'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
         'adidases': ShoeBrand.objects.get(name="Adidas").models.all(),

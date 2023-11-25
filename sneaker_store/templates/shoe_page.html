@@ -151,9 +151,8 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <form id="size-form" action="/add_to_cart" method="post">
+                <form id="size-form" method="post">
                 {% csrf_token %}
-
                 <div class="sizes-container">
                     {% for size, measure in women_sizes.items %}
                         <div class="size-box">
@@ -167,7 +166,6 @@
                         <div class="tooltip">{{ measure }}</div>
                     </div>
                     {% endfor %}
-
                 </div>
                 <div>
                     <select class="form-select form-select-lg mb-3 mobile-select" aria-label=".form-select-lg example">
@@ -177,6 +175,7 @@
                           {% endfor %}
                       </select>
                 </div>
+                    
             </div>
             <div class="col-6">
                 <h2 class="product-price">₽{{shoe.price}}</h2>
@@ -189,7 +188,7 @@
                     <input type="hidden" id="selected_size" name="selected_size" value="">
                     <input type="hidden" name="shoe_id" value="{{ shoe.id }}">
                     <button type="submit" class="btn btn-dark" style="align-items: center;">В корзину</button>
-                    </form>
+                </form>
                 </div>
             </div> 
             <div class="col-md-6" style="

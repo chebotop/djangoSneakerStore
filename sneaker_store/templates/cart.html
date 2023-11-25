@@ -57,17 +57,17 @@
                                         <div class="p-2">
                                             <img src="{{item.shoe.color.image.url}}" alt="" width="70" class="img-fluid rounded shadow-sm">
                                             <div class="ml-3 d-inline-block align-middle">
-                                                <h5 class="mb-0"> <a href="/shoe/{{item.shoe.color.id}}" class="text-dark d-inline-block align-middle">{{item.shoe.color.model.brand.name}} {{item.shoe.color.model.model}}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Size: {{item.shoe.size}}</span>
+                                                <h5 class="mb-0"> <a href="/shoe/{{item.shoe.color.id}}" class="text-dark d-inline-block align-middle">{{item.shoe.model}} {{size}}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Size: {{item.shoe.size}}</span>
                                             </div>
                                         </div>
                                     </th>
                                     <td class="align-middle"><strong>{{item.shoe.color.color}}</strong></td>
-                                    <td class="align-middle"><strong>${{item.shoe.color.model.price}}</strong></td>
+                                    <td class="align-middle"><strong>₽{{item.shoe.price}}</strong></td>
                                     <form action='/update_quantity' method='post'>
                                         {% csrf_token %}
                                         <td class="align-middle">
                                             <input type='hidden' name='item_id' value='{{item.id}}'>
-                                            <input type='text' name='new_quantity' size='2' value='{{item.quantity}}'><button class="btn btn-dark btn-sm">Update</button>
+                                            <input type='text' name='new_quantity' size='2' value='{{item.quantity}}'><button class="btn btn-dark btn-sm">Обновить</button>
                                         </td>
                                     </form>
                                     <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
@@ -75,21 +75,18 @@
                                 {% endfor %}
                             </tbody>
                         </table>
-                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Итог </div>
                         <ul class="list-unstyled mb-4">
                             <li class="d-flex justify-content-between px-4 py-3 border-bottom">
-                                <strong class="text-muted">Предварительная сумма заказа: </strong><strong>${{cart.total}}</strong>
+                                <strong class="text-muted">Предварительная сумма заказа: </strong><strong>₽{{cart.total}}</strong>
                             </li>
                             <li class="d-flex justify-content-between px-4 py-3 border-bottom">
                                 <strong class="text-muted">Доставка: </strong><strong>Бесплатно</strong>
                             </li>
-                            <!-- <li class="d-flex justify-content-between px-4 py-3 border-bottom">
-                                <strong class="text-muted">Tax</strong><strong>$0.00</strong>
-                            </li> -->
                             <li class="d-flex justify-content-between px-4 py-3 border-bottom">
                                 <strong class="text-muted">Итого: </strong>
                                 <h5 class="font-weight-bold">₽{{cart.total}}</h5>
-                            </li>я
+                            </li>
                         </ul>
                         <a href="/checkout" class="btn btn-dark rounded-pill py-2 btn-block">Оформить</a>
                     </div>
