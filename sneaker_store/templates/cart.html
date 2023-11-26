@@ -70,7 +70,16 @@
                                             <input type='text' name='new_quantity' size='2' value='{{item.quantity}}'><button class="btn btn-dark btn-sm">Обновить</button>
                                         </td>
                                     </form>
-                                    <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                                    <td class="border-0 align-middle">
+                                        <form action="{% url 'remove_from_cart' %}" method="post" style="display: inline;">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="item_id" value="{{item.id}}">
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                        <!-- <a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td> -->
                                 </tr>
                                 {% endfor %}
                             </tbody>

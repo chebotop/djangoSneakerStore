@@ -133,13 +133,7 @@ def shoe_list(request):
 
     return render(request, 'shoe_list.html', context)
 
-# Updates inventory of specific size.
-# def update_desc(request):
-#     shoe = ShoeSize.objects.get(id=request.POST['shoe_id'])
-#     shoe.inventory = request.POST['new_inventory']
-#     shoe.save()
 
-#     return redirect('/admin/shoe_list')
 def update_desc(request):
     shoe = ShoeModel.objects.get(id=request.POST['desc'])
     shoe.desc = request.POST['new_description']
@@ -155,7 +149,7 @@ def update_img(request):
 
     return redirect('/admin/shoe_list')
 
-#Updates price of specific model. Prices are constant across all colors/sizes of the same model.
+#Updates price of specific model
 def update_price(request):
     shoe = ShoeModel.objects.get(id=request.POST['shoe_id'])
     shoe.price = request.POST['new_price']
@@ -196,9 +190,9 @@ def shoe_page(request, shoe_id):
             return HttpResponseBadRequest("No cart found")
 
         cart = Cart.objects.get(id=cart_id)
-        CartItem.objects.create(shoe=shoe, cart=cart)
+        CartItem.objects.create(shoe=shoe, cart=cart, size=selected_size) # Ранее создавал обьект корзины без передачи size
         refresh_cart_total(cart)
-        # Возможно, здесь стоит добавить перенаправление или другую логику
+        # Добавить кнопку "перейти в корзину", после добавления товара в корзину"
 
     context = {
         'shoe': shoe,
@@ -343,12 +337,12 @@ def checkout_process_guest(request):
         # credit_card = credit_card,
     )
 
-    # Removes the purchased items from the store inventory.
-    for item in cart.cart_items.all():
-        shoe = item.shoe
-        shoe.inventory = shoe.inventory-item.quantity
-        shoe.quantity_sold = shoe.quantity_sold+item.quantity
-        shoe.save()
+    # # Removes the purchased items from the store inventory.
+    # for item in cart.cart_items.all():
+    #     shoe = item.shoe
+    #     shoe.inventory = shoe.inventory-item.quantity
+    #     shoe.quantity_sold = shoe.quantity_sold+item.quantity
+    #     shoe.save()
 
     # Places order_id in session to retrieve for confirmation page.
     request.session['order_id'] = new_order.id

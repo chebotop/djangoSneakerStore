@@ -60,6 +60,7 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, related_name="cart_items", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
+    size = models.CharField(max_length=45, default='')
 
 class Address(models.Model):
     address = models.CharField(max_length=45)
