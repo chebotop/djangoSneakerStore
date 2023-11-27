@@ -3,6 +3,9 @@ from django.http import HttpResponseBadRequest
 from django.contrib import messages
 import datetime
 from main.models import *
+import logging
+
+# logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -208,13 +211,6 @@ def shoe_page(request, shoe_id):
     return render(request, 'shoe_page.html', context)
 
 
-# Add shoe size instance to cart.
-# def add_to_cart(request):
-
-#     return redirect('/cart')
-
-
-# Function used within views.py for refreshing the total of a cart when things are added or removed.
 def refresh_cart_total(cart):
     total = 0
     for item in cart.cart_items.all():
@@ -252,16 +248,12 @@ def remove_from_cart(request, item_id):
         except CartItem.DoesNotExist:
             pass
         return redirect('cart')
+    
 # Update the quantity in the cart.
 def update_quantity(request):
     item = CartItem.objects.get(id=request.POST['item_id'])
-
-    # Checks to make sure the new updated quantity is in stock.
-    if item.shoe.inventory<int(request.POST['new_quantity']):
-        messages.error(request, "Sorry, that quantity is not currently in stock.")
-        return redirect('/cart')
     item.quantity = request.POST['new_quantity']
-
+    print(item)
     #Updates quantity or deletes the CartItem if quantity has been updated to 0.
     if int(request.POST['new_quantity'])>0:
         item.save()
