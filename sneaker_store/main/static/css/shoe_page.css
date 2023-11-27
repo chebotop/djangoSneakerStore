@@ -38,11 +38,7 @@ body {
     margin-top: 20px;
 }
 
-.btn-dark {
-    margin-top: 10px;
 
-    width: 100%;
-}
 
 .size-box:hover, .size-box.size-selected {
     background-color: #40E0D0;
@@ -113,11 +109,22 @@ body {
     justify-content: center; /* Центрирование кнопки внутри контейнера */
 }
 
-.btn-dark {
-    width: 100%; /* Растягивание кнопки на всю ширину контейнера */
-}
+
 .col-6 {
     flex: 0 0 100%;
     max-width: 100%;
 }
+}
+
+.btn-dark {
+    margin-top: 10px;
+    width: 100%;
+}
+.btn-danger {
+    justify-content: center;
+    width: 100%;
+    background-color: red;
+    color: white;
+    margin-top: 10px;
+
 }
