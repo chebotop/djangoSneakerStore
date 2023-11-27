@@ -242,6 +242,16 @@ def cart(request):
 
     return render(request, 'cart.html', context)
 
+def remove_from_cart(request, item_id):
+    if request.method == 'POST':
+        try:
+            item = CartItem.objects.get(id=item_id, cart__id=request.session.get('cart_id'))
+            item.delete()
+            cart = Cart.objects.get(id=request.session['cart_id'])
+            refresh_cart_total(cart)
+        except CartItem.DoesNotExist:
+            pass
+        return redirect('cart')
 # Update the quantity in the cart.
 def update_quantity(request):
     item = CartItem.objects.get(id=request.POST['item_id'])

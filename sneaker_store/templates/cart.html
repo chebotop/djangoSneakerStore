@@ -51,36 +51,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for item in cart.cart_items.all %}
-                                <tr>
-                                    <th scope="row">
-                                        <div class="p-2">
-                                            <img src="{{item.shoe.color.image.url}}" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                            <div class="ml-3 d-inline-block align-middle">
-                                                <h5 class="mb-0"> <a href="/shoe/{{item.shoe.color.id}}" class="text-dark d-inline-block align-middle">{{item.shoe.model}} {{size}}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Size: {{item.shoe.size}}</span>
+                                {% for item in cart_items %}
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="p-2">
+                                                <img src="{{item.shoe.color.image.url}}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                                <div class="ml-3 d-inline-block align-middle">
+                                                    <h5 class="mb-0"> <a href="/shoe/{{item.shoe.color.id}}" class="text-dark d-inline-block align-middle">{{item.shoe.model}} {{size}}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Size: {{item.shoe.size}}</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </th>
-                                    <td class="align-middle"><strong>{{item.shoe.color.color}}</strong></td>
-                                    <td class="align-middle"><strong>₽{{item.shoe.price}}</strong></td>
-                                    <form action='/update_quantity' method='post'>
-                                        {% csrf_token %}
-                                        <td class="align-middle">
-                                            <input type='hidden' name='item_id' value='{{item.id}}'>
-                                            <input type='text' name='new_quantity' size='2' value='{{item.quantity}}'><button class="btn btn-dark btn-sm">Обновить</button>
-                                        </td>
-                                    </form>
-                                    <td class="border-0 align-middle">
-                                        <form action="{% url 'remove_from_cart' %}" method="post" style="display: inline;">
+                                        </th>
+                                        <td class="align-middle"><strong>{{item.shoe.color.color}}</strong></td>
+                                        <td class="align-middle"><strong>₽{{item.shoe.price}}</strong></td>
+                                        <form action='/update_quantity' method='post'>
                                             {% csrf_token %}
-                                            <input type="hidden" name="item_id" value="{{item.id}}">
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
+                                            <td class="align-middle">
+                                                <input type='hidden' name='item_id' value='{{item.id}}'>
+                                                <input type='text' name='new_quantity' size='2' value='{{item.quantity}}'>
+                                                <button class="btn btn-dark btn-sm">Обновить</button>
+                                            </td>
                                         </form>
-                                    </td>
-                                        <!-- <a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td> -->
-                                </tr>
+                                        <td class="border-0 align-middle">
+                                            <form action="{% url 'remove_from_cart' item.id %}" method="post" style="display: inline;">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="item_id" value="{{item.id}}">
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                            <!-- <a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td> -->
+                                    </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
