@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('size-selected');
 
             // Получить и обновить размер
-            var selectedSize = this.innerText.trim().split(' ')[0];
+            var selectedSize = this.innerText.trim().split('\n')[0];
             console.log("Selected size:", selectedSize);  // Отладочный вывод
             document.getElementById('selected_size').value = selectedSize;
         });
