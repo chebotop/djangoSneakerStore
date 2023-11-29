@@ -48,25 +48,25 @@ def catalog_page(request, browse_filter="all"):
     else:
         max_price = 10000
 
-    # # Assigns display_shoes to either all, a brand, or a specific model in the else statement. "browse_filter" can include brand or model info. Always filters for price as well.
-    # if browse_filter == "all":
-    #     category = "All Sneakers"
-    #     display_shoes = ShoeModel.objects.filter(price__gte=min_price, price__lte=max_price)
-    # elif browse_filter == "air jordan":
-    #     category = "Air Jordan"
-    #     display_shoes = ShoeModel.objects.filter(brand__name="Air Jordan", price__gte=min_price,
-    #                                             price__lte=max_price)
-    # elif browse_filter == "nike":
-    #     category = "Nike"
-    #     display_shoes = ShoeModel.objects.filter(brand__name="Nike", price__gte=min_price, price__lte=max_price)
-    # elif browse_filter == "adidas":
-    #     category = "Adidas"
-    #     display_shoes = ShoeModel.objects.filter(brand__name="Adidas", price__gte=min_price,
-    #                                              price__lte=max_price)
-    # else:
-    #     model = ShoeModel.objects.get(id=int(browse_filter))
-    #     category = model.model
-    #     display_shoes = ShoeModel.objects.filter(model=model, price__gte=min_price, price__lte=max_price)
+    # Assigns display_shoes to either all, a brand, or a specific model in the else statement. "browse_filter" can include brand or model info. Always filters for price as well.
+    if browse_filter == "all":
+        category = "All Sneakers"
+        display_shoes = ShoeModel.objects.filter(price__gte=min_price, price__lte=max_price)
+    elif browse_filter == "air jordan":
+        category = "Air Jordan"
+        display_shoes = ShoeModel.objects.filter(brand__name="Air Jordan", price__gte=min_price,
+                                                price__lte=max_price)
+    elif browse_filter == "nike":
+        category = "Nike"
+        display_shoes = ShoeModel.objects.filter(brand__name="Nike", price__gte=min_price, price__lte=max_price)
+    elif browse_filter == "adidas":
+        category = "Adidas"
+        display_shoes = ShoeModel.objects.filter(brand__name="Adidas", price__gte=min_price,
+                                                 price__lte=max_price)
+    else:
+        model = ShoeModel.objects.get(id=int(browse_filter))
+        category = model.model
+        display_shoes = ShoeModel.objects.filter(model=model, price__gte=min_price, price__lte=max_price)
 
     context = {
         # 'shoes': display_shoes,
