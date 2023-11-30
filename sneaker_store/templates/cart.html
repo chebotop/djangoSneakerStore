@@ -1,14 +1,14 @@
 {% extends 'base_head.html' %}
 
 {% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
     {% block title %}Корзина | Интернет магазин{% endblock %}
     {{ block.super }}  
 {% endblock %}
-
 {% block navbar %}
     {{ block.super }}     
 {% endblock %}
-
 {% block content %}
 <div class="px-4 px-lg-0">
     <!-- For demo purpose -->
@@ -64,23 +64,28 @@
                                         </th>
                                         <td class="align-middle"><strong>{{item.shoe.color.color}}</strong></td>
                                         <td class="align-middle"><strong>₽{{ item.shoe.price|floatformat:2|multiply:item.quantity }}</strong></td>
-                                        <form action='/update_quantity' method='post'>
-                                            {% csrf_token %}
-                                            <td class="align-middle">
-                                                <input type='hidden' name='item_id' value='{{item.id}}'>
-                                                <input type='text' name='new_quantity' size='2' value='{{item.quantity}}'>
-                                                <button class="btn btn-dark btn-sm">Обновить</button>
-                                            </td>
-                                        </form>
-                                        <td class="border-0 align-middle">
-                                            <form action="{% url 'remove_from_cart' item.id %}" method="post" style="display: inline;">
+                                        <td class="align-middle">
+                                            <div class="form-container">
+                                            <form action='/update_quantity' method='post' class="form-update">
+                                                {% csrf_token %}
+                                                    <input type='hidden' name='item_id' value='{{item.id}}'>
+                                                    <input class="input_quantity" type='text' name='new_quantity' size='2' value='{{item.quantity}}'>
+                                                    <button class="btn btn-dark btn-sm">
+                                                        <i class="fas fa-sync-alt"></i>
+                                                    </button>
+                                            </form>
+                                            <form action="{% url 'remove_from_cart' item.id %}" method="post" style="display: inline;" class="form-delete">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="item_id" value="{{item.id}}">
                                                 <button type="submit" class="btn btn-danger btn-sm">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </form>
+                                            </div>
                                         </td>
+                                        <!-- <td class="border-0 align-middle">
+
+                                        </td> -->
                                             <!-- <a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td> -->
                                     </tr>
                                 {% endfor %}
