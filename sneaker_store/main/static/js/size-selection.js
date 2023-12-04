@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Функция для сброса стиля кнопки "в корзину"
+    function resetAddToCartButton() {
+        var addToCartButton = document.getElementById('add-to-cart-btn');
+        if (addToCartButton) {
+            addToCartButton.textContent = 'Добавить в корзину';
+            addToCartButton.classList.remove('btn-danger');
+            addToCartButton.classList.add('btn-dark');
+        }
+    }
+
+    // Обработчик кликов для размеров
     document.querySelectorAll('.size-box').forEach(function(sizeBox) {
         sizeBox.addEventListener('click', function() {
             // Очистить предыдущее выделение
@@ -9,17 +20,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // Добавить класс для визуального выделения к текущему элементу
             this.classList.add('size-selected');
 
+            // Сбросить стиль кнопки "в корзину" на первоначальный
+            resetAddToCartButton();
+
             // Получить и обновить размер
             var selectedSize = this.innerText.trim().split('\n')[0];
             console.log("Selected size:", selectedSize);  // Отладочный вывод
             document.getElementById('selected_size').value = selectedSize;
         });
     });
-});
 
-
-// Обработка клика по кнопке "в корзину" для перенаправления в корзину
-document.addEventListener('DOMContentLoaded', function() {
+    // Обработка клика по кнопке "в корзину"
     var addToCartButton = document.getElementById('add-to-cart-btn');
     var form = document.getElementById('size-form'); // Убедитесь, что у вашей формы есть id="size-form"
 
@@ -44,9 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 addToCartButton.textContent = 'Перейти в корзину';
                 addToCartButton.classList.remove('btn-dark');
                 addToCartButton.classList.add('btn-danger');
-                addToCartButton.onclick = function() {
-                    window.location.href = '/cart/';
-                };
             } else {
                 console.error("Ошибка при добавлении товара в корзину");
             }
@@ -55,6 +63,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
-
-

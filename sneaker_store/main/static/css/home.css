@@ -41,6 +41,9 @@ body {
 
 .card {
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 img.logo-img {
     max-width: 200px;

@@ -31,13 +31,13 @@
                 <div class="card h-100">
                     <a href="/shoe/{{shoe.id}}">
                     {% if shoe.image and shoe.image.url %}
-                        <img src="{{ shoe.image.url}}" alt="" width="100%">
+                        <img src="{{ shoe.image.url}}" style="max-height: 120px;" alt="" width="100%">
                     {% else %}
                         <img src="{% static 'images\Jordan-Mars-270-Green-Glow.jpg' %}" alt="Заглушка" width="100%">
                     {% endif %}
                     </a>
                     <div class="card-body">
-                        <p class="card-title"><a class="text-secondary" href="/shoe/{{shoe.id}}">{{shoe.brand.name}} {{shoe.model}} {{shoe.color}}</a></p>
+                        <p class="card-title"><a class="text-secondary" href="/shoe/{{shoe.id}}">{{shoe.model}}</a></p>
                     </div>
                 </div>
             </div>

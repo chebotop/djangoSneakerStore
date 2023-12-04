@@ -5,7 +5,7 @@ import datetime
 from main.models import *
 import logging
 
-# logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -46,7 +46,7 @@ def catalog_page(request, browse_filter="all"):
     if request.method == 'GET' and request.GET.get('max'):
         max_price = request.GET['max']
     else:
-        max_price = 10000
+        max_price = 20000
 
     # Assigns display_shoes to either all, a brand, or a specific model in the else statement. "browse_filter" can include brand or model info. Always filters for price as well.
     if browse_filter == "all":
@@ -57,7 +57,6 @@ def catalog_page(request, browse_filter="all"):
         display_shoes = ShoeModel.objects.filter(brand__name="Air Jordan", price__gte=min_price,
                                                 price__lte=max_price)
     elif browse_filter == "nike":
-        category = "Nike"
         display_shoes = ShoeModel.objects.filter(brand__name="Nike", price__gte=min_price, price__lte=max_price)
     elif browse_filter == "adidas":
         category = "Adidas"
@@ -69,7 +68,7 @@ def catalog_page(request, browse_filter="all"):
         display_shoes = ShoeModel.objects.filter(model=model, price__gte=min_price, price__lte=max_price)
 
     context = {
-        # 'shoes': display_shoes,
+        'shoes': display_shoes,
         'all_brands': all_brands,
         'all_models': all_models,
         # 'category': category,

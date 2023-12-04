@@ -1,14 +1,14 @@
 {% extends 'base_head.html' %}
 
 {% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/catalog.css' %}">
     {% block title %}Обзор | Crossboost{% endblock %}
     {{ block.super }}  
 {% endblock %}
-
 {% block navbar %}
     {{ block.super }}  
 {% endblock %}
-
 {% block content %}
 <main role="main">
     <div class="container">
@@ -112,7 +112,7 @@
                             </a>
                             <div class="card-body text-center">
                                 <a href="/shoe/{{shoe.id}}" class="text-secondary">
-                                    <h6>{{shoe.model.brand.name}}</h6>
+                                    <h6>{{shoe.model}}</h6>
                                 </a>
                                 <h5>
                                     <strong>

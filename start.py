@@ -2,8 +2,8 @@ import subprocess
 import os
 
 def run_server():
-    subprocess.run('venv\\Scripts\\activate', shell=True)
-    os.system("cd sneaker_store")
+    subprocess.run('cd sneaker_store && venv\\Scripts\\activate', shell=True)
+
 
     command = "cd sneaker_store && python manage.py runserver"
     subprocess.run(command, shell=True)
