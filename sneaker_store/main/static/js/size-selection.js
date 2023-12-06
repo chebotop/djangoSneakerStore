@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+    var addToCartButton = document.getElementById('add-to-cart-btn');
+    var form = document.getElementById('size-form');
+
     // Функция для сброса стиля кнопки "в корзину"
     function resetAddToCartButton() {
-        var addToCartButton = document.getElementById('add-to-cart-btn');
         if (addToCartButton) {
             addToCartButton.textContent = 'Добавить в корзину';
             addToCartButton.classList.remove('btn-danger');
@@ -31,15 +33,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Обработка клика по кнопке "в корзину"
-    var addToCartButton = document.getElementById('add-to-cart-btn');
-    var form = document.getElementById('size-form'); // Убедитесь, что у вашей формы есть id="size-form"
-
-    if (!addToCartButton || !form) {
-        console.log("Кнопка или форма не найдены!");
-        return;
-    }
-
     addToCartButton.addEventListener('click', function(event) {
+        // Если товар добавлен в корзину, перенаправляем в нее
+        if (this.textContent.trim() === 'Перейти в корзину') {
+            console.log("Пойман триггер перейти в корзину")
+            window.location.href = '/cart';
+            return;
+        } else {
+            console.log(this.textContent.trim())
+        }
+
+        // Если класса нет, выполняем стандартное действие по добавлению в корзину
         event.preventDefault(); // Предотвращаем стандартное поведение кнопки
 
         var formData = new FormData(form); // Собираем данные из формы
@@ -53,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("Товар добавлен в корзину");
                 // Изменяем текст и стиль кнопки
                 addToCartButton.textContent = 'Перейти в корзину';
+                console.log('THIS:', this.textContent)
                 addToCartButton.classList.remove('btn-dark');
                 addToCartButton.classList.add('btn-danger');
             } else {
@@ -62,4 +67,4 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Ошибка:', error);
         });
     });
-});
+})
