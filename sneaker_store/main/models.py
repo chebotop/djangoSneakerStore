@@ -13,6 +13,10 @@ class ShoeColor(models.Model):
     def __str__(self):
         return self.color 
 
+# class ShoeSize(models.Model):
+#     euro_size = models.CharField(max_length=20)
+#     sm_size = models.CharField(max_length=20)
+#     gender = models.CharField(max_length=20)
 
 def default_size():
     return {
@@ -41,6 +45,7 @@ class ShoeModel(models.Model):
     color = models.ForeignKey(ShoeColor, max_length=45, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='gallery', default='')
     sizes = models.JSONField(default=default_size)
+    # sizes = models.ManyToManyField(ShoeSize)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 

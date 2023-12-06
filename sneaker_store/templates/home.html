@@ -27,7 +27,7 @@
     <div class="container">
         <div class="row text-center">
             {% for shoe in recent_shoes %}
-            <div class="col-4 col-lg-2 col-md-3 col-sm-4 mb-4"> <!-- Определение размеров колонок для разных экранов -->
+            <div class="col-12 col-lg-2 col-md-3 col-sm-4 mb-4"> <!-- Определение размеров колонок для разных экранов -->
                 <div class="card h-100">
                     <a href="/shoe/{{shoe.id}}">
                     {% if shoe.image and shoe.image.url %}

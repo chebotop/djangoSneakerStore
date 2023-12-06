@@ -12,38 +12,26 @@
 <main role="main">
     <div class="container">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-sm-6 col-md-6">
                 {% if shoe.image and shoe.image.url %}
-                    <img src='{{ shoe.image.url }}' class='image-responsive' style="max-width: 100%;height: auto;">
+                    <img src='{{ shoe.image.url }}' class='image-responsive' style="max-width: 100%;;">
                 {% else %}
                     <img src="{% static 'images/Jordan-Mars-270-Green-Glow.jpg' %}" alt="Заглушка" width="100%">
                 {% endif %}
+                
             </div>
             <div class="col-6">
                 <div class="col-md-12" id="pageShoeName">
                     <h2>{{shoe.brand.name}} {{shoe.model}} {{shoe.color}}</h2>
                     <hr class="my-4">
                     <p class="description">{{shoe.desc}}</p>
+
                 </div>  
             </div>
         </div>
         <div class="row">
             <div class="col-6">
-                <form id="size-form" method="post">
-                {% csrf_token %}
-                <div class="sizes-container">
-                    {% for size, measure in women_sizes.items %}
-                        <div class="size-box">
-                            {{ size }}
-                            <div class="tooltip">{{ measure }}</div>
-                        </div>
-                    {% endfor %}
-                    {% for size, measure in men_sizes.items %}
-                    <div class="size-box">
-                        {{ size }}
-                        <div class="tooltip">{{ measure }}</div>
-                    </div>
-                    {% endfor %}
+
                 </div>
                 <div>
                     <select class="form-select form-select-lg mb-3 mobile-select" aria-label=".form-select-lg example">
@@ -60,26 +48,33 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <div class="container">
-                    
-                    <input type="hidden" id="selected_size" name="selected_size" value="">
-                    <input type="hidden" name="shoe_id" value="{{ shoe.id }}">
-                    <button type="submit" class="btn btn-dark" style="align-items: center;" id="add-to-cart-btn">Выберите размер</button>
-                </form>
-                </div>
-            </div> 
-            <div class="col-md-6" style="
-            padding-top: 20px;">
-            
-                <div class="row">
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-12">
-                        
+        <form id="size-form" method="post">
+            {% csrf_token %}
+            <div class="sizes-container col-6">
+                {% for size, measure in women_sizes.items %}
+                    <div class="size-box">
+                        {{ size }}
+                        <div class="tooltip">{{ measure }}</div>
                     </div>
+                {% endfor %}
+                {% for size, measure in men_sizes.items %}
+                <div class="size-box">
+                    {{ size }}
+                    <div class="tooltip">{{ measure }}</div>
                 </div>
+                {% endfor %}
+                <div class="col-6 col-md-6">
+                    <div class="container">
+                        
+                        <input type="hidden" id="selected_size" name="selected_size" value="">
+                        <input type="hidden" name="shoe_id" value="{{ shoe.id }}">
+                        <button type="submit" class="btn btn-dark" style="align-items: center;" id="add-to-cart-btn">Выберите размер</button>
+                    </form>
+        </div>
+
+
+            <!-- <div class="col-md-6" style="padding-top: 20px;">
+                </div> -->
                 <hr class="my-4">
                 <div class="row">
                     <div class="col-md-12 bottom-rule">
@@ -91,6 +86,7 @@
                 </div> -->
             </div>
         </div>
+    </div>
             <hr class="my-4">
             <h3 class="text-center">Вам может понравиться:</h3>
         <div class="row text-center justify-content-center">

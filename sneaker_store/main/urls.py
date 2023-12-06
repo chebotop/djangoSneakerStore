@@ -25,6 +25,5 @@ urlpatterns = [
     path('admin', views.admin_menu),
     path('admin/login', views.admin_login),
     path('admin/logout', views.admin_logout),
-    path('browse/<str:browse_filter>', views.catalog_page, name='catalog_page_filter'),
-
+    path('browse/<str:brand_filter>/<str:model_filter>', views.catalog_page, name='catalog_page_filter'),
 ]
