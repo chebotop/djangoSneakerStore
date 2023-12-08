@@ -2,6 +2,12 @@ body {
     padding-top: 120px;
 }
 
+.img-align {
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 .card {
     border: none;
 }

@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Обработка клика по кнопке "в корзину"
     addToCartButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Предотвращаем стандартное поведение кнопки
+
         // Если товар добавлен в корзину, перенаправляем в нее
         if (this.textContent.trim() === 'Перейти в корзину') {
             console.log("Пойман триггер перейти в корзину")
@@ -42,9 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             console.log(this.textContent.trim())
         }
-
-        // Если класса нет, выполняем стандартное действие по добавлению в корзину
-        event.preventDefault(); // Предотвращаем стандартное поведение кнопки
 
         var formData = new FormData(form); // Собираем данные из формы
 

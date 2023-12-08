@@ -12,7 +12,7 @@
 <main role="main">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-6">
+            <div class="img-align col-12 col-sm-6 col-md-6">
                 {% if shoe.image and shoe.image.url %}
                     <img src='{{ shoe.image.url }}' class='image-responsive' style="max-width: 100%;;">
                 {% else %}
@@ -54,16 +54,19 @@
                 {% for size, measure in women_sizes.items %}
                     <div class="size-box">
                         {{ size }}
-                        <div class="tooltip">{{ measure }}</div>
+                        <div class="tooltip">
+                            {{ measure }}
+                        </div>
                     </div>
                 {% endfor %}
                 {% for size, measure in men_sizes.items %}
                 <div class="size-box">
                     {{ size }}
-                    <div class="tooltip">{{ measure }}</div>
+                    <div class="tooltip">
+                        {{ measure }}
+                    </div>
                 </div>
                 {% endfor %}
-                <div class="col-6 col-md-6">
                     <div class="container">
                         
                         <input type="hidden" id="selected_size" name="selected_size" value="">
