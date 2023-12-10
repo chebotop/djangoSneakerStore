@@ -2,11 +2,25 @@ body {
     padding-top: 120px;
 }
 
+#would-like {
+    margin-top: 20px
+}
+
+.size-select-row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
+
 .img-align {
     display: flex;
     align-content: center;
     flex-direction: row;
     flex-wrap: wrap;
+}
+.product-price {
+    display: flex;
+    justify-content: center;
 }
 .card {
     border: none;
@@ -23,7 +37,6 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 auto;
-    
 }
 
 .size-box {
@@ -83,26 +96,27 @@ body {
 
 
 
-@media only screen and (min-width: 600px) {
-    .mobile-select {
+@media only screen and (min-width: 720px) {
+    #size-select-row {
         display: none;
     }
 }
 
-@media only screen and (max-width: 600px) {
+/* @media only screen and (min-width: 600px) {
+    .sizes-container {
 
-.sizes-container {
-    display: none;
-}
+    }
+} */
+@media only screen and (max-width: 720px) {
+
+
 
 .mobile-select {
     display: block;
 }
 
 .sizes-container {
-    flex-direction: column;
-    align-items: center; /* Центрирование элементов в одном столбце */
-    flex-wrap: nowrap; /* Это предотвращает обтекание элементов */
+    display: none;
 }
 
 .size-box {

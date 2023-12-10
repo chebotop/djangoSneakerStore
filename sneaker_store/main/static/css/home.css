@@ -63,6 +63,10 @@ margin-right: 50px;
         font-size: 30px;
         margin-top: 20px;
     }
+    
+    #jumbo-text {
+        font-size: 20px;
+    }
 }
 @media (max-width: 550px) {
     .col-custom {
