@@ -45,6 +45,9 @@ body {
     justify-content: center;
     align-items: center;
 }
+.card-body {
+    padding: 0 !important;
+}
 img.logo-img {
     max-width: 200px;
 }

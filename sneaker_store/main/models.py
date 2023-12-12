@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 import json
 
 class ShoeBrand(models.Model):
@@ -12,6 +13,8 @@ class ShoeColor(models.Model):
 
     def __str__(self):
         return self.color 
+    
+
 
 # class ShoeSize(models.Model):
 #     euro_size = models.CharField(max_length=20)
@@ -51,6 +54,16 @@ class ShoeModel(models.Model):
 
     def __str__(self):
         return self.model 
+
+def shoe_image_directory_path(instance, filename):
+    return f'images/{instance.shoe_model.model}/{filename}'
+
+class ShoeImage(models.Model):
+    shoe_model = models.ForeignKey(ShoeModel, related_name='images', on_delete=models.CASCADE)
+    extra_images = models.ImageField(upload_to=shoe_image_directory_path)
+
+    def __str__(self):
+        return f'Image for {self.shoe_model.model}'
 
 
 class Cart(models.Model): 
