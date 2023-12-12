@@ -23,11 +23,9 @@ class ShoeModelAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
 
-        # Добавление дополните  льных изображений
         if 'extra_images' in form.cleaned_data:
             for f in request.FILES.getlist('extra_images'):
                 ShoeImage.objects.create(shoe_model=obj, image=f)
-
 
 
 admin.site.register(ShoeBrand)
