@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-from .models import ShoeBrand, ShoeModel, ShoeImage
+from .models import ShoeBrand, ShoeModel, ShoeImage, ShoeSize
 from .forms import ShoeModelForm
 
 
@@ -30,4 +30,5 @@ class ShoeModelAdmin(admin.ModelAdmin):
 
 admin.site.register(ShoeBrand)
 admin.site.register(ShoeModel, ShoeModelAdmin)
+admin.site.register(ShoeSize)
 admin.site.register(ShoeImage)

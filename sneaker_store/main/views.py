@@ -151,41 +151,7 @@ def shoe_list(request):
     return render(request, 'shoe_list.html', context)
 
 
-def update_desc(request):
-    shoe = ShoeModel.objects.get(id=request.POST['desc'])
-    shoe.desc = request.POST['new_description']
-    shoe.save()
 
-    return redirect('/admin/shoe_list')
-
-# Updates image upload of specific color. Applies to all sizes.
-def update_img(request):
-    shoe = ShoeModel.objects.get(id=request.POST['shoe_color_id'])
-    shoe.image = request.FILES.get('new_image', False)
-    shoe.save()
-
-    return redirect('/admin/shoe_list')
-
-#Updates price of specific model
-def update_price(request):
-    shoe = ShoeModel.objects.get(id=request.POST['shoe_id'])
-    shoe.price = request.POST['new_price']
-    shoe.save()
-
-    return redirect('/admin/shoe_list')
-
-# def filter_list(request):
-#     model_id=request.POST['model_id']
-#     shoes_of_model = ShoeSize.objects.filter(color__model__id = model_id)
-#     context ={
-#         'shoes': shoes_of_model,
-#         'models': ShoeModel.objects.all(),
-#         'filtered': True,
-#     }
-
-#     return render(request, 'shoe_list.html', context)
-
-# Catalog page for individual Model-Color
 def shoe_page(request, shoe_id):
     if 'cart' not in request.session:
         cart = Cart.objects.create(total=0)
@@ -194,8 +160,7 @@ def shoe_page(request, shoe_id):
     shoe = get_object_or_404(ShoeModel, id=shoe_id)
     current_brand_id = shoe.brand.id
     related_shoes = ShoeModel.objects.filter(brand_id=current_brand_id).exclude(id=shoe.id)[:6]
-    women_sizes = shoe.sizes.get('women', {})
-    men_sizes = shoe.sizes.get('men', {})
+    sizes = shoe.sizes.all()
 
     if request.method == 'POST':
         selected_size = request.POST.get('selected_size')
@@ -213,9 +178,7 @@ def shoe_page(request, shoe_id):
 
     context = {
         'shoe': shoe,
-        'women_sizes': women_sizes,
-        'men_sizes': men_sizes,
-        'all_sizes': women_sizes | men_sizes,
+        'sizes': sizes,
         'related_shoes': related_shoes,
         'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
         'nikes': ShoeBrand.objects.get(name="Nike").models.all(),

@@ -8,11 +8,7 @@ class ShoeBrand(models.Model):
     def __str__(self):
         return self.name 
 
-class ShoeColor(models.Model):
-    color = models.CharField(max_length=20)
 
-    def __str__(self):
-        return self.color 
     
 
 
@@ -39,15 +35,19 @@ def default_size():
         }
     }
 
+class ShoeSize(models.Model):
+    size = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.size
+    
 class ShoeModel(models.Model):
     model = models.CharField(max_length=45)
     price = models.IntegerField()
     desc = models.TextField()
     brand = models.ForeignKey(ShoeBrand, related_name='models', on_delete=models.CASCADE, max_length=45)
-    color = models.ForeignKey(ShoeColor, max_length=45, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='gallery', default='')
-    sizes = models.JSONField(default=default_size)
+    sizes = models.ManyToManyField(ShoeSize, related_name='sizes')
     # sizes = models.ManyToManyField(ShoeSize)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
