@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-from .models import ShoeBrand, ShoeModel, ShoeColor
+from .models import ShoeBrand, ShoeModel, ShoeSize
 
 
 
@@ -19,4 +19,4 @@ class ShoeModelAdmin(admin.ModelAdmin):
 
 admin.site.register(ShoeBrand)
 admin.site.register(ShoeModel, ShoeModelAdmin)
-admin.site.register(ShoeColor)
+admin.site.register(ShoeSize)

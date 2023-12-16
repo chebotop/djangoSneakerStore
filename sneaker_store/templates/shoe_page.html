@@ -36,7 +36,7 @@
                 <div>
                     <select class="form-select form-select-lg mb-3 mobile-select" aria-label=".form-select-lg example">
                         <option selected>Выбрать размер</option>
-                          {% for size in all_sizes.items %}
+                          {% for size in sizes %}
                               <option value="{{ size.0 }}">{{ size.0 }} {{ size.1 }}</option>
                           {% endfor %}
                       </select>

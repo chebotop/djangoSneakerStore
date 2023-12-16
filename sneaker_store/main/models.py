@@ -5,36 +5,16 @@ class ShoeBrand(models.Model):
     name = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.name 
+        return self.name
 
-class ShoeColor(models.Model):
-    color = models.CharField(max_length=20)
+
+class ShoeSize(models.Model):
+    euro_size = models.CharField(max_length=10)
+    sm_size = models.CharField(max_length=10)
+    gender = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.color 
-
-# class ShoeSize(models.Model):
-#     euro_size = models.CharField(max_length=20)
-#     sm_size = models.CharField(max_length=20)
-#     gender = models.CharField(max_length=20)
-
-def default_size():
-    return {
-        "women": {
-            "36EUR": "22.5см",
-            "37EUR": "23.5см",
-            "38EUR": "24см",
-            "39EUR": "25см",
-            "40EUR": "25.5см",
-        },
-        "men": {
-            "41EUR": "26см",
-            "42EUR": "26.5см",
-            "43EUR": "27.5см",
-            "44EUR": "28см",
-            "45EUR": "29см"
-        }
-    }
+        return self.euro_size
 
 
 class ShoeModel(models.Model):
@@ -42,10 +22,8 @@ class ShoeModel(models.Model):
     price = models.IntegerField()
     desc = models.TextField()
     brand = models.ForeignKey(ShoeBrand, related_name='models', on_delete=models.CASCADE, max_length=45)
-    color = models.ForeignKey(ShoeColor, max_length=45, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='gallery', default='')
-    sizes = models.JSONField(default=default_size)
-    # sizes = models.ManyToManyField(ShoeSize)
+    sizes = models.ManyToManyField(ShoeSize)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
@@ -53,7 +31,7 @@ class ShoeModel(models.Model):
         return self.model 
 
 
-class Cart(models.Model): 
+class Cart(models.Model):
     total = models.DecimalField(max_digits=8, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
@@ -89,20 +67,3 @@ class Order(models.Model):
     # credit_card = models.ForeignKey(CreditCard, related_name="orders", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
-
-
-
-
-
-
-
-# class CreditCard(models.Model):
-#     number = models.IntegerField()
-#     security_code = models.IntegerField()
-#     expiration_date = models.DateField()
-#     first_name = models.CharField(max_length=45)
-#     last_name = models.CharField(max_length=45)
-#     address = models.ForeignKey(Address, related_name="card", on_delete = models.CASCADE)
-#     user = models.ForeignKey(User, related_name="credit_cards", on_delete = models.CASCADE)
-
-
