@@ -45,6 +45,9 @@ body {
     justify-content: center;
     align-items: center;
 }
+.card-body {
+    padding: 0 !important;
+}
 img.logo-img {
     max-width: 200px;
 }
@@ -62,6 +65,10 @@ margin-right: 50px;
     .display-3 {
         font-size: 30px;
         margin-top: 20px;
+    }
+    
+    #jumbo-text {
+        font-size: 20px;
     }
 }
 @media (max-width: 550px) {

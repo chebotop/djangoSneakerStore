@@ -12,8 +12,8 @@
 {% block content %}
 <main role="main">
     <div class="container">
-        <div class="row justify-content-center" style="padding-top: 12px">
-            <h2 class="text-center">Обзор {{category}}</h2>
+        <div class="row justify-content-center" style="padding-top: 30px">
+            <h2 class="text-center">Обзор {{brand}}</h2>
         </div>
     </div>
     <div class="container">
@@ -105,8 +105,7 @@
             <div class="col-lg-9 col-md-9">
                 <div class="row wow fadeIn">
                     {% for shoe in shoes %}
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-5">
-                        <div class="card h-100">
+                    <div class="card col-lg-3 col-md-6 col-sm-6 mb-5">
                             <a href="/shoe/{{shoe.id}}">
                                 <img src="{{shoe.image.url}}" alt="" width="100%">
                             </a>
@@ -119,13 +118,11 @@
                                         <a href="/shoe/{{shoe.id}}" class="text-dark">{{shoe.model.model}}</a>
                                     </strong>
                                 </h5>
-                                <h6 class="text-secondary">{{shoe.color}}</h6>
-                
+                                <!-- <h6 class="text-secondary">{{shoe.color}}</h6> -->
                                 <h5 class="font-weight-bold">
                                     ₽{{shoe.price}}
                                 </h5>
                             </div>
-                        </div>
                     </div>
                     {% endfor %}
                 </div>

@@ -10,9 +10,9 @@
 {% endblock %}
 {% block content %}
 <main role="main">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-6">
+            <div class="img col-md-5 col-lg-6">
                 {% if shoe.image and shoe.image.url %}
                     <img src='{{ shoe.image.url }}' class='image-responsive' style="max-width: 100%;;">
                 {% else %}
@@ -20,92 +20,94 @@
                 {% endif %}
                 
             </div>
-            <div class="col-6">
-                <div class="col-md-12" id="pageShoeName">
-                    <h2>{{shoe.brand.name}} {{shoe.model}} {{shoe.color}}</h2>
-                    <hr class="my-4">
-                    <p class="description">{{shoe.desc}}</p>
+            <div class="col-md-7 col-lg-6">
+                <div class="shoeContent" id="product">
+                    <div class="shoeName">
+                        <p class="shoeId">{{shoe.id}}</p>
+                        <p>{{shoe.brand.name}}</p>
+                        <h2> {{shoe.model}}</h2>
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+        
 
-                </div>  
             </div>
         </div>
-        <div class="row">
-            <div class="col-6">
-
-                </div>
-                <div>
-                    <select class="form-select form-select-lg mb-3 mobile-select" aria-label=".form-select-lg example">
+        <div class="row" id="size-select-row">
+            <!-- <div class="col-12 col-sm-6 col-md-6"> -->
+                <form method="post">
+                    <select class="form-select form-select-lg mb-3" aria-label="Large select example"style="width: 100%">
                         <option selected>Выбрать размер</option>
+<<<<<<< HEAD
                           {% for size in sizes %}
+=======
+                          {% for size in sizes.items %}
+>>>>>>> 399bc5d090769e750f9502be8a936b2f2f60f4c3
                               <option value="{{ size.0 }}">{{ size.0 }} {{ size.1 }}</option>
                           {% endfor %}
-                      </select>
-                </div>
+                    </select>
+                    <button type="submit" class="btn btn-dark">В корзину</button>
+                </form>
+            <!-- </div> -->
                     
-            </div>
-            <div class="col-6">
-                <h2 class="product-price">₽{{shoe.price}}</h2>
-            </div>
         </div>
-        <div class="row">
-        <form id="size-form" method="post">
-            {% csrf_token %}
-            <div class="sizes-container col-6">
-                {% for size, measure in women_sizes.items %}
+            <!-- <div class="col-12">
+            </div> -->
+
+        <div class="row" id="size-secondary-row">
+            <form id="size-form" method="post">
+                {% csrf_token %} 
+                <div class="sizes-container col-10 col-md-6">
+                    {% for size in sizes %}
+                        <div class="size-box">
+                            {{ size.size }}
+                            <!-- <div class="tooltip">{{ measure }}</div> -->
+                        </div>
+                    {% endfor %}
+                    {% for size, measure in sizes.items %}
                     <div class="size-box">
                         {{ size }}
-                        <div class="tooltip">{{ measure }}</div>
+                        <div class="tooltip">
+                            {{ measure }}
+                        </div>
                     </div>
-                {% endfor %}
-                {% for size, measure in men_sizes.items %}
-                <div class="size-box">
-                    {{ size }}
-                    <div class="tooltip">{{ measure }}</div>
+                    {% endfor %}                            
+                            <input type="hidden" id="selected_size" name="selected_size" value="">
+                            <input type="hidden" name="shoe_id" value="{{ shoe.id }}">
+                            <button type="submit" class="btn btn-dark" style="align-items: center;" id="add-to-cart-btn">Выберите размер</button>
                 </div>
-                {% endfor %}
-                <div class="col-6 col-md-6">
-                    <div class="container">
-                        
-                        <input type="hidden" id="selected_size" name="selected_size" value="">
-                        <input type="hidden" name="shoe_id" value="{{ shoe.id }}">
-                        <button type="submit" class="btn btn-dark" style="align-items: center;" id="add-to-cart-btn">Выберите размер</button>
-                    </form>
+            </form>
+            <h2 class="col-12 product-price" style="padding-top: 20px; display: flex; justify-content: center;">₽{{shoe.price}}</h2>
         </div>
-
-
-            <!-- <div class="col-md-6" style="padding-top: 20px;">
-                </div> -->
+        </div>  
+    </div>
                 <hr class="my-4">
-                <div class="row">
+                <!-- <hr class="my-4"> -->
+                <div class="row" id="shoeDescription">
+                    <p class="col-6 description">{{shoe.desc}}</p>
+
                     <div class="col-md-12 bottom-rule">
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <div class="col-md-12">
-                    </div>
-                </div> -->
-            </div>
-        </div>
-    </div>
             <hr class="my-4">
-            <h3 class="text-center">Вам может понравиться:</h3>
+            <h3 class="text-center" id="would-like">Вам может понравиться:</h3>
         <div class="row text-center justify-content-center">
             {% for shoe in related_shoes %}
-            <div class="col-lg-2 col-md-2 col-sm-4 mb-5">
+            <div class="col-lg-2 col-md-3 col-sm-4 mb-5">
                 <div class="card h-100">
                     <a href="/shoe/{{shoe.id}}">
                         <img src="{{shoe.image.url}}" alt="" width="100%">
                     </a>
                     <div class="card-body">
-                        <p class="card-title"><a class ="text-secondary" href="/shoe/{{shoe.id}}">{{shoe.model.brand.name}} {{shoe.model.model}} {{shoe.color}}</a></p>
+                        <p class="card-title"><a class ="text-secondary" href="/shoe/{{shoe.id}}">{{shoe.brand.name}} {{shoe.model}}</a></p>
                     </div>
                 </div>
             </div>
             {% endfor %}
             
         </div>
-    </div>
-    <!-- close container -->
 </main>
 <script src="{% static 'js/size-selection.js' %}"></script>
 {% endblock %}

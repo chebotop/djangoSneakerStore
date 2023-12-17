@@ -3,6 +3,7 @@ from django.http import HttpResponseBadRequest
 from django.contrib import messages
 import datetime
 from main.models import *
+from main.forms import ShoeModelForm
 import logging
 
 logger = logging.getLogger(__name__)
@@ -96,36 +97,42 @@ def add_shoe_page(request):
         return redirect('/admin')
     
     context = {
-
+        'form': ShoeModelForm()
     }
     return render(request,"add_shoe_page.html", context)
 
+# Старая кастомная логика добавления моделей 
+# def add_shoe(request):
+#     if request.method == 'POST':
+#         form = ShoeModelForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             brand_name = form.cleaned_data.get('brand')
+#             model_name = form.cleaned_data.get('model')
+#             price = form.cleaned_data.get('price')
+#             description = form.cleaned_data.get('desc')
+#             color_name = form.cleaned_data.get('color')
+#             sizes = form.cleaned_data.get('sizes') 
 
-def add_shoe(request):
-    if request.method == 'POST':
-        brand_name = request.POST.get('brand')
-        model_name = request.POST.get('model')
-        price = request.POST.get('price')
-        description = request.POST.get('desc')
-        color_name = request.POST.get('color')
-        sizes = request.POST.get('sizes') 
+#             brand, created = ShoeBrand.objects.get_or_create(name=brand_name)
+#             color, created = ShoeColor.objects.get_or_create(name=color_name)
 
-        brand, created = ShoeBrand.objects.get_or_create(name=brand_name)
+#             shoe_model, created = ShoeModel.objects.update_or_create(
+#                 model=model_name,
+#                 brand=brand,
+#                 color=color,
+#                 defaults={
+#                     'price': price,
+#                     'desc': description,
+#                     'sizes': sizes, 
+#                 }
+#             )
+#             for f in request.FILES.getlist('extra_images'):
+#                 ShoeImage.objects.create(shoe_model=shoe_model, image=f)
 
-        color, created = ShoeColor.objects.get_or_create(name=color_name)
-
-        shoe_model, created = ShoeModel.objects.update_or_create(
-            model=model_name,
-            brand=brand,
-            color=color,
-            defaults={
-                'price': price,
-                'desc': description,
-                'sizes': sizes, 
-            }
-        )
-
-        return redirect('/admin/shoe_list')
+#             return redirect('/admin/shoe_list')
+#         else:
+#             form = ShoeModelForm()
+#         return render(request, 'add_shoe_page.html', {'form': form})
 
 
 
@@ -144,7 +151,11 @@ def shoe_list(request):
     return render(request, 'shoe_list.html', context)
 
 
+<<<<<<< HEAD
 # Catalog page for individual Model-Color
+=======
+
+>>>>>>> 399bc5d090769e750f9502be8a936b2f2f60f4c3
 def shoe_page(request, shoe_id):
     if 'cart' not in request.session:
         cart = Cart.objects.create(total=0)
@@ -154,6 +165,10 @@ def shoe_page(request, shoe_id):
     sizes = ShoeModel.sizes
     current_brand_id = shoe.brand.id
     related_shoes = ShoeModel.objects.filter(brand_id=current_brand_id).exclude(id=shoe.id)[:6]
+<<<<<<< HEAD
+=======
+    sizes = shoe.sizes.all()
+>>>>>>> 399bc5d090769e750f9502be8a936b2f2f60f4c3
 
     if request.method == 'POST':
         selected_size = request.POST.get('selected_size')
