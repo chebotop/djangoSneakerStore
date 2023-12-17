@@ -9,4 +9,5 @@ class ShoeModelForm(forms.ModelForm):
 
     class Meta:
         model = ShoeModel
-        fields = '__all__'  # или перечислите нужные поля
+        fields = '__all__'  
+

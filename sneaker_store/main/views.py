@@ -42,6 +42,7 @@ def catalog_page(request, brand_filter="all", model_filter="all"):
     if request.method == 'GET' and request.GET.get('min'):
         min_price = request.GET['min']
     else:
+        
         min_price = min([model.price for model in all_models])
 
     if request.method == 'GET' and request.GET.get('max'):
@@ -151,24 +152,17 @@ def shoe_list(request):
     return render(request, 'shoe_list.html', context)
 
 
-<<<<<<< HEAD
 # Catalog page for individual Model-Color
-=======
 
->>>>>>> 399bc5d090769e750f9502be8a936b2f2f60f4c3
 def shoe_page(request, shoe_id):
     if 'cart' not in request.session:
         cart = Cart.objects.create(total=0)
         request.session['cart'] = cart.id
 
     shoe = get_object_or_404(ShoeModel, id=shoe_id)
-    sizes = ShoeModel.sizes
     current_brand_id = shoe.brand.id
     related_shoes = ShoeModel.objects.filter(brand_id=current_brand_id).exclude(id=shoe.id)[:6]
-<<<<<<< HEAD
-=======
     sizes = shoe.sizes.all()
->>>>>>> 399bc5d090769e750f9502be8a936b2f2f60f4c3
 
     if request.method == 'POST':
         selected_size = request.POST.get('selected_size')
