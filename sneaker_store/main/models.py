@@ -33,9 +33,12 @@ class ShoeModel(models.Model):
         return self.model 
 
 def shoe_image_directory_path(instance, filename):
-    return f'images/{instance.shoe_model.model}/{filename}'
+    path = f'images/{instance.shoe_model.model}/{filename}'
+    print(f"Saving file to: {path}") 
 
-class ShoeImage(models.Model):
+    return path
+
+class ShoeGalleryImages(models.Model):
     shoe_model = models.ForeignKey(ShoeModel, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=shoe_image_directory_path)
 

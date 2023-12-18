@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const inputField = document.getElementById('id_images'); // Предполагая, что у вас есть поле с id 'id_images'
+    const inputFile = document.getElementById('id_images'); // Предполагая, что у вас есть поле с id 'id_images'
 
-    inputField.setAttribute('multiple', 'multiple');
+    if (inputFile) {
+        inputFile.setAttribute('multiple', 'multiple');
+    }
+    inputFile.setAttribute();
 
-    inputField.addEventListener('change', function(event) {
+    inputFile.addEventListener('change', function(event) {
         const files = event.target.files;
     });
 });
