@@ -12,13 +12,12 @@
 <main role="main" class="main">
     <div class="container-fluid">
         <div class="row">
-            <div class="img col-md-5 col-lg-6">
+            <div class="img col-md-5 col-lg-6 image-container">
                 {% if shoe.image and shoe.image.url %}
                     <img src='{{ shoe.image.url }}' class='image-responsive' style="max-width: 100%;;">
                 {% else %}
                     <img src="{% static 'images/Jordan-Mars-270-Green-Glow.jpg' %}" alt="Заглушка" width="100%">
                 {% endif %}
-                
             </div>
             <div class="col-md-7 col-lg-6">
                 <div class="shoeContent" id="product">
@@ -35,7 +34,7 @@
                                       <option value="{{ size.0 }}">{{ size.0 }} {{ size.1 }}</option>
                                   {% endfor %}
                             </select>
-                            <button type="submit" class="btn btn-dark">В корзину</button>
+                            <button type="submit" class="btn btn-dark" id="to-cart-button">В корзину</button>
                         </form>
                         <form id="size-form" method="post">
                             {% csrf_token %} 
@@ -50,24 +49,28 @@
                                 {% endfor %}                            
                                         <input type="hidden" id="selected_size" name="selected_size" value="">
                                         <input type="hidden" name="shoe_id" value="{{ shoe.id }}">
-                                        <button type="submit" class="btn btn-dark" style="align-items: center;" id="add-to-cart-btn">Выберите размер</button>
+                                        <button type="submit" class="btn btn-dark" style="align-items: center;"
+                                                id="add-to-cart-btn">Выберите размер</button>
                             </div>
                         </form>
-                        <div class="row" id="size-secondary-row">
-                            <h2 class="col-12 product-price" style="padding-top: 20px; display: flex; justify-content: center;">₽{{shoe.price}}</h2>
-                        </div>
+                    </div>
+                    <h2 class="col-12 product-price" style="">₽{{shoe.price}}</h2>
+                    <div class="shoe-gallery-container">
+                        {% for image in shoe_images %}
+                        <img style="max-width: 100px;" src="{{ image.image.url }}" alt="Gallery image for {{ shoe.model }}">
+                        {% endfor %}
                     </div>
                 </div>
         
 
             </div>
         </div>
-        <div class="row" id="size-select-row">        
-        </div>
-        </div>  
+
+    </div> 
+
     </div>
+
                 <hr class="my-4">
-                <!-- <hr class="my-4"> -->
                 <div class="row" id="shoeDescription">
                     <p class="col-6 description">{{shoe.desc}}</p>
 
@@ -84,7 +87,11 @@
                         <img src="{{shoe.image.url}}" alt="" width="100%">
                     </a>
                     <div class="card-body">
-                        <p class="card-title"><a class ="text-secondary" href="/shoe/{{shoe.id}}">{{shoe.brand.name}} {{shoe.model}}</a></p>
+                        <p class="card-title">
+                            <a class ="text-secondary"
+                                                 href="/shoe/{{shoe.id}}">{{shoe.brand.name}} {{shoe.model}}
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>

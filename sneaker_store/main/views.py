@@ -162,6 +162,7 @@ def shoe_page(request, shoe_id):
     shoe = get_object_or_404(ShoeModel, id=shoe_id)
     current_brand_id = shoe.brand.id
     related_shoes = ShoeModel.objects.filter(brand_id=current_brand_id).exclude(id=shoe.id)[:6]
+    shoe_images = shoe.shoe_gallery.all()
     sizes = shoe.sizes.all()
 
     if request.method == 'POST':
@@ -181,6 +182,7 @@ def shoe_page(request, shoe_id):
     context = {
         'shoe': shoe,
         'sizes': sizes,
+        'shoe_images': shoe_images,
         'related_shoes': related_shoes,
         'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
         'nikes': ShoeBrand.objects.get(name="Nike").models.all(),

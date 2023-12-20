@@ -1,6 +1,8 @@
 .main {
     margin-top: 115px;
 }
+
+
 .shoeId {
     font-size: 12px;
     color: #acacac;
@@ -8,6 +10,24 @@
     display: block;
     margin-bottom: 0;
 }
+
+/* carousel thumbnail */
+.carousel {
+    margin-top: 20px;
+   }
+   .item .thumb {
+    width: 25%;
+    cursor: pointer;
+    float: left;
+   }
+   .item .thumb img {
+    width: 100%;
+    margin: 2px;
+   }
+   .item img {
+    width: 100%; 
+   }
+/* end thumbnail */
 
 .shoeBrand {
     font-weight: 400;
@@ -21,9 +41,6 @@
     justify-content: center;
 }
 
-/* .shoeHead {
-    
-} */
 
 #would-like {
     margin-top: 20px
@@ -46,7 +63,7 @@
     justify-content: center;
 }
 .card {
-    border: none;
+    border: none !important;
 }
 
 #pageShoeName {
@@ -55,12 +72,20 @@
 .description {
     text-align: justify;
 }
-.sizes-container, .submit-container {
+.product-price {
+    padding-top: 20px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+}
+
+.sizes-container {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     margin: 0 auto;
 }
+
 
 .size-box {
     position: relative; 
