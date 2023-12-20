@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib import admin
+from django.conf import settings
+import os
 import json
 
 class ShoeBrand(models.Model):
@@ -12,7 +14,6 @@ class ShoeBrand(models.Model):
 class ShoeSize(models.Model):
     euro_size = models.CharField(max_length=10)
     sm_size = models.CharField(max_length=10)
-    gender = models.CharField(max_length=10)
 
     def __str__(self):
         return self.euro_size
@@ -33,13 +34,21 @@ class ShoeModel(models.Model):
         return self.model 
 
 def shoe_image_directory_path(instance, filename):
-    path = f'images/{instance.shoe_model.model}/{filename}'
-    print(f"Saving file to: {path}") 
+    directory_path = os.path.join(settings.MEDIA_ROOT, f'images/{instance.shoe_model.model}/')
 
-    return path
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+
+    file_count = len(os.listdir(directory_path))
+    new_filename = f'{file_count + 1}.jpg' 
+    full_path = os.path.join(directory_path, new_filename)
+    print(f"Saving file to: {full_path}")
+
+    return os.path.join(f'images/{instance.shoe_model.model}/', new_filename)
+
 
 class ShoeGalleryImages(models.Model):
-    shoe_model = models.ForeignKey(ShoeModel, related_name='images', on_delete=models.CASCADE)
+    shoe_model = models.ForeignKey(ShoeModel, related_name='shoe_gallery', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=shoe_image_directory_path)
 
     def __str__(self):

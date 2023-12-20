@@ -1,6 +1,8 @@
 4{% extends 'base_head.html' %}
 
 {% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
     {% block title %}Home | Sneaker Shop{% endblock %}
     {{ block.super }}
 {% endblock %}
@@ -10,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-{% load static %}
+
 <main role="main">
     <div class="jumbotron jumbotron-fluid">
         <h1 class="display-3">Air Jordan 6 DMP</h1>

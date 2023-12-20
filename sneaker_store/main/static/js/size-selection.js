@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Получить и обновить размер
             var selectedSize = this.innerText.trim().split('\n')[0];
-            console.log("Selected size:", selectedSize);  // Отладочный вывод
+            console.log("Selected size:", this.innerText.trim());  // Отладочный вывод
             document.getElementById('selected_size').value = selectedSize;
         });
     });
@@ -38,11 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Если товар добавлен в корзину, перенаправляем в нее
         if (this.textContent.trim() === 'Перейти в корзину') {
-            console.log("Пойман триггер перейти в корзину")
             window.location.href = '/cart';
             return;
-        } else {
-            console.log(this.textContent.trim())
         }
 
         var formData = new FormData(form); // Собираем данные из формы
@@ -53,10 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
             body: formData
         }).then(response => {
             if (response.ok) {
-                console.log("Товар добавлен в корзину");
                 // Изменяем текст и стиль кнопки
                 addToCartButton.textContent = 'Перейти в корзину';
-                console.log('THIS:', this.textContent)
                 addToCartButton.classList.remove('btn-dark');
                 addToCartButton.classList.add('btn-danger');
             } else {

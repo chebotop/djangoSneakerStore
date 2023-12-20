@@ -295,20 +295,7 @@ def checkout_process_guest(request):
         last_name = request.POST['last_name'],
         email = request.POST['email'],
         password = "",
-        address = shipping_address
-    )
-    # Credit Card expiration date set as a datetime, where it's the first of the month of the MM/YYYY provided
-    expiration_date = datetime.date(int(request.POST['expireYYYY']),int(request.POST['expireM']),1)
-    # Creates the credit card.
-    # credit_card = CreditCard.objects.create(
-    #     number = request.POST['cc_number'],
-    #     security_code = request.POST['cc_security_code'],
-    #     expiration_date = expiration_date,
-    #     first_name = cc_first_name,
-    #     last_name = cc_last_name,
-    #     address = billing_address,
-    #     user = guest_user,
-    # )
+        address = shipping_address)
     # Retrieves the cart from the session cart_id. Creates an Order object with it, the User, and Credit Card
     cart = Cart.objects.get(id=request.session['cart_id'])
     new_order = Order.objects.create(
