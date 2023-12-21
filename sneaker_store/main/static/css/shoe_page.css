@@ -2,6 +2,23 @@
     margin-top: 115px;
 }
 
+body { background:url(https://bootstraptema.ru/images/bg/bg-4.png) }
+
+.carousel {
+ margin-top: 20px;
+}
+.item .thumb {
+ width: 25%;
+ cursor: pointer;
+ float: left;
+}
+.item .thumb img {
+ width: 100%;
+ margin: 2px;
+}
+.item img {
+ width: 100%;
+}
 
 .shoeId {
     font-size: 12px;
