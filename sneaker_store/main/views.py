@@ -6,6 +6,7 @@ from main.models import *
 from main.forms import ShoeModelForm
 import logging
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -136,7 +137,6 @@ def add_shoe_page(request):
 #         return render(request, 'add_shoe_page.html', {'form': form})
 
 
-
 # Inventory Management Page.
 def shoe_list(request):
     if 'admin' not in request.session:
@@ -219,6 +219,7 @@ def cart(request):
 
     return render(request, 'cart.html', context)
 
+
 def remove_from_cart(request, item_id):
     if request.method == 'POST':
         try:
@@ -229,7 +230,8 @@ def remove_from_cart(request, item_id):
         except CartItem.DoesNotExist:
             pass
         return redirect('cart')
-    
+
+
 # Update the quantity in the cart.
 def update_quantity(request):
     item = CartItem.objects.get(id=request.POST['item_id'])
@@ -245,6 +247,7 @@ def update_quantity(request):
     refresh_cart_total(cart)
 
     return redirect('/cart')
+
 
 # Checkout page. Goes to form to input checkout information.
 def checkout(request):
@@ -262,6 +265,7 @@ def checkout(request):
     }
 
     return render(request,'checkout_guest.html',context)
+
 
 # Checkout processing function.
 def checkout_process_guest(request):
@@ -290,7 +294,7 @@ def checkout_process_guest(request):
         )
         cc_first_name = request.POST['cc_first_name']
         cc_last_name = request.POST['cc_last_name']
-    
+
     # Creates guest user. Assigns Shipping Address to user.
     guest_user = User.objects.create(
         first_name = request.POST['first_name'],
@@ -307,20 +311,20 @@ def checkout_process_guest(request):
         # credit_card = credit_card,
     )
 
-    # # Removes the purchased items from the store inventory.
-    # for item in cart.cart_items.all():
-    #     shoe = item.shoe
-    #     shoe.inventory = shoe.inventory-item.quantity
-    #     shoe.quantity_sold = shoe.quantity_sold+item.quantity
-    #     shoe.save()
-
-    # Places order_id in session to retrieve for confirmation page.
+    # Removes the purchased items from the store inventory.
+    for item in cart.cart_items.all():
+        shoe = item.shoe
+        shoe.inventory = shoe.inventory-item.quantity
+        shoe.quantity_sold = shoe.quantity_sold+item.quantity
+        shoe.save()
+#     # Places order_id in session to retrieve for confirmation page.
     request.session['order_id'] = new_order.id
 
     # Removes cart from session. The next visit to the store page will create a new cart.
     request.session.pop("cart_id")
 
     return redirect('/confirmation')
+
 
 # Order confirmation page.
 def confirmation(request):
@@ -344,56 +348,33 @@ def confirmation(request):
     return render(request, 'confirmation.html', context)
 
 # Admin page for viewing all orders.
-def orders_page(request):
-    if 'admin' not in request.session:
-        return render(request, "admin_login.html")
+# def orders_page(request):
+#     if 'admin' not in request.session:
+#         return render(request, "admin_login.html")
+#
+#     context = {
+#         'orders': Order.objects.all().order_by('-created_at')
+#     }
+#
+#     return render(request, 'orders_page.html', context)
 
-    context = {
-        'orders': Order.objects.all().order_by('-created_at')
-    }
+# def update_status(request):
+#     order = Order.objects.get(id=request.POST['order_id'])
+#     order.status = request.POST['status']
+#     order.save()
+#
+#     return redirect('/admin/orders')
 
-    return render(request, 'orders_page.html', context)
+# def order_details(request, order_id):
+#     if 'admin' not in request.session:
+#         return redirect('/admin')
+#     order = Order.objects.get(id=order_id)
+#     # Because credit card expiration date is stored as a date with the first of the month,
+#     # this reformats it as a MM/YY
+#     cc_expiration_date = order.credit_card.expiration_date.strftime('%m/%y')
+#     context = {
+#         'order': order,
+#         'cc_expiration_date': cc_expiration_date
+#     }
+#     return render(request,"order_details.html", context)
 
-# Update the status of the order between "Processing", "Shipped", or "Canceled"
-def update_status(request):
-    order = Order.objects.get(id=request.POST['order_id'])
-    order.status = request.POST['status']
-    order.save()
-
-    return redirect('/admin/orders')
-
-# Order details page. This is an order summary that can be used by the store to fullfill orders.
-def order_details(request, order_id):
-    if 'admin' not in request.session:
-        return redirect('/admin')
-    order = Order.objects.get(id=order_id)
-    # Because credit card expiration date is stored as a date with the first of the month,
-    # this reformats it as a MM/YY
-    cc_expiration_date = order.credit_card.expiration_date.strftime('%m/%y')
-    context = {
-        'order': order,
-        'cc_expiration_date': cc_expiration_date
-    }
-    return render(request,"order_details.html", context)
-
-# Basic navigation menu for admin pages.
-def admin_menu(request):
-    # If admin hasn't been logged in, redirect to login page.
-    if 'admin' not in request.session:
-        return render(request, "admin_login.html")
-    
-    return render(request, "admin_menu.html")
-
-# Logs in admin. Checks to see if password is "admin". This probably isn't secure.
-def admin_login(request):
-    if request.POST['password']=="admin":
-        request.session['admin']=True
-        return redirect('/admin')
-    messages.error(request, "Incorrect Password")
-    return redirect('/admin')
-
-# Remove admin from session on logout.
-def admin_logout(request):
-    request.session.pop("admin")
-
-    return redirect('/admin')

@@ -19,11 +19,5 @@ urlpatterns = [
     path('checkout', views.checkout),
     path('checkout_process_guest', views.checkout_process_guest),
     path('confirmation', views.confirmation),
-    path('admin/orders', views.orders_page),
-    path('admin/update_status', views.update_status),
-    path('admin/order/<int:order_id>', views.order_details),
-    path('admin', views.admin_menu),
-    path('admin/login', views.admin_login),
-    path('admin/logout', views.admin_logout),
     path('browse/<str:brand_filter>/<str:model_filter>', views.catalog_page, name='catalog_page_filter'),
 ]

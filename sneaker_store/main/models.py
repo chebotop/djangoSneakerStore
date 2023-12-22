@@ -4,6 +4,7 @@ from django.conf import settings
 import os
 import json
 
+
 class ShoeBrand(models.Model):
     name = models.CharField(max_length=20)
 
@@ -32,6 +33,7 @@ class ShoeModel(models.Model):
 
     def __str__(self):
         return self.model 
+
 
 def shoe_image_directory_path(instance, filename):
     directory_path = os.path.join(settings.MEDIA_ROOT, f'images/{instance.shoe_model.model}/')
@@ -69,6 +71,7 @@ class CartItem(models.Model):
     updated_at = models.DateTimeField(auto_now = True)
     size = models.CharField(max_length=45, default='')
 
+
 class Address(models.Model):
     address = models.CharField(max_length=45)
     address2 = models.CharField(max_length=45)
@@ -77,12 +80,14 @@ class Address(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
+
 class User(models.Model):
     first_name = models.CharField(max_length=45)
     last_name = models.CharField(max_length=45)
     email = models.EmailField(max_length=254)
     password = models.CharField(max_length=60)
     address = models.ForeignKey(Address, related_name="user", on_delete=models.CASCADE)
+
 
 class Order(models.Model):
     status = models.CharField(max_length=45)
