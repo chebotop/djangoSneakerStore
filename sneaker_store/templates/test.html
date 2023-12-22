@@ -1,0 +1,41 @@
+            <!-- Основные изображения карусели -->
+            <div class="carousel-inner">
+             {% for image in shoe_images %}
+             <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <img src="{{ image.image.url }}">
+             </div>
+             {% endfor %}
+            </div>
+            <!-- Контролы карусели -->
+            <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+             <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+             <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+           </div>
+           <!-- Миниатюры -->
+           <div id="thumbcarousel" class="carousel slide" data-interval="12000" data-ride="carousel">
+            <div class="carousel-inner">
+             <div class="item active">
+              {% for image in shoe_images|slice:":4" %}
+              <div data-target="#carousel" data-slide-to="{{ forloop.counter0 }}" class="thumb">
+               <img src="{{ image.image.url }}">
+              </div>
+              {% endfor %}
+             </div>
+             <div class="item">
+              {% for image in shoe_images|slice:"4:" %}
+              <div data-target="#carousel" data-slide-to="{{ forloop.counter0 }}" class="thumb">
+               <img src="{{ image.image.url }}">
+              </div>
+              {% endfor %}
+             </div>
+            </div>
+            <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
+             <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">
+             <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+           </div>

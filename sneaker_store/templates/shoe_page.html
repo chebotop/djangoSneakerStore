@@ -2,7 +2,6 @@
 {% block head %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/shoe_page.css' %}">
-
     <!-- {% block title %}Обзор | Crossboost{% endblock %} -->
     {{ block.super }}
 {% endblock %}
@@ -12,49 +11,50 @@
 {% block content %}
 <main role="main" class="main">
 <div class="container">
- <div class="row">
-  <div class="col-md-8 col-md-offset-2">
-            <!-- Основные изображения карусели -->
-            <div class="carousel-inner">
-             {% for image in shoe_images %}
-             <div class="item {% if forloop.first %}active{% endif %}">
-              <img src="{{ image.image.url }}">
-             </div>
-             {% endfor %}
-            </div>
-            <!-- Контролы карусели -->
-            <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
-             <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-            <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
-             <span class="glyphicon glyphicon-chevron-right"></span>
-            </a>
-           </div>
-           <!-- Миниатюры -->
-           <div id="thumbcarousel" class="carousel slide" data-interval="12000" data-ride="carousel">
-            <div class="carousel-inner">
-             <div class="item active">
-              {% for image in shoe_images|slice:":4" %}
-              <div data-target="#carousel" data-slide-to="{{ forloop.counter0 }}" class="thumb">
-               <img src="{{ image.image.url }}">
+  <div class="row carousel-flex">
+    <div class="col-md-8 col-md-offset-2">
+
+       <div id="carousel" class="carousel slide" data-interval="false" data-ride="carousel">
+        <div class="carousel-inner">
+         {% for image in shoe_images %}
+         <div class="carousel-item {% if forloop.first %}active{% endif %} modal-trigger-image">
+             <img src="{{ image.image.url }}" data-toggle="modal" data-target="#imageModal" onclick="setImageSrc(this.src);">
+         </div>
+            <!-- Модальное окно -->
+            <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <img id="modalImage" class="img-fluid">
+                  </div>
+                </div>
               </div>
-              {% endfor %}
-             </div>
-             <div class="item">
-              {% for image in shoe_images|slice:"4:" %}
-              <div data-target="#carousel" data-slide-to="{{ forloop.counter0 }}" class="thumb">
-               <img src="{{ image.image.url }}">
-              </div>
-              {% endfor %}
-             </div>
             </div>
-            <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
-             <span class="glyphicon glyphicon-chevron-left"></span>
-            </a>
-            <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">
-             <span class="glyphicon glyphicon-chevron-right"></span>
-            </a>
+         {% endfor %}
+        </div>
+       </div>
+       <div class="clearfix">
+        <div id="thumbcarousel" class="carousel slide" data-interval="false" data-ride="carousel">
+         <div class="carousel-inner">
+          <div class="item {% if forloop.first %}active{% endif %}">
+           {% for image in shoe_images %}
+           <div data-target="#carousel" data-slide-to="{{ forloop.counter0 }}" class="thumb">
+            <img src="{{ image.image.url }}">
            </div>
+           {% endfor %}
+          </div>
+         </div>
+         <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+         </a>
+         <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+         </a>
+        </div>
+       </div>
+      </div>
+
+
 
                 <div class="shoeContent" id="product">
                     <div class="shoeName">
@@ -89,12 +89,7 @@
                                                 id="add-to-cart-btn">Выберите размер</button>
                             </div>
                         </form>
-                    </div>
-                    <h2 class="col-12 product-price" style="">₽{{shoe.price}}</h2>
-                        {% for image in shoe_images %}
-                        <img style="max-width: 100px;" src="{{ image.image.url }}" alt="Gallery image for {{ shoe.model }}">
-                        {% endfor %}
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -133,4 +128,5 @@
         </div>
 </main>
 <script src="{% static 'js/size-selection.js' %}"></script>
+<script src="{% static 'js/modal-window.js' %}"></script>
 {% endblock %}
