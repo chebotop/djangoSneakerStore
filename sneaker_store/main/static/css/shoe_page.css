@@ -20,9 +20,9 @@
     height: 450px;
     object-fit: contain;
 }
-.carousel-flex {
-    flex-wrap: nowrap !important;
-}
+/*.carousel-flex {*/
+/*    flex-wrap: nowrap !important;*/
+/*}*/
 .modal-trigger-image {
     cursor: zoom-in;
 }
@@ -56,6 +56,38 @@
        object-fit: cover;
    }
 /* end thumbnail */
+
+/* Стили для модального окна */
+.modal-dialog {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  height: 100%;
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Стили для контента модального окна */
+.modal-content {
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Стили для тела модального окна */
+.modal-body {
+  padding: 0; /* Убираем отступы */
+}
+
+/* Стили для изображения */
+#modalImage {
+  max-width: 100vh;
+  max-height: 100vh; /* Максимальная высота - 100% от высоты окна просмотра */
+  object-fit: contain; /* Позволяет изображению сохранять пропорции */
+}
 
 .shoeBrand {
     font-weight: 400;
@@ -176,6 +208,10 @@
     .small-display-size {
         display: none;
     }
+    .carousel-flex {
+        flex-wrap: nowrap !important;
+}
+
 }
 
 /* @media only screen and (min-width: 600px) {
@@ -184,6 +220,10 @@
     }
 } */
 @media only screen and (max-width: 720px) {
+.row {
+    display: flex;
+    justify-content: center !important;
+}
 .mobile-select {
     display: block;
 }

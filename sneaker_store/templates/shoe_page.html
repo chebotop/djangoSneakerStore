@@ -13,8 +13,10 @@
 <div class="container">
   <div class="row carousel-flex">
     <div class="col-md-8 col-md-offset-2">
-
        <div id="carousel" class="carousel slide" data-interval="false" data-ride="carousel">
+           {% if image and image not in shoe_images %}
+               <img src="{{ shoe.image.url }}" style="max-width: 100%;">
+           {% endif %}
         <div class="carousel-inner">
          {% for image in shoe_images %}
          <div class="carousel-item {% if forloop.first %}active{% endif %} modal-trigger-image">
@@ -54,8 +56,6 @@
        </div>
       </div>
 
-
-
                 <div class="shoeContent" id="product">
                     <div class="shoeName">
                         <p class="shoeId">{{shoe.id}}</p>
@@ -63,17 +63,19 @@
                         <h2> {{shoe.model}}</h2>
                     </div>
                     <div class="sizes">
+                        {% csrf_token %}
                         <form method="post" class="small-display-size">
+
                             <select class=" form-select form-select-lg mb-3" aria-label="Large select example"style="width: 100%">
                                 <option selected>Выбрать размер</option>
                                   {% for size in sizes %}
-                                      <option value="{{ size.0 }}">{{ size.0 }} {{ size.1 }}</option>
+                                      <option value="{{ size.0 }}">{{ size }}</option>
                                   {% endfor %}
                             </select>
                             <button type="submit" class="btn btn-dark" id="to-cart-button">В корзину</button>
                         </form>
                         <form id="size-form" method="post">
-                            {% csrf_token %} 
+<!--                            {% csrf_token %} -->
                             <div class="sizes-container">
                                 {% for size in sizes %}
                                 <div class="size-box">
@@ -100,7 +102,7 @@
 
                 <hr class="my-4">
                 <div class="row" id="shoeDescription">
-                    <p class="col-6 description">{{shoe.desc}}</p>
+                    <p class="col-10 description">{{shoe.desc}}</p>
 
                     <div class="col-md-12 bottom-rule">
                     </div>
