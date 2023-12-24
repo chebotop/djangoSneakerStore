@@ -1,59 +1,27 @@
 from django.test import TestCase
-from django.urls import reverse
-from .models import ShoeModel, ShoeBrand, Cart, ShoeColor
-from django.shortcuts import get_object_or_404
+from django.contrib.admin.sites import AdminSite
+from django.utils.html import format_html
 
-# class ShoePageTests(TestCase):
-#     @classmethod
-#     def setUpTestData(cls):
-#         # Создаем тестовые данные для бренда и цвета
-#         brand = ShoeBrand.objects.create(name="Test Brand")
-#         color = ShoeColor.objects.create(color="Test Color")
+from .models import ShoeModel
+from .admin import ShoeModelAdmin
 
-#         # Теперь создаем обувь с указанием цвета
-#         ShoeModel.objects.create(model="Test Shoe", brand=brand, color=color, sizes={"women": {"36EUR": "22.5см"}}, price="1000")
+class MockRequest:
+    pass
 
-#     def test_shoe_page_get_request(self):
-#         # Получаем первый объект обуви из базы данных
-#         shoe = ShoeModel.objects.first()
-        
-#         # Отправляем GET-запрос на страницу обуви
-#         response = self.client.get(reverse('shoe_page', args=[shoe.id]))
+class ShoeModelAdminTest(TestCase):
+    def setUp(self):
+        self.site = AdminSite()
 
-#         # Проверяем, что страница успешно загружена
-#         self.assertEqual(response.status_code, 200)
-#         self.assertContains(response, shoe.model)
+    def test_image_tag(self):
+        obj = ShoeModel(image='path/to/image.jpg')
+        admin = ShoeModelAdmin(ShoeModel, self.site)
+        self.assertEqual(
+            admin.image_tag(obj),
+            format_html('<img src="{}" width="70" height="50" />', obj.image.url)
+        )
 
-#     def test_shoe_page_post_request_add_to_cart(self):
-#         # Получаем первый объект обуви и создаем корзину
-#         shoe = ShoeModel.objects.first()
-#         cart = Cart.objects.create(total=0)
-
-#         # Создаем сессию для корзины
-#         session = self.client.session
-#         session['cart_id'] = cart.id
-#         session.save()
-
-#         # Отправляем POST-запрос на добавление обуви в корзину
-#         response = self.client.post(reverse('shoe_page', args=[shoe.id]), {
-#             'selected_size': '36EUR'
-#         })
-
-#         # Проверяем, что запрос был успешно обработан
-#         self.assertEqual(response.status_code, 200)
-#         self.assertTrue(cart.items.filter(shoe=shoe).exists())
-
-
-from .models import ShoeModel, ShoeBrand
-
-class MyViewTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        brand = ShoeBrand.objects.create(name="Test Brand")
-        ShoeModel.objects.create(model="Test Shoe", brand=brand, ...)
-
-    def test_shoe_page_css(self):
-        shoe = ShoeModel.objects.first()
-        response = self.client.get(reverse('shoe_page', args=[shoe.id]))
-        self.assertContains(response, 'shoe_page.css')
-
+        obj_no_image = ShoeModel()
+        self.assertEqual(
+            admin.image_tag(obj_no_image),
+            format_html('<span class="no-image">No Image</span>')
+        )

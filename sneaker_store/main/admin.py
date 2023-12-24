@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from .models import ShoeBrand, ShoeModel, ShoeGalleryImages, ShoeSize
 from .forms import ShoeModelForm
-from django.contrib.admin.widgets import FilteredSelectMultiple
+import json
 
 
 class ShoeModelAdmin(admin.ModelAdmin):
@@ -21,16 +21,13 @@ class ShoeModelAdmin(admin.ModelAdmin):
             for f in request.FILES.getlist('images'):  # 'images' - имя поля в форме
                 ShoeGalleryImages.objects.create(shoe_model=obj, image=f)
 
-    def formfield_for_manytomany(self, db_field, request, **kwargs):
-        if db_field.name == "images":
-            kwargs["widget"] = FilteredSelectMultiple(is_stacked=False)
-        return super().formfield_for_manytomany(db_field, request, **kwargs)
-
-    def get_form(self, request, obj=None, **kwargs):
-        form = super().get_form(request, obj, **kwargs)
+    def render_change_form(self, request, context, *args, **kwargs):
+        obj = kwargs.get('obj')
         if obj:
-            form.base_fields['images'].initial = obj.images.order_by('your_order_field')
-        return form
+            image_urls_js = json.dumps([img.image.url for img in obj.shoe_gallery.all()])
+            context['image_urls_js'] = image_urls_js
+        return super().render_change_form(request, context, *args, **kwargs)
+
 
     class Media:
         js = ('js/image-upload.js',)

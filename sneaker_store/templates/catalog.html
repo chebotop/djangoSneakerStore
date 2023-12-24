@@ -3,7 +3,7 @@
 {% block head %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/catalog.css' %}">
-    {% block title %}Обзор | Crossboost{% endblock %}
+<!--    {% block title %}Обзор | Crossboost{% endblock %}-->
     {{ block.super }}  
 {% endblock %}
 {% block navbar %}
@@ -28,7 +28,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <article class="filter-group">
-                                    <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside1" data-abc="true" aria-expanded="false" class="collapsed"> <i class="icon-control fa fa-chevron-down"></i>
+                                    <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside1" data-abc="true" aria-expanded="false" class="collapsed">
+                                        <i class="icon-control fa fa-chevron-down"></i>
                                             <h6 class="title">Бренд</h6>
                                         </a> </header>
                                     <div class="filter-content collapse" id="collapse_aside1">
@@ -66,16 +67,16 @@
                                         <div class="card-body">
                                             <form>
                                                 <div class="form-row">
-                                                    <div class="form-group col-md-6">
+                                                    <div class="form-group col-md-6 col-12">
                                                         <label>Мин.</label>
-                                                        <input class="form-control" placeholder="₽" name="min" min="0" type="number" value={{min_price}}>
+                                                        <input class="form-control w-100" placeholder="₽" name="min" min="0" type="number" value={{min_price}}>
                                                     </div>
-                                                    <div class="form-group text-right col-md-6">       
+                                                    <div class="form-group text-right col-md-6 col-12 justify-content-center">
                                                         <label>Макс.</label>
-                                                        <input class="form-control" placeholder="₽" name="max" min="0" type="number" value={{max_price}}>
+                                                        <input class="form-control w-100" placeholder="₽" name="max" min="0" type="number" value={{max_price}}>
                                                     </div>
                                                 </div>
-                                                <button href="#" class="highlight-button btn btn-medium button xs-margin-bottom-five" data-abc="true">Apply Now</button>
+                                                <button href="#" class="highlight-button btn btn-medium button xs-margin-bottom-five" data-abc="true">Применить</button>
                                             </form>
                                         </div>
                                     </div>
@@ -103,9 +104,9 @@
             <!-- end filter column -- 
                product grid column -->
             <div class="col-lg-9 col-md-9">
-                <div class="row wow fadeIn">
+                <div class="row wow fadeIn catalog-column">
                     {% for shoe in shoes %}
-                    <div class="card col-lg-3 col-md-6 col-sm-6 mb-5">
+                    <div class="card border-0 col-lg-3 col-md-6 col-sm-6 mb-5">
                             <a href="/shoe/{{shoe.id}}">
                                 <img src="{{shoe.image.url}}" alt="" width="100%">
                             </a>
@@ -130,6 +131,19 @@
             <!-- end product grid column -->
         </div>
     </div>
-    
+    <script>
+        if (window.innerWidth >= 775) {
+            const collapseLinks = document.querySelectorAll('[data-toggle="collapse"]');
+
+            collapseLinks.forEach(function (link) {
+                const targetId = link.getAttribute('data-target');
+                const collapseElement = document.querySelector(targetId);
+
+                link.classList.remove('collapsed');
+                link.setAttribute('aria-expanded', 'true');
+                collapseElement.classList.add('show');
+            });
+        }
+    </script>
 </main>
 {% endblock %}

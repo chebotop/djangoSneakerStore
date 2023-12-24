@@ -2,9 +2,12 @@
     margin-top: 115px;
 }
 
-
+/*Carousel start*/
 .carousel {
  margin-top: 20px;
+}
+.carousel-inner img{
+    padding: 1px 1px;
 }
 .carousel-item .thumb {
     width: 25%;
@@ -20,9 +23,7 @@
     height: 450px;
     object-fit: contain;
 }
-/*.carousel-flex {*/
-/*    flex-wrap: nowrap !important;*/
-/*}*/
+
 .modal-trigger-image {
     cursor: zoom-in;
 }
@@ -120,6 +121,8 @@
 }
 .product-price {
     display: flex;
+    padding-top: 20px;
+    display: flex;
     justify-content: center;
 }
 .card {
@@ -129,13 +132,12 @@
 #pageShoeName {
     margin-top: 100px;
 }
+
 .description {
     text-align: justify;
 }
 .product-price {
-    padding-top: 20px;
-    display: flex;
-    justify-content: center;
+
 }
 
 .sizes-container {
@@ -204,7 +206,7 @@
 
 
 
-@media only screen and (min-width: 720px) {
+@media only screen and (min-width: 775px) {
     .small-display-size {
         display: none;
     }
@@ -219,7 +221,7 @@
 
     }
 } */
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 775px) {
 .row {
     display: flex;
     justify-content: center !important;

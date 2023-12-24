@@ -15,22 +15,22 @@
 
 <main role="main">
     <div class="jumbotron jumbotron-fluid">
-        <h1 class="display-3">Air Jordan 6 DMP</h1>
-        <p id="jumbo-text" class="lead text-white font-weight-bold col-8" 
+        <h1 class="display-3">Air Jordan 3 Retro</h1>
+        <p id="jumbo-text" class="lead text-white font-weight-bold col-6"
             style="text-shadow: 2px 2px 4px black;">
-            Релиз "Defining Moments Pack" (DMP): успей заполучить часть истории Майкла Джордана.
+            Модель Air Jordan 3 Retro возвращается с простым и выдающимся стилем.
         </p>
         <!-- <hr class="my-4"> -->
         <p class="lead">
-            <a class="btn btn-dark btn-lg" href="/shoe/8" role="button">Узнать больше</a>
+            <a class="btn btn-outline-light btn-lg" href="/shoe/8" role="button">Перейти</a>
         </p>
     </div>
     <h2 class="text-center">Актуальное</h2>
     <div class="container">
         <div class="row text-center">
             {% for shoe in recent_shoes %}
-            <div class="col-12 col-lg-2 col-md-3 col-sm-4 mb-4"> <!-- Определение размеров колонок для разных экранов -->
-                <div class="card h-100">
+            <div class="col-6 col-lg-2 col-md-3 col-sm-4 mb-4"> <!-- Определение размеров колонок для разных экранов -->
+                <div class="card h-100 border-0 flex-wrap flex-row">
                     <a href="/shoe/{{shoe.id}}">
                     {% if shoe.image and shoe.image.url %}
                         <img src="{{ shoe.image.url}}" style="min-height:120px; object-fit: contain;" alt="" width="100%">

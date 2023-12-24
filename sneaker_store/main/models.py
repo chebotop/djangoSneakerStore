@@ -20,7 +20,6 @@ class ShoeSize(models.Model):
         return self.euro_size
 
 
-    
 class ShoeModel(models.Model):
     model = models.CharField(max_length=45)
     price = models.IntegerField()
