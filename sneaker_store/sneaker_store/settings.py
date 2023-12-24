@@ -42,8 +42,13 @@ CSRF_TRUSTED_ORIGINS = ['https://cb5e-46-101-89-251.ngrok-free.app']
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_tools',
+    'admin_tools.theming',
+    'admin_tools.menu',
+    'admin_tools.dashboard',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -78,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'admin_tools.template_loaders.Loader'
             ],
         },
     },
@@ -135,6 +141,10 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR, 'main/static'),
     # os.path.join(BASE_DIR, '../mainapp/build')
     ]
+
+STATICFILES_FINDERS=[
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
