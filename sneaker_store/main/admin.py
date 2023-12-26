@@ -37,6 +37,3 @@ admin.site.register(ShoeBrand)
 admin.site.register(ShoeModel, ShoeModelAdmin)
 admin.site.register(ShoeSize)
 admin.site.register(ShoeGalleryImages)
-
-
-
