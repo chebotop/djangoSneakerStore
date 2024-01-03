@@ -2,8 +2,7 @@
 {% block head %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/shoe_page.css' %}">
-    <!-- {% block title %}Обзор | Crossboost{% endblock %} -->
-    {{ block.super }}
+{% block title %}Обзор | Crtr55yu575789y8689y
 {% endblock %}
 {% block navbar %}
     {{ block.super }}
@@ -14,7 +13,7 @@
   <div class="row carousel-flex">
     <div class="col-md-8 col-md-offset-2">
        <div id="carousel" class="carousel slide" data-interval="false" data-ride="carousel">
-           {% if image and image not in shoe_images %}
+           {% if shoe.image and image not in shoe_images %}
                <img src="{{ shoe.image.url }}" style="max-width: 100%;">
            {% endif %}
         <div class="carousel-inner">

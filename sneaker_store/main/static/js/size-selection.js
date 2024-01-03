@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'POST',
             body: formData
         }).then(response => {
+            console.log(response)
             if (response.ok) {
                 // Изменяем текст и стиль кнопки
                 addToCartButton.textContent = 'Перейти в корзину';
