@@ -20,16 +20,16 @@ class ShoeSize(models.Model):
         return self.euro_size
 
 
-class ModelCategory(models.Model):
-    model_category = models.CharField(null=True, blank=True, max_length=20, default='')
+class CategoryModel(models.Model):
+    m_category = models.CharField(null=True, blank=True, max_length=20, default='')
 
     def __str__(self):
-        return self.model_category
+        return self.m_category
 
 
 class ShoeModel(models.Model):
     model = models.CharField(max_length=45)
-    category = models.ForeignKey(ModelCategory, null=True, blank=True, on_delete=models.CASCADE, max_length=20, default='')
+    category = models.ForeignKey(CategoryModel, null=True, blank=True, on_delete=models.CASCADE, max_length=20, default='')
     price = models.IntegerField()
     desc = models.TextField()
     brand = models.ForeignKey(ShoeBrand, related_name='models', on_delete=models.CASCADE, max_length=45)
@@ -59,9 +59,13 @@ def shoe_image_directory_path(instance, filename):
 class ShoeGalleryImages(models.Model):
     shoe_model = models.ForeignKey(ShoeModel, related_name='shoe_gallery', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=shoe_image_directory_path)
+    my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self):
         return f'Image for {self.shoe_model.model}'
+
+    class Meta:
+        ordering = ['my_order']
 
 
 class Cart(models.Model):

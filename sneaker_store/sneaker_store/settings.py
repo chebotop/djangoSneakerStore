@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'telegram_bot',
     'rest_framework',
     'corsheaders',
+    'adminsortable2'
 ]
 
 MIDDLEWARE = [
