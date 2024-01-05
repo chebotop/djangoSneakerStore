@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib import admin
 from django.conf import settings
 import os
 import json

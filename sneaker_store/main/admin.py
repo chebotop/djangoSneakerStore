@@ -1,14 +1,21 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import ShoeBrand, ShoeModel, ShoeGalleryImages, ShoeSize
-from adminsortable2.admin import SortableAdminMixin
+from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin, SortableAdminBase
 from .forms import ShoeModelForm
 import json
 
 
-class ShoeModelAdmin(admin.ModelAdmin):
+class ShoeGalleryImagesInline(SortableInlineAdminMixin, admin.StackedInline):  # Или admin.StackedInline
+    model = ShoeGalleryImages
+    extra = 1  # Количество форм для новых записей
+    fields = ('image',)  # поля для отображения
+
+
+class ShoeModelAdmin(SortableAdminBase, admin.ModelAdmin):
     form = ShoeModelForm
     list_display = ('image_tag', 'brand', 'model', 'price')
+    inlines = [ShoeGalleryImagesInline]
 
     @admin.display(description='Image')
     def image_tag(self, obj):
@@ -30,7 +37,13 @@ class ShoeModelAdmin(admin.ModelAdmin):
 
 @admin.register(ShoeGalleryImages)
 class ShoeGalleryImagesAdmin(SortableAdminMixin, admin.ModelAdmin):
-    pass
+    list_display = ('image_tag',)
+
+    @admin.display(description='Image')
+    def image_tag(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="70" height="50" />', obj.image.url)
+        return format_html('<span class="no-image">No Image</span>')
 
 
 admin.site.register(ShoeBrand)
