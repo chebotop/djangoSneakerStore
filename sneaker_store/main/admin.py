@@ -9,7 +9,14 @@ import json
 class ShoeGalleryImagesInline(SortableInlineAdminMixin, admin.StackedInline):  # Или admin.StackedInline
     model = ShoeGalleryImages
     extra = 1  # Количество форм для новых записей
-    fields = ('image',)  # поля для отображения
+    fields = ('image', 'image_tag',)  # поля для отображения
+    readonly_fields = ('image_tag',)
+
+    @admin.display(description='Image')
+    def image_tag(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="70" height="50" />', obj.image.url)
+        return format_html('<span class="no-image">No Image</span>')
 
 
 class ShoeModelAdmin(SortableAdminBase, admin.ModelAdmin):
@@ -29,21 +36,13 @@ class ShoeModelAdmin(SortableAdminBase, admin.ModelAdmin):
             for f in request.FILES.getlist('images'):  # 'images' - имя поля в форме
                 ShoeGalleryImages.objects.create(shoe_model=obj, image=f)
 
-
-
     class Media:
         js = ('js/image-upload.js',)
 
 
 @admin.register(ShoeGalleryImages)
 class ShoeGalleryImagesAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ('image_tag',)
-
-    @admin.display(description='Image')
-    def image_tag(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" width="70" height="50" />', obj.image.url)
-        return format_html('<span class="no-image">No Image</span>')
+    pass
 
 
 admin.site.register(ShoeBrand)

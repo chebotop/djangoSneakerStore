@@ -44,18 +44,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var formData = new FormData(form); // Собираем данные из формы
 
-        // Отправляем данные формы асинхронно
         fetch(form.action, {
             method: 'POST',
             body: formData
         }).then(response => {
             if (response.ok) {
-                // Изменяем текст и стиль кнопки
                 addToCartButton.textContent = 'Перейти в корзину';
                 addToCartButton.classList.remove('btn-dark');
                 addToCartButton.classList.add('btn-danger');
             } else {
+                response.text().then(text => console.error(text));
                 console.error("Ошибка при добавлении товара в корзину");
+
             }
         }).catch(error => {
             console.error('Ошибка:', error);

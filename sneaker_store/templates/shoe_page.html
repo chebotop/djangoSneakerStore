@@ -75,14 +75,11 @@
                             <button type="submit" class="btn btn-dark" id="to-cart-button">В корзину</button>
                         </form>
                         <form id="size-form" method="post">
-<!--                            {% csrf_token %} -->
+                            {% csrf_token %}
                             <div class="sizes-container">
                                 {% for size in sizes %}
                                 <div class="size-box">
                                     {{ size }}
-                                    <!-- <div class="tooltip">
-                                        {{ measure }}
-                                    </div> -->
                                 </div>
                                 {% endfor %}                            
                                         <input type="hidden" id="selected_size" name="selected_size" value="">
