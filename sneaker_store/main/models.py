@@ -1,11 +1,17 @@
 from django.db import models
 from django.conf import settings
 import os
+from mptt.models import MPTTModel, TreeForeignKey
+
 import json
 
 
-class ShoeBrand(models.Model):
+class ShoeBrand(MPTTModel):
     name = models.CharField(max_length=20)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+
+    class MPTTMeta:
+        order_insertion_by = ['name']
 
     def __str__(self):
         return self.name
@@ -19,26 +25,36 @@ class ShoeSize(models.Model):
         return self.euro_size
 
 
-class CategoryModel(models.Model):
-    m_category = models.CharField(null=True, blank=True, max_length=20, default='')
+class CategoryModel(MPTTModel):
+    name = models.CharField(null=True, blank=True, max_length=20, default='')
+    parent = models.ForeignKey(ShoeBrand, on_delete=models.CASCADE, null=True, blank=True)
+
+    class MPTTMeta:
+        order_insertion_by = ['name']
 
     def __str__(self):
-        return self.m_category
+        return self.name
 
 
-class ShoeModel(models.Model):
-    model = models.CharField(max_length=45)
-    category = models.ForeignKey(CategoryModel, null=True, blank=True, on_delete=models.CASCADE, max_length=20, default='')
+class ShoeModel(MPTTModel):
+    name = models.CharField(max_length=45)
+    category = models.ForeignKey(CategoryModel, related_name='categories', null=True, blank=True,
+                                 on_delete=models.CASCADE, max_length=20, default='')
+    brand = models.ForeignKey(ShoeBrand, related_name='models', on_delete=models.CASCADE, max_length=45)
     price = models.IntegerField()
     desc = models.TextField()
-    brand = models.ForeignKey(ShoeBrand, related_name='models', on_delete=models.CASCADE, max_length=45)
     image = models.ImageField(upload_to='gallery', default='')
     sizes = models.ManyToManyField(ShoeSize, related_name='sizes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    parent = models.ForeignKey(CategoryModel, on_delete=models.CASCADE, null=True, blank=True)
+
+    class MPTTMeta:
+        order_insertion_by = ['name']
+
     def __str__(self):
-        return self.model
+        return self.name
 
 
 def shoe_image_directory_path(instance, filename):

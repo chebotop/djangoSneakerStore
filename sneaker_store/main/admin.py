@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import ShoeBrand, ShoeModel, ShoeGalleryImages, ShoeSize
+from .models import ShoeBrand, ShoeModel, ShoeGalleryImages, CategoryModel
 from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin, SortableAdminBase
 from .forms import ShoeModelForm
-import json
+from mptt.admin import MPTTModelAdmin
 
 
 class ShoeGalleryImagesInline(SortableInlineAdminMixin, admin.StackedInline):  # Или admin.StackedInline
@@ -19,7 +19,7 @@ class ShoeGalleryImagesInline(SortableInlineAdminMixin, admin.StackedInline):  #
         return format_html('<span class="no-image">No Image</span>')
 
 
-class ShoeModelAdmin(SortableAdminBase, admin.ModelAdmin):
+class ShoeModelAdmin(SortableAdminBase, MPTTModelAdmin, admin.ModelAdmin):
     form = ShoeModelForm
     list_display = ('image_tag', 'brand', 'model', 'price')
     inlines = [ShoeGalleryImagesInline]
@@ -39,12 +39,14 @@ class ShoeModelAdmin(SortableAdminBase, admin.ModelAdmin):
     class Media:
         js = ('js/image-upload.js',)
 
+# Не удалять, пока существует данная модель в базе данных
+# @admin.register(ShoeGalleryImages)
+# class ShoeGalleryImagesAdmin(SortableAdminMixin, admin.ModelAdmin):
+#     pass
 
-@admin.register(ShoeGalleryImages)
-class ShoeGalleryImagesAdmin(SortableAdminMixin, admin.ModelAdmin):
-    pass
 
-
-admin.site.register(ShoeBrand)
+admin.site.register(ShoeBrand, MPTTModelAdmin)
+admin.site.register(CategoryModel, MPTTModelAdmin)
 admin.site.register(ShoeModel, ShoeModelAdmin)
-admin.site.register(ShoeSize)
+
+# admin.site.register(ShoeSize)
