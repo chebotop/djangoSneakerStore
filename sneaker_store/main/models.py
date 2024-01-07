@@ -1,12 +1,14 @@
 from django.db import models
 from django.conf import settings
-import os
 from mptt.models import MPTTModel, TreeForeignKey
-
-import json
+import mptt
+import os
 
 
 class ShoeBrand(MPTTModel):
+    class Meta:
+        db_table = 'brand'
+        ordering = ('tree_id', 'level')
     name = models.CharField(max_length=20)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 

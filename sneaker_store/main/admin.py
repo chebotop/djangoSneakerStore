@@ -5,7 +5,6 @@ from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin, S
 from .forms import ShoeModelForm
 from mptt.admin import MPTTModelAdmin
 
-
 class ShoeGalleryImagesInline(SortableInlineAdminMixin, admin.StackedInline):  # Или admin.StackedInline
     model = ShoeGalleryImages
     extra = 1  # Количество форм для новых записей
