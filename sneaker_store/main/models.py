@@ -40,17 +40,15 @@ class CategoryModel(MPTTModel):
 
 class ShoeModel(MPTTModel):
     name = models.CharField(max_length=45)
-    category = models.ForeignKey(CategoryModel, related_name='categories', null=True, blank=True,
-                                 on_delete=models.CASCADE, max_length=20, default='')
     brand = models.ForeignKey(ShoeBrand, related_name='models', on_delete=models.CASCADE, max_length=45)
+    parent = models.ForeignKey(CategoryModel, related_name='categories', null=True, blank=True,
+                                 on_delete=models.CASCADE, max_length=20, default='')
     price = models.IntegerField()
     desc = models.TextField()
     image = models.ImageField(upload_to='gallery', default='')
     sizes = models.ManyToManyField(ShoeSize, related_name='sizes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    parent = models.ForeignKey(CategoryModel, on_delete=models.CASCADE, null=True, blank=True)
 
     class MPTTMeta:
         order_insertion_by = ['name']
@@ -60,7 +58,7 @@ class ShoeModel(MPTTModel):
 
 
 def shoe_image_directory_path(instance, filename):
-    directory_path = os.path.join(settings.MEDIA_ROOT, f'images/{instance.shoe_model.model}/')
+    directory_path = os.path.join(settings.MEDIA_ROOT, f'images/{instance.shoe_model.name}/')
 
     if not os.path.exists(directory_path):
         os.makedirs(directory_path)
@@ -70,7 +68,7 @@ def shoe_image_directory_path(instance, filename):
     full_path = os.path.join(directory_path, new_filename)
     print(f"Saving file to: {full_path}")
 
-    return os.path.join(f'images/{instance.shoe_model.model}/', new_filename)
+    return os.path.join(f'images/{instance.shoe_model.name}/', new_filename)
 
 
 class ShoeGalleryImages(models.Model):
@@ -79,7 +77,7 @@ class ShoeGalleryImages(models.Model):
     my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self):
-        return f'Image for {self.shoe_model.model}'
+        return f'Image for {self.shoe_model.name}'
 
     class Meta:
         ordering = ['my_order']

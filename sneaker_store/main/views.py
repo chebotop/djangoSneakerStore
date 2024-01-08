@@ -11,15 +11,10 @@ logger = logging.getLogger(__name__)
 
 
 def index(request):
-    # Проверяет, существует ли уже корзина в сессии. В противном случае создает корзину и сохраняет ее id в сессии.
     if 'cart_id' not in request.session:
         cart = Cart.objects.create(total=0)
         request.session['cart_id'] = cart.id
-
-    # Получает 6 самых недавно созданных кроссовок в БД.
     recent_shoes = ShoeModel.objects.all().order_by('-created_at')[0:6]
-
-    # Также получает все модели трех брендов
     context = {
         'recent_shoes': recent_shoes,
         # 'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
@@ -34,50 +29,20 @@ def catalog_page(request, brand_filter="all", model_filter="all"):
     if 'cart' not in request.session:
         cart = Cart.objects.create(total=0)
         request.session['cart'] = cart.id
-
-    # Info for the side-bar.
     all_models = ShoeModel.objects.all()
-    # all_brands = ShoeModel.objects.all().order_by('brand')
-
-    # Checks if there are min and max price filters in the GET url, otherwise sets min and max to default values.
     if request.method == 'GET' and request.GET.get('min'):
         min_price = request.GET['min']
     else:
-        
         min_price = min([model.price for model in all_models])
-
     if request.method == 'GET' and request.GET.get('max'):
         max_price = request.GET['max']
     else:
         max_price = max([model.price for model in all_models])
-
     display_models = all_models.filter(price__gte=min_price, price__lte=max_price)
-
     if brand_filter != 'all':
         display_models = display_models.filter(brand__name=brand_filter)
         if model_filter != 'all':
             display_models = display_models.filter(model=model_filter)
-
-
-    # # Assigns display_shoes to either all, a brand, or a specific model in the else statement. "browse_filter" can include brand or model info. Always filters for price as well.
-    # if browse_filter == "all":
-    #     category = "All Sneakers"
-    #     display_shoes = ShoeModel.objects.filter(price__gte=min_price, price__lte=max_price)
-    # elif browse_filter == "air jordan":
-    #     category = "Air Jordan"
-    #     display_shoes = ShoeModel.objects.filter(brand__name="Air Jordan", price__gte=min_price,
-    #                                             price__lte=max_price)
-    # elif browse_filter == "nike":
-    #     display_shoes = ShoeModel.objects.filter(brand__name="Nike", price__gte=min_price, price__lte=max_price)
-    # elif browse_filter == "adidas":
-    #     category = "Adidas"
-    #     display_shoes = ShoeModel.objects.filter(brand__name="Adidas", price__gte=min_price,
-    #                                              price__lte=max_price)
-    # else:
-    #     model = ShoeModel.objects.get(id=int(browse_filter))
-    #     category = model.model
-    #     display_shoes = ShoeModel.objects.filter(model=model, price__gte=min_price, price__lte=max_price)
-
     context = {
         'shoes': display_models,
         'all_brands': sorted(set([model.brand.name for model in all_models])),
