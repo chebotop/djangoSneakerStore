@@ -46,7 +46,8 @@ def catalog_page(request, brand_filter="all", model_filter="all"):
     context = {
         'shoes': display_models,
         'all_brands': sorted(set([model.brand.name for model in all_models])),
-        'all_models': sorted(set([model.model for model in all_models])),
+        'all_models': sorted(set([model.name for model in all_models])),
+
         # 'category': category,
         'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
         'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
@@ -67,40 +68,6 @@ def add_shoe_page(request):
         'form': ShoeModelForm()
     }
     return render(request,"add_shoe_page.html", context)
-
-# Старая кастомная логика добавления моделей 
-# def add_shoe(request):
-#     if request.method == 'POST':
-#         form = ShoeModelForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             brand_name = form.cleaned_data.get('brand')
-#             model_name = form.cleaned_data.get('model')
-#             price = form.cleaned_data.get('price')
-#             description = form.cleaned_data.get('desc')
-#             color_name = form.cleaned_data.get('color')
-#             sizes = form.cleaned_data.get('sizes') 
-
-#             brand, created = ShoeBrand.objects.get_or_create(name=brand_name)
-#             color, created = ShoeColor.objects.get_or_create(name=color_name)
-
-#             shoe_model, created = ShoeModel.objects.update_or_create(
-#                 model=model_name,
-#                 brand=brand,
-#                 color=color,
-#                 defaults={
-#                     'price': price,
-#                     'desc': description,
-#                     'sizes': sizes, 
-#                 }
-#             )
-#             for f in request.FILES.getlist('extra_images'):
-#                 ShoeImage.objects.create(shoe_model=shoe_model, image=f)
-
-#             return redirect('/admin/shoe_list')
-#         else:
-#             form = ShoeModelForm()
-#         return render(request, 'add_shoe_page.html', {'form': form})
-
 
 # Inventory Management Page.
 def shoe_list(request):

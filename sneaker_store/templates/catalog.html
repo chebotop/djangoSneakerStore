@@ -50,7 +50,7 @@
                                         <div class="card-body">
                                             <ul class="list-menu">
                                                 {% for model in all_models %}
-                                                <li><a href="/browse/all/{{model}}" class="text-secondary" data-abc="true">{{model}}</a></li>
+                                                <li><a href="/browse/shoe/{{model.id}}" class="text-secondary" data-abc="true">{{model}}</a></li>
                                                 {% endfor %}
                                             </ul>
                                         </div>
@@ -81,21 +81,6 @@
                                         </div>
                                     </div>
                                 </article>
-                                <!-- <article class="filter-group">
-                                    <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside4" data-abc="true" aria-expanded="false" class="collapsed"> <i class="icon-control fa fa-chevron-down"></i>
-                                            <h6 class="title">Size </h6>
-                                        </a> </header>
-                                    <div class="filter-content collapse" id="collapse_aside4" style="">
-                                        <div class="card-body">
-                                            {% for size in sizes %}
-                                            <label class="checkbox-btn">
-                                                <input type="checkbox">
-                                                <span class="btn btn-light"> {{size}} </span>
-                                            </label>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </article> -->
                             </div>
                         </div>
                     </div>
@@ -116,7 +101,7 @@
                                 </a>
                                 <h5>
                                     <strong>
-                                        <a href="/shoe/{{shoe.id}}" class="text-dark">{{shoe.model.model}}</a>
+                                        <a href="/shoe/{{shoe.id}}" class="text-dark">{{shoe.model.name}}</a>
                                     </strong>
                                 </h5>
                                 <!-- <h6 class="text-secondary">{{shoe.color}}</h6> -->

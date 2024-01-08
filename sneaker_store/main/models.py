@@ -9,6 +9,7 @@ class ShoeBrand(MPTTModel):
     class Meta:
         db_table = 'brand'
         ordering = ('tree_id', 'level')
+
     name = models.CharField(max_length=20)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 
@@ -41,8 +42,8 @@ class CategoryModel(MPTTModel):
 class ShoeModel(MPTTModel):
     name = models.CharField(max_length=45)
     brand = models.ForeignKey(ShoeBrand, related_name='models', on_delete=models.CASCADE, max_length=45)
-    parent = models.ForeignKey(CategoryModel, related_name='categories', null=True, blank=True,
-                                 on_delete=models.CASCADE, max_length=20, default='')
+    parent = models.ForeignKey(CategoryModel, related_name='shoe_models', null=True, blank=True,
+                               on_delete=models.CASCADE, max_length=20, default='')
     price = models.IntegerField()
     desc = models.TextField()
     image = models.ImageField(upload_to='gallery', default='')
