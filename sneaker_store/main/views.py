@@ -3,7 +3,6 @@ from django.http import HttpResponseBadRequest
 from django.contrib import messages
 import datetime
 from main.models import *
-from main.forms import ShoeModelForm
 import logging
 
 
@@ -25,7 +24,7 @@ def index(request):
 
 
 # Catalog Page, works for Browse all, but also catagories and filters. Default filter is "all".
-def catalog_page(request, brand_filter="all", model_filter="all"):
+def catalog_page(request, brand_filter="all", category_filter="all"):
     if 'cart' not in request.session:
         cart = Cart.objects.create(total=0)
         request.session['cart'] = cart.id
@@ -41,12 +40,20 @@ def catalog_page(request, brand_filter="all", model_filter="all"):
     display_models = all_models.filter(price__gte=min_price, price__lte=max_price)
     if brand_filter != 'all':
         display_models = display_models.filter(brand__name=brand_filter)
-        if model_filter != 'all':
-            display_models = display_models.filter(model=model_filter)
+    shoebrands = ShoeBrand.objects.all()
+    title = "Обзор"
+    if brand_filter != 'all' and category_filter == 'all':
+        title += f" {brand_filter}"
+    elif category_filter != 'all':
+        title = f"Обзор {brand_filter} {category_filter}"
     context = {
+        'selected_title': title,
         'shoes': display_models,
-        'all_brands': sorted(set([model.brand.name for model in all_models])),
-        'all_models': sorted(set([model.name for model in all_models])),
+        'brand': brand_filter,
+        'all_brands_names': sorted(set([model.brand.name for model in all_models])),
+        'all_models_names': sorted(set([model.name for model in all_models])),
+        'all_brands': [brand for brand in shoebrands],
+        'all_models': [model for model in all_models],
 
         # 'category': category,
         'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),

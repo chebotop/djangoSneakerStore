@@ -13,7 +13,10 @@
 <main role="main">
     <div class="container">
         <div class="row justify-content-center" style="padding-top: 30px">
-            <h2 class="text-center">Обзор {{brand}}</h2>
+            <h2 class="text-center">{{ selected_title }}</h2>
+<!--            как бы здесь иметь динамический brand, зависящий от того, есть ли после browse в ссылке соответствующий лейбл,
+                либо осуществлен выбор бренда через клик в левом меню фильтра -->
+
         </div>
     </div>
     <div class="container">
@@ -36,7 +39,15 @@
                                         <div class="card-body">
                                             <ul class="list-menu">
                                                 {% for brand in all_brands %}
-                                                <li><a href='/browse/{{brand}}/all' class="text-secondary" data-abc="true">{{brand}}</a></li>
+                                                    <li>
+                                                        <a href='/browse/{{ brand }}/all' class="text-secondary" data-abc="true">{{ brand }}</a>
+                                                        <ul>
+                                                            {% for category in brand.categorymodel_set.all %}
+                                                                <a href='/browse/{{ brand }}/{{ category }}' class="text-secondary" data-abc="true">{{ category }}</a>
+
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </li>
                                                 {% endfor %}
                                             </ul>
                                         </div>
@@ -49,8 +60,8 @@
                                     <div class="filter-content collapse" id="collapse_aside2">
                                         <div class="card-body">
                                             <ul class="list-menu">
-                                                {% for model in all_models %}
-                                                <li><a href="/browse/shoe/{{model.id}}" class="text-secondary" data-abc="true">{{model}}</a></li>
+                                                {% for shoe in shoes %}
+                                                <li><img src="{{ shoe.image.url }}" height="20px" width="30px"><a href="/browse/shoe/{{model.id}}" class="text-secondary" data-abc="true">{{ shoe }}</a></li>
                                                 {% endfor %}
                                             </ul>
                                         </div>
@@ -101,7 +112,7 @@
                                 </a>
                                 <h5>
                                     <strong>
-                                        <a href="/shoe/{{shoe.id}}" class="text-dark">{{shoe.model.name}}</a>
+                                        <a href="/shoe/{{shoe.id}}" class="text-dark">{{shoe.name}}</a>
                                     </strong>
                                 </h5>
                                 <!-- <h6 class="text-secondary">{{shoe.color}}</h6> -->
