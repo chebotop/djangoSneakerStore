@@ -36,7 +36,8 @@ SECRET_KEY = 'django-insecure-c_=2$^yczi2gdf8bz1yfge6px8o84^*m08t7(u!q=frhpi=k6(
 DEBUG = True
 
 ALLOWED_HOSTS = ['*',
-                 'cb5e-46-101-89-251.ngrok-free.app']
+                 'cb5e-46-101-89-251.ngrok-free.app',
+                 '.crossboost.ru']
 
 # TEMPORARY SETTINGS FOR NGROK
 CSRF_TRUSTED_ORIGINS = ['https://cb5e-46-101-89-251.ngrok-free.app']
