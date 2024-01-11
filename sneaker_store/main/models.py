@@ -11,7 +11,7 @@ class ShoeBrand(MPTTModel):
         ordering = ('tree_id', 'level')
 
     name = models.CharField(max_length=20)
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children', editable=False)
 
     class MPTTMeta:
         order_insertion_by = ['name']
@@ -30,7 +30,7 @@ class ShoeSize(models.Model):
 
 class CategoryModel(MPTTModel):
     name = models.CharField(null=True, blank=True, max_length=20, default='')
-    parent = models.ForeignKey(ShoeBrand, on_delete=models.CASCADE, null=True, blank=True)
+    parent = models.ForeignKey(ShoeBrand, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Бренд')
 
     class MPTTMeta:
         order_insertion_by = ['name']
@@ -40,14 +40,14 @@ class CategoryModel(MPTTModel):
 
 
 class ShoeModel(MPTTModel):
-    name = models.CharField(max_length=45)
-    brand = models.ForeignKey(ShoeBrand, related_name='models', on_delete=models.CASCADE, max_length=45)
+    name = models.CharField(max_length=45, verbose_name='Имя модели')
+    brand = models.ForeignKey(ShoeBrand, related_name='models', on_delete=models.CASCADE, max_length=45, verbose_name='Бренд')
     parent = models.ForeignKey(CategoryModel, related_name='shoe_models', null=True, blank=True,
-                               on_delete=models.CASCADE, max_length=20, default='')
-    price = models.IntegerField()
-    desc = models.TextField()
-    image = models.ImageField(upload_to='gallery', default='')
-    sizes = models.ManyToManyField(ShoeSize, related_name='sizes')
+                               on_delete=models.CASCADE, max_length=20, default='', verbose_name='Категория')
+    price = models.IntegerField(verbose_name='Цена')
+    desc = models.TextField(verbose_name='Описание к модели')
+    image = models.ImageField(upload_to='gallery', default='', verbose_name='Изображение миниатюры')
+    sizes = models.ManyToManyField(ShoeSize, related_name='sizes', verbose_name='Размеры')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -74,7 +74,7 @@ def shoe_image_directory_path(instance, filename):
 
 class ShoeGalleryImages(models.Model):
     shoe_model = models.ForeignKey(ShoeModel, related_name='shoe_gallery', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=shoe_image_directory_path)
+    image = models.ImageField(upload_to=shoe_image_directory_path, verbose_name='Галерея')
     my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self):

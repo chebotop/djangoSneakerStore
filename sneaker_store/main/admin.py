@@ -12,7 +12,7 @@ class ShoeGalleryImagesInline(SortableInlineAdminMixin, admin.StackedInline):  #
     fields = ('image', 'image_tag',)  # поля для отображения
     readonly_fields = ('image_tag',)
 
-    @admin.display(description='Image')
+    @admin.display(description='Изображение')
     def image_tag(self, obj):
         if obj.image:
             return format_html('<img src="{}" width="70" height="50" />', obj.image.url)
