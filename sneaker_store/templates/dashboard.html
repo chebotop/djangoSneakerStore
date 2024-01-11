@@ -24,6 +24,13 @@
                         {% empty %}
                             <li>Нет доступной обуви в этой категории</li>
                         {% endfor %}
+
+                        {% for category in standalone_categories %}
+                            <h3>{{ category.name }}</h3>
+                                {% for shoe in category.shoes.all %}
+                                    {# вывод обуви #}
+                                {% endfor %}
+                            {% endfor %}
                         </ul>
                 </li>
                 {% endfor %}
