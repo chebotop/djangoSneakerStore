@@ -37,10 +37,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="border-0 bg-light">
-                                        <div class="p-2 px-3 text-uppercase">Товар</div>
-                                    </th>
-                                    <th scope="col" class="border-0 bg-light">
-                                        <div class="p-2 px-3 text-uppercase">Цвет</div>
+                                        <div class="p-2 px-3 text-uppercase">Модель</div>
                                     </th>
                                     <th scope="col" class="border-0 bg-light">
                                         <div class="py-2 text-uppercase">Цена</div>
@@ -56,13 +53,12 @@
                                     <tr>
                                         <th scope="row">
                                             <div class="p-2">
-                                                <img src="{{item.shoe.color.image.url}}" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                                <img src="{{ item.shoe.image.url }}" alt="" width="70" class="img-fluid rounded shadow-sm">
                                                 <div class="ml-3 d-inline-block align-middle">
-                                                    <h5 class="mb-0"> <a href="/shoe/{{item.shoe.color.id}}" class="text-dark d-inline-block align-middle">{{ item.shoe.brand }} {{ item.shoe.model }} </a></h5><span class="text-muted font-weight-normal font-italic d-block">Size: {{ item.size }}</span>
+                                                    <h5 class="mb-0"> <a href="/shoe/{{item.shoe.id}}" class="text-dark d-inline-block align-middle">{{ item.shoe.brand }} {{ item.shoe.name  }} </a></h5><span class="text-muted font-weight-normal font-italic d-block">Size: {{ item.size }}</span>
                                                 </div>
                                             </div>
                                         </th>
-                                        <td class="align-middle"><strong>{{item.shoe.color.color}}</strong></td>
                                         <td class="align-middle"><strong>₽{{ item.shoe.price|floatformat:2|multiply:item.quantity }}</strong></td>
                                         <td class="align-middle">
                                             <div class="form-container">

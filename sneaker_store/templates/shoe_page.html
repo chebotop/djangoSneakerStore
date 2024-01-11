@@ -14,13 +14,14 @@
   <div class="row carousel-flex">
     <div class="col-md-8 col-md-offset-2">
        <div id="carousel" class="carousel slide" data-interval="false" data-ride="carousel">
-           {% if image and image not in shoe_images %}
+<!--           для чего нужен if image -->
+           {% if shoe_images|length == 0 %}
                <img src="{{ shoe.image.url }}" style="max-width: 100%;">
            {% endif %}
         <div class="carousel-inner">
          {% for image in shoe_images %}
          <div class="carousel-item {% if forloop.first %}active{% endif %} modal-trigger-image">
-             <img src="{{ image.image.url }}" data-toggle="modal" data-target="#imageModal" onclick="setImageSrc(this.src);">
+             <img src="{{ image.image.url }}" data-toggle="modal" data-target="#imageModal" onmouseover="setImageSrc(this.src);">
          </div>
             <!-- Модальное окно -->
             <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -40,9 +41,9 @@
          <div class="carousel-inner">
           <div class="item {% if forloop.first %}active{% endif %}">
            {% for image in shoe_images %}
-           <div data-target="#carousel" data-slide-to="{{ forloop.counter0 }}" class="thumb">
-            <img src="{{ image.image.url }}">
-           </div>
+               <div data-target="#carousel" data-slide-to="{{ forloop.counter0 }}" class="thumb">
+                   <img src="{{ image.image.url }}">
+               </div>
            {% endfor %}
           </div>
          </div>
@@ -60,7 +61,7 @@
                     <div class="shoeName">
                         <p class="shoeId">{{shoe.id}}</p>
                         <p class="shoeBrand">{{shoe.brand.name}}</p>
-                        <h2> {{shoe.model}}</h2>
+                        <h2> {{shoe.name}}</h2>
                     </div>
                     <div class="sizes">
                         {% csrf_token %}
@@ -88,15 +89,14 @@
                                                 id="add-to-cart-btn">Выберите размер</button>
                             </div>
                         </form>
-
+                            <div class="col-6">
+                                <h2 class="product-price">₽{{shoe.price}}</h2>
+                            </div>
                 </div>
             </div>
         </div>
 
-    </div> 
-
     </div>
-
                 <hr class="my-4">
                 <div class="row" id="shoeDescription">
                     <p class="col-10 description">{{shoe.desc}}</p>
