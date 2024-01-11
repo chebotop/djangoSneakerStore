@@ -45,42 +45,20 @@
                     <li class="nav-item">
                         <a href="/" class="nav-link" >ГЛАВНАЯ</a>
                     </li>
+                    {% for brand in brands %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        AIR JORDAN
+                        {{ brand.name.upper }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {% for air_jordan in air_jordans %}
-                            <a class="dropdown-item" href="/shoe/{{air_jordan.id}}">{{air_jordan.model}}</a>
+                            {% for category in brand.categories.all %}
+                            <a class="dropdown-item" href="/browse/{{ brand }}/{{ category }}">{{ category.name }}</a>
                             {% endfor %}
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/browse/Air Jordan/all">ОБЗОР JORDAN</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        NIKE
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {% for nike in nikes %}
-                            <a class="dropdown-item" href="/shoe/{{nike.id}}">{{nike.model}}</a>
-                            {% endfor %}
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/browse/Nike/all">ОБЗОР NIKE</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        ADIDAS
-                        </a> 
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {% for adidas in adidases %}
-                            <a class="dropdown-item" href="/shoe/{{adidas.id}}">{{adidas.model}}</a>
-                            {% endfor %}
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/browse/Adidas/all">ОБЗОР ADIDAS</a>
-                        </div>
-                    </li>
+                    {% endfor %}
                     <li class="nav-item">
                         <a href="/browse" class="nav-link">КАТАЛОГ</a>
                     </li>

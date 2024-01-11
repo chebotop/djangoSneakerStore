@@ -30,7 +30,7 @@ class ShoeSize(models.Model):
 
 class CategoryModel(MPTTModel):
     name = models.CharField(null=True, blank=True, max_length=20, default='')
-    parent = models.ForeignKey(ShoeBrand, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Бренд')
+    parent = models.ForeignKey(ShoeBrand, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Бренд', related_name='categories')
 
     class MPTTMeta:
         order_insertion_by = ['name']

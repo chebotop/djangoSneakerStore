@@ -9,6 +9,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+def base_head(request):
+    brands = ShoeBrand.objects.all()
+    context = {
+        'brands': brands,
+    }
+    return render(request, 'base_head.html', context)
+
+
 def index(request):
     if 'cart_id' not in request.session:
         cart = Cart.objects.create(total=0)
