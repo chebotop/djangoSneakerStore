@@ -1,0 +1,508 @@
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Error: That port is already in use.
+Watching for file changes with StatReloader
+Error: That port is already in use.
+Watching for file changes with StatReloader
+Error: That port is already in use.
+Watching for file changes with StatReloader
+Not Found: /sneaker_store/
+[10/Jan/2024 05:23:03] "GET /sneaker_store/ HTTP/1.1" 404 4287
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Error: That port is already in use.
+Not Found: /home.html
+[10/Jan/2024 05:54:45] "GET /home.html HTTP/1.1" 404 4277
+Not Found: /favicon.ico
+[10/Jan/2024 05:54:46] "GET /favicon.ico HTTP/1.1" 404 4283
+[10/Jan/2024 05:54:52] "GET / HTTP/1.1" 200 10665
+[10/Jan/2024 05:54:52] "GET /static/css/home.css HTTP/1.1" 200 2720
+[10/Jan/2024 05:54:52] "GET /static/images/logo.png HTTP/1.1" 200 27405
+[10/Jan/2024 05:54:52] "GET /static/images/admin.png HTTP/1.1" 200 1427
+[10/Jan/2024 05:54:52] "GET /static/images/cart.png HTTP/1.1" 200 2712
+Not Found: /media/gallery/krossovki-nike-air-jordan-1-retro-high-not-for-resale-06ab2.jpg
+[10/Jan/2024 05:54:52] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-high-not-for-resale-06ab2.jpg HTTP/1.1" 404 4736
+[10/Jan/2024 05:54:53] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-travis-scott-a7d2f_0higpv7.jpg HTTP/1.1" 200 84487
+[10/Jan/2024 05:54:53] "GET /media/gallery/4547-adidas-yeezy-boost-350-v2-triple-white-cream-white-3a0ba_0Lci7oL.jpg HTTP/1.1" 200 50052
+[10/Jan/2024 05:54:53] "GET /media/gallery/krossovki-nike-air-force-1-gum-45353_LPDxOcO.jpg HTTP/1.1" 200 72198
+[10/Jan/2024 05:54:53] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-low-x-zion-williamson-voodoo-25f7f.jpg HTTP/1.1" 200 94546
+[10/Jan/2024 05:54:54] "GET /media/gallery/11.jpg HTTP/1.1" 200 388898
+[10/Jan/2024 05:54:55] "GET /static/images/jumbotron.jpg HTTP/1.1" 200 388898
+[10/Jan/2024 05:55:22] "GET / HTTP/1.1" 200 10665
+[10/Jan/2024 05:55:22] "GET /static/css/home.css HTTP/1.1" 200 2720
+[10/Jan/2024 05:55:22] "GET /static/images/logo.png HTTP/1.1" 200 27405
+[10/Jan/2024 05:55:22] "GET /static/images/cart.png HTTP/1.1" 200 2712
+[10/Jan/2024 05:55:22] "GET /static/images/admin.png HTTP/1.1" 200 1427
+Not Found: /media/gallery/krossovki-nike-air-jordan-1-retro-high-not-for-resale-06ab2.jpg
+[10/Jan/2024 05:55:22] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-high-not-for-resale-06ab2.jpg HTTP/1.1" 404 4736
+[10/Jan/2024 05:55:23,142] - Broken pipe from ('46.101.89.251', 9182)
+[10/Jan/2024 05:55:23] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-low-x-zion-williamson-voodoo-25f7f.jpg HTTP/1.1" 200 94546
+[10/Jan/2024 05:55:23] "GET /media/gallery/4547-adidas-yeezy-boost-350-v2-triple-white-cream-white-3a0ba_0Lci7oL.jpg HTTP/1.1" 200 50052
+[10/Jan/2024 05:55:23] "GET /media/gallery/krossovki-nike-air-force-1-gum-45353_LPDxOcO.jpg HTTP/1.1" 200 72198
+[10/Jan/2024 05:55:24] "GET /static/images/jumbotron.jpg HTTP/1.1" 200 388898
+[10/Jan/2024 05:55:24] "GET /media/gallery/11.jpg HTTP/1.1" 200 388898
+[10/Jan/2024 05:55:24] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-travis-scott-a7d2f_0higpv7.jpg HTTP/1.1" 200 84487
+Not Found: /favicon.ico
+[10/Jan/2024 05:55:25] "GET /favicon.ico HTTP/1.1" 404 4283
+[10/Jan/2024 05:55:38] "GET / HTTP/1.1" 200 10665
+[10/Jan/2024 05:55:38] "GET /static/css/home.css HTTP/1.1" 200 2720
+[10/Jan/2024 05:55:38] "GET /static/images/cart.png HTTP/1.1" 200 2712
+[10/Jan/2024 05:55:38] "GET /static/images/admin.png HTTP/1.1" 200 1427
+[10/Jan/2024 05:55:38] "GET /static/images/logo.png HTTP/1.1" 200 27405
+Not Found: /media/gallery/krossovki-nike-air-jordan-1-retro-high-not-for-resale-06ab2.jpg
+[10/Jan/2024 05:55:38] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-high-not-for-resale-06ab2.jpg HTTP/1.1" 404 4736
+[10/Jan/2024 05:55:39] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-travis-scott-a7d2f_0higpv7.jpg HTTP/1.1" 200 84487
+[10/Jan/2024 05:55:39] "GET /media/gallery/krossovki-nike-air-force-1-gum-45353_LPDxOcO.jpg HTTP/1.1" 200 72198
+[10/Jan/2024 05:55:39] "GET /media/gallery/4547-adidas-yeezy-boost-350-v2-triple-white-cream-white-3a0ba_0Lci7oL.jpg HTTP/1.1" 200 50052
+[10/Jan/2024 05:55:39] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-low-x-zion-williamson-voodoo-25f7f.jpg HTTP/1.1" 200 94546
+[10/Jan/2024 05:55:40] "GET /media/gallery/11.jpg HTTP/1.1" 200 388898
+[10/Jan/2024 05:55:40] "GET /static/images/jumbotron.jpg HTTP/1.1" 200 388898
+Not Found: /favicon.ico
+[10/Jan/2024 05:55:41] "GET /favicon.ico HTTP/1.1" 404 4283
+[10/Jan/2024 05:55:47] "GET /shoe/7 HTTP/1.1" 200 18100
+[10/Jan/2024 05:55:47] "GET /static/css/shoe_page.css HTTP/1.1" 200 4702
+Not Found: /media/images/Retro High 'Not For Resale'/6.jpg
+[10/Jan/2024 05:55:47] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/6.jpg HTTP/1.1" 404 4660
+Not Found: /media/images/Retro High 'Not For Resale'/2.jpg
+[10/Jan/2024 05:55:47] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/2.jpg HTTP/1.1" 404 4660
+[10/Jan/2024 05:55:47] "GET /static/js/modal-window.js HTTP/1.1" 200 81
+[10/Jan/2024 05:55:47] "GET /static/js/size-selection.js HTTP/1.1" 200 2898
+Not Found: /media/images/Retro High 'Not For Resale'/3.jpg
+[10/Jan/2024 05:55:47] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/3.jpg HTTP/1.1" 404 4660
+Not Found: /media/images/Retro High 'Not For Resale'/4.jpg
+[10/Jan/2024 05:55:48] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/4.jpg HTTP/1.1" 404 4660
+Not Found: /media/images/Retro High 'Not For Resale'/6.jpg
+[10/Jan/2024 05:55:48] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/6.jpg HTTP/1.1" 404 4660
+[10/Jan/2024 05:55:48,278] - Broken pipe from ('46.101.89.251', 9203)
+Not Found: /media/images/Retro High 'Not For Resale'/2.jpg
+[10/Jan/2024 05:55:48] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/2.jpg HTTP/1.1" 404 4660
+[10/Jan/2024 05:55:48,396] - Broken pipe from ('46.101.89.251', 9269)
+[10/Jan/2024 05:55:48] "GET /static/images/favicon.png HTTP/1.1" 200 14595
+[10/Jan/2024 05:55:53] "GET /static/images/favicon.png HTTP/1.1" 200 14595
+[10/Jan/2024 05:55:57] "GET / HTTP/1.1" 200 10665
+Not Found: /media/gallery/krossovki-nike-air-jordan-1-retro-high-not-for-resale-06ab2.jpg
+[10/Jan/2024 05:55:57] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-high-not-for-resale-06ab2.jpg HTTP/1.1" 404 4736
+[10/Jan/2024 05:56:44] "GET /shoe/7 HTTP/1.1" 200 18100
+Not Found: /media/images/Retro High 'Not For Resale'/6.jpg
+[10/Jan/2024 05:56:45] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/6.jpg HTTP/1.1" 404 4660
+Not Found: /media/images/Retro High 'Not For Resale'/2.jpg
+[10/Jan/2024 05:56:45] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/2.jpg HTTP/1.1" 404 4660
+Not Found: /media/images/Retro High 'Not For Resale'/3.jpg
+[10/Jan/2024 05:56:45] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/3.jpg HTTP/1.1" 404 4660
+Not Found: /media/images/Retro High 'Not For Resale'/4.jpg
+[10/Jan/2024 05:56:45] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/4.jpg HTTP/1.1" 404 4660
+Not Found: /media/images/Retro High 'Not For Resale'/6.jpg
+[10/Jan/2024 05:56:45] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/6.jpg HTTP/1.1" 404 4660
+Not Found: /shoe/null
+[10/Jan/2024 05:56:46] "GET /shoe/null HTTP/1.1" 404 4277
+Not Found: /media/images/Retro High 'Not For Resale'/3.jpg
+[10/Jan/2024 05:56:48] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/3.jpg HTTP/1.1" 404 4660
+Not Found: /media/images/Retro High 'Not For Resale'/2.jpg
+[10/Jan/2024 05:59:16] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/2.jpg HTTP/1.1" 404 4660
+[10/Jan/2024 05:59:43] "GET /admin HTTP/1.1" 301 0
+[10/Jan/2024 05:59:43] "GET /admin/ HTTP/1.1" 302 0
+Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/models.py", line 39, in _get_site_by_request
+    SITE_CACHE[host] = self.get(domain__iexact=host)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/query.py", line 647, in get
+    raise self.model.DoesNotExist(
+django.contrib.sites.models.Site.DoesNotExist: Site matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/admin/sites.py", line 440, in login
+    return LoginView.as_view(**defaults)(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/decorators/debug.py", line 141, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/auth/views.py", line 88, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/generic/edit.py", line 142, in get
+    return self.render_to_response(self.get_context_data())
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/auth/views.py", line 112, in get_context_data
+    current_site = get_current_site(self.request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/shortcuts.py", line 16, in get_current_site
+    return Site.objects.get_current(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/models.py", line 61, in get_current
+    return self._get_site_by_request(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/models.py", line 45, in _get_site_by_request
+    SITE_CACHE[domain] = self.get(domain__iexact=domain)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/query.py", line 647, in get
+    raise self.model.DoesNotExist(
+django.contrib.sites.models.Site.DoesNotExist: Site matching query does not exist.
+[10/Jan/2024 05:59:44] "GET /admin/login/?next=/admin/ HTTP/1.1" 500 169642
+Watching for file changes with StatReloader
+Error: [Errno -5] No address associated with hostname
+Watching for file changes with StatReloader
+Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/models.py", line 39, in _get_site_by_request
+    SITE_CACHE[host] = self.get(domain__iexact=host)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/query.py", line 647, in get
+    raise self.model.DoesNotExist(
+django.contrib.sites.models.Site.DoesNotExist: Site matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/admin/sites.py", line 440, in login
+    return LoginView.as_view(**defaults)(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/decorators/debug.py", line 141, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/auth/views.py", line 88, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/generic/edit.py", line 142, in get
+    return self.render_to_response(self.get_context_data())
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/auth/views.py", line 112, in get_context_data
+    current_site = get_current_site(self.request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/shortcuts.py", line 16, in get_current_site
+    return Site.objects.get_current(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/models.py", line 61, in get_current
+    return self._get_site_by_request(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/models.py", line 45, in _get_site_by_request
+    SITE_CACHE[domain] = self.get(domain__iexact=domain)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/query.py", line 647, in get
+    raise self.model.DoesNotExist(
+django.contrib.sites.models.Site.DoesNotExist: Site matching query does not exist.
+[10/Jan/2024 06:04:27] "GET /admin/login/?next=/admin/ HTTP/1.1" 500 169779
+[10/Jan/2024 06:04:33] "GET / HTTP/1.1" 200 10665
+[10/Jan/2024 06:04:33] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-high-not-for-resale-06ab2.jpg HTTP/1.1" 200 87189
+[10/Jan/2024 06:04:34] "GET /shoe/7 HTTP/1.1" 200 18100
+[10/Jan/2024 06:04:35] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/6.jpg HTTP/1.1" 200 87189
+[10/Jan/2024 06:04:36] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/4.jpg HTTP/1.1" 200 335768
+[10/Jan/2024 06:04:37] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/2.jpg HTTP/1.1" 200 588221
+[10/Jan/2024 06:04:37] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/3.jpg HTTP/1.1" 200 765159
+[10/Jan/2024 06:04:38] "GET /admin/ HTTP/1.1" 302 0
+Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/models.py", line 39, in _get_site_by_request
+    SITE_CACHE[host] = self.get(domain__iexact=host)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/query.py", line 647, in get
+    raise self.model.DoesNotExist(
+django.contrib.sites.models.Site.DoesNotExist: Site matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/admin/sites.py", line 440, in login
+    return LoginView.as_view(**defaults)(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/decorators/debug.py", line 141, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/auth/views.py", line 88, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/generic/edit.py", line 142, in get
+    return self.render_to_response(self.get_context_data())
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/auth/views.py", line 112, in get_context_data
+    current_site = get_current_site(self.request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/shortcuts.py", line 16, in get_current_site
+    return Site.objects.get_current(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/models.py", line 61, in get_current
+    return self._get_site_by_request(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/models.py", line 45, in _get_site_by_request
+    SITE_CACHE[domain] = self.get(domain__iexact=domain)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/query.py", line 647, in get
+    raise self.model.DoesNotExist(
+django.contrib.sites.models.Site.DoesNotExist: Site matching query does not exist.
+[10/Jan/2024 06:04:38] "GET /admin/login/?next=/admin/ HTTP/1.1" 500 169642
+[10/Jan/2024 06:05:23] "GET /shoe/7 HTTP/1.1" 200 18100
+[10/Jan/2024 06:05:25] "GET /admin/ HTTP/1.1" 302 0
+Internal Server Error: /admin/login/
+Traceback (most recent call last):
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/models.py", line 39, in _get_site_by_request
+    SITE_CACHE[host] = self.get(domain__iexact=host)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/query.py", line 647, in get
+    raise self.model.DoesNotExist(
+django.contrib.sites.models.Site.DoesNotExist: Site matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/website/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/admin/sites.py", line 440, in login
+    return LoginView.as_view(**defaults)(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/decorators/debug.py", line 141, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 188, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 186, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/decorators/cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/auth/views.py", line 88, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/views/generic/edit.py", line 142, in get
+    return self.render_to_response(self.get_context_data())
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/auth/views.py", line 112, in get_context_data
+    current_site = get_current_site(self.request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/shortcuts.py", line 16, in get_current_site
+    return Site.objects.get_current(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/models.py", line 61, in get_current
+    return self._get_site_by_request(request)
+  File "/root/website/venv/lib/python3.10/site-packages/django/contrib/sites/models.py", line 45, in _get_site_by_request
+    SITE_CACHE[domain] = self.get(domain__iexact=domain)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/root/website/venv/lib/python3.10/site-packages/django/db/models/query.py", line 647, in get
+    raise self.model.DoesNotExist(
+django.contrib.sites.models.Site.DoesNotExist: Site matching query does not exist.
+[10/Jan/2024 06:05:25] "GET /admin/login/?next=/admin/ HTTP/1.1" 500 169642
+[10/Jan/2024 06:05:30] "GET /shoe/7 HTTP/1.1" 200 18100
+[10/Jan/2024 06:05:35] "GET / HTTP/1.1" 200 10665
+[10/Jan/2024 06:05:35] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-high-not-for-resale-06ab2.jpg HTTP/1.1" 304 0
+[10/Jan/2024 06:05:35] "GET /browse HTTP/1.1" 200 23215
+[10/Jan/2024 06:05:36] "GET /static/css/catalog.css HTTP/1.1" 200 2227
+[10/Jan/2024 06:05:59] "GET /browse/Nike/Air%20Force%201%20Low HTTP/1.1" 200 17706
+[10/Jan/2024 06:25:28] code 400, message Bad request version ('À\x14À')
+[10/Jan/2024 06:25:28] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Jan/2024 06:36:03] "GET / HTTP/1.1" 200 10665
+[10/Jan/2024 06:36:03] "GET /static/css/home.css HTTP/1.1" 200 2720
+[10/Jan/2024 06:36:04] "GET /static/images/admin.png HTTP/1.1" 200 1427
+[10/Jan/2024 06:36:04] "GET /static/images/cart.png HTTP/1.1" 200 2712
+[10/Jan/2024 06:36:04] "GET /static/images/logo.png HTTP/1.1" 200 27405
+[10/Jan/2024 06:36:05] "GET /media/gallery/krossovki-nike-air-force-1-gum-45353_LPDxOcO.jpg HTTP/1.1" 200 72198
+[10/Jan/2024 06:36:05] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-high-not-for-resale-06ab2.jpg HTTP/1.1" 200 87189
+[10/Jan/2024 06:36:05] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-low-x-zion-williamson-voodoo-25f7f.jpg HTTP/1.1" 200 94546
+[10/Jan/2024 06:36:05] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-travis-scott-a7d2f_0higpv7.jpg HTTP/1.1" 200 84487
+[10/Jan/2024 06:36:05] "GET /media/gallery/4547-adidas-yeezy-boost-350-v2-triple-white-cream-white-3a0ba_0Lci7oL.jpg HTTP/1.1" 200 50052
+[10/Jan/2024 06:36:06] "GET /static/images/jumbotron.jpg HTTP/1.1" 200 388898
+[10/Jan/2024 06:36:06] "GET /media/gallery/11.jpg HTTP/1.1" 200 388898
+Not Found: /favicon.ico
+[10/Jan/2024 06:36:06] "GET /favicon.ico HTTP/1.1" 404 4283
+Not Found: /shoe/8
+[10/Jan/2024 06:36:37] "GET /shoe/8 HTTP/1.1" 404 2923
+[10/Jan/2024 06:36:40] "GET /shoe/6 HTTP/1.1" 200 15583
+[10/Jan/2024 06:36:40] "GET /static/css/shoe_page.css HTTP/1.1" 200 4702
+[10/Jan/2024 06:36:41] "GET /static/js/size-selection.js HTTP/1.1" 200 2898
+[10/Jan/2024 06:36:41] "GET /static/js/modal-window.js HTTP/1.1" 200 81
+[10/Jan/2024 06:36:41] "GET /media/images/Air%20Jordan%203/2.jpg HTTP/1.1" 200 511453
+[10/Jan/2024 06:36:42] "GET /media/images/Air%20Jordan%203/1.jpg HTTP/1.1" 200 408045
+[10/Jan/2024 06:36:42] "GET /media/images/Air%20Jordan%203/3.jpg HTTP/1.1" 200 399869
+[10/Jan/2024 06:36:43] "GET /static/images/favicon.png HTTP/1.1" 200 14595
+[10/Jan/2024 06:36:54] "GET /shoe/7 HTTP/1.1" 200 18100
+[10/Jan/2024 06:36:54] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/6.jpg HTTP/1.1" 200 87189
+[10/Jan/2024 06:36:55] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/2.jpg HTTP/1.1" 200 588221
+[10/Jan/2024 06:36:55] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/4.jpg HTTP/1.1" 200 335768
+[10/Jan/2024 06:36:56] "GET /media/images/Retro%20High%20'Not%20For%20Resale'/3.jpg HTTP/1.1" 200 765159
+[10/Jan/2024 06:37:10] "GET /shoe/4 HTTP/1.1" 200 13896
+[10/Jan/2024 06:37:11] "GET /media/images/Retro%20Travis%20Scott/1.jpg HTTP/1.1" 200 84487
+[10/Jan/2024 06:55:26] code 400, message Bad request version ('ZZ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93úú\x00\x00ÿ\x01\x00\x01\x00\x00')
+[10/Jan/2024 06:55:26] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Jan/2024 06:55:26] code 400, message Bad request version ('2#BP\xadÿ\x88\x1aG~\x9c\x0e\x9f¦\x80\x11µ\x13Ììù')
+[10/Jan/2024 06:55:26] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Jan/2024 06:55:26] "GET / HTTP/1.1" 200 10665
+[10/Jan/2024 06:55:26] "GET /static/css/home.css HTTP/1.1" 200 2720
+[10/Jan/2024 06:55:26] "GET /static/images/admin.png HTTP/1.1" 200 1427
+[10/Jan/2024 06:55:26] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-high-not-for-resale-06ab2.jpg HTTP/1.1" 200 87189
+[10/Jan/2024 06:55:26] "GET /static/images/logo.png HTTP/1.1" 200 27405
+[10/Jan/2024 06:55:26] "GET /static/images/cart.png HTTP/1.1" 200 2712
+[10/Jan/2024 06:55:26] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-low-x-zion-williamson-voodoo-25f7f.jpg HTTP/1.1" 200 94546
+[10/Jan/2024 06:55:26] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-travis-scott-a7d2f_0higpv7.jpg HTTP/1.1" 200 84487
+[10/Jan/2024 06:55:26] "GET /media/gallery/4547-adidas-yeezy-boost-350-v2-triple-white-cream-white-3a0ba_0Lci7oL.jpg HTTP/1.1" 200 50052
+[10/Jan/2024 06:55:26] "GET /media/gallery/krossovki-nike-air-force-1-gum-45353_LPDxOcO.jpg HTTP/1.1" 200 72198
+[10/Jan/2024 06:55:26] "GET /media/gallery/11.jpg HTTP/1.1" 200 388898
+[10/Jan/2024 06:55:26] "GET /static/images/jumbotron.jpg HTTP/1.1" 200 388898
+Not Found: /favicon.ico
+[10/Jan/2024 06:55:27] "GET /favicon.ico HTTP/1.1" 404 4283
+[10/Jan/2024 06:55:27] code 400, message Bad request version ('\x14ÚÍ\x07P_±ö×óA\x95\x8fÜNn¼k')
+[10/Jan/2024 06:55:27] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Jan/2024 06:55:27] code 400, message Bad request version ('hØ³ªú(\x18\x15[¸ùÕ/\x99')
+[10/Jan/2024 06:55:27] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Jan/2024 06:55:40] "GET / HTTP/1.1" 200 10665
+[10/Jan/2024 06:55:40] code 400, message Bad request version ('\x00\x02\x01\x00\x00')
+[10/Jan/2024 06:55:40] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Jan/2024 06:55:40] code 400, message Bad request version ('\x96D£õ\x01JÉ')
+[10/Jan/2024 06:55:40] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Jan/2024 06:55:43] "GET /shoe/6 HTTP/1.1" 200 15583
+[10/Jan/2024 06:55:43] "GET /static/css/shoe_page.css HTTP/1.1" 200 4702
+[10/Jan/2024 06:55:43] "GET /static/js/modal-window.js HTTP/1.1" 200 81
+[10/Jan/2024 06:55:43] "GET /static/js/size-selection.js HTTP/1.1" 200 2898
+[10/Jan/2024 06:55:43] "GET /media/images/Air%20Jordan%203/1.jpg HTTP/1.1" 200 408045
+[10/Jan/2024 06:55:43] "GET /media/images/Air%20Jordan%203/3.jpg HTTP/1.1" 200 399869
+[10/Jan/2024 06:55:43] "GET /media/images/Air%20Jordan%203/2.jpg HTTP/1.1" 200 511453
+[10/Jan/2024 06:55:43] "GET /static/images/favicon.png HTTP/1.1" 200 14595
+[10/Jan/2024 06:55:49] "GET /browse/Adidas/all HTTP/1.1" 200 16279
+[10/Jan/2024 06:55:49] "GET /static/css/catalog.css HTTP/1.1" 200 2227
+[10/Jan/2024 06:56:38,166] - Broken pipe from ('95.24.12.213', 36878)
+[10/Jan/2024 06:56:38,167] - Broken pipe from ('95.24.12.213', 35524)
+[10/Jan/2024 06:56:38,168] - Broken pipe from ('95.24.12.213', 37184)
+[10/Jan/2024 06:56:38,168] - Broken pipe from ('95.24.12.213', 36404)
+[10/Jan/2024 06:56:38,171] - Broken pipe from ('95.24.12.213', 36982)
+[10/Jan/2024 06:56:38,173] - Broken pipe from ('95.24.12.213', 35868)
+[10/Jan/2024 09:11:40] code 400, message Bad request version ('À\x14À')
+[10/Jan/2024 09:11:40] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Jan/2024 09:27:45] "GET / HTTP/1.1" 200 10665
+[10/Jan/2024 10:00:21] code 400, message Bad request version ('À\x14À')
+[10/Jan/2024 10:00:21] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Jan/2024 10:00:21] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03\x0f#MB¦\x94QF\x89ùhtÔþÜh8j¾#ö\x90UùQv2NÕ\x1bÞÌ\x00\x00\x1aÀ/À+À\x11À\x07À\x13À')
+[10/Jan/2024 10:00:21] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Jan/2024 10:00:22] "GET / HTTP/1.1" 200 10665
+[10/Jan/2024 10:00:22] code 400, message Bad request version ('À\x14À')
+[10/Jan/2024 10:00:22] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Jan/2024 11:15:58] code 400, message Bad request syntax ('\x16\x03\x01\x00ê\x01\x00\x00æ\x03\x03O1\x80\x89%\x96$r')
+[10/Jan/2024 11:15:58] You're accessing the development server over HTTPS, but it only supports HTTP.
+[10/Jan/2024 11:15:59] "GET / HTTP/1.1" 200 10665
+[10/Jan/2024 11:15:59] "GET / HTTP/1.1" 200 10665
+Not Found: /.vscode/sftp.json
+[10/Jan/2024 11:15:59] "GET /.vscode/sftp.json HTTP/1.1" 404 4301
+Not Found: /about
+[10/Jan/2024 11:15:59] "GET /about HTTP/1.1" 404 4265
+Not Found: /debug/default/view
+[10/Jan/2024 11:15:59] "GET /debug/default/view?panel=config HTTP/1.1" 404 4317
+Not Found: /v2/_catalog
+[10/Jan/2024 11:15:59] "GET /v2/_catalog HTTP/1.1" 404 4283
+Not Found: /ecp/Current/exporttool/microsoft.exchange.ediscovery.exporttool.application
+[10/Jan/2024 11:15:59] "GET /ecp/Current/exporttool/microsoft.exchange.ediscovery.exporttool.application HTTP/1.1" 404 4475
+Not Found: /server-status
+[10/Jan/2024 11:15:59] "GET /server-status HTTP/1.1" 404 4289
+Not Found: /_all_dbs
+[10/Jan/2024 11:16:00] "GET /_all_dbs HTTP/1.1" 404 4274
+Not Found: /.DS_Store
+[10/Jan/2024 11:16:00] "GET /.DS_Store HTTP/1.1" 404 4277
+Not Found: /.env
+[10/Jan/2024 11:16:00] "GET /.env HTTP/1.1" 404 4262
+Not Found: /.git/config
+[10/Jan/2024 11:16:00] "GET /.git/config HTTP/1.1" 404 4283
+Not Found: /s/4363e2330313e2034323e2538313/_/;/META-INF/maven/com.atlassian.jira/jira-webapp-dist/pom.properties
+[10/Jan/2024 11:16:00] "GET /s/4363e2330313e2034323e2538313/_/;/META-INF/maven/com.atlassian.jira/jira-webapp-dist/pom.properties HTTP/1.1" 404 4552
+Not Found: /config.json
+[10/Jan/2024 11:16:00] "GET /config.json HTTP/1.1" 404 4283
+Not Found: /telescope/requests
+[10/Jan/2024 11:16:00] "GET /telescope/requests HTTP/1.1" 404 4304
+[10/Jan/2024 11:16:00] "GET /?rest_route=/wp/v2/users/ HTTP/1.1" 200 10665
+Not Found: /google.com:443
+[10/Jan/2024 11:33:39] "CONNECT google.com:443 HTTP/1.1" 404 1791
+[10/Jan/2024 12:00:40] "GET /static/images/favicon.png HTTP/1.1" 304 0
+[10/Jan/2024 12:02:55] "GET /browse/Nike/Air%20Force%201%20Low HTTP/1.1" 200 17706
+[10/Jan/2024 12:02:56] "GET /static/css/catalog.css HTTP/1.1" 304 0
+[10/Jan/2024 12:02:56] "GET /static/images/logo.png HTTP/1.1" 304 0
+[10/Jan/2024 12:02:56] "GET /static/images/admin.png HTTP/1.1" 304 0
+[10/Jan/2024 12:02:56] "GET /static/images/cart.png HTTP/1.1" 304 0
+[10/Jan/2024 12:02:56] "GET /media/gallery/krossovki-nike-air-force-1-gum-45353_LPDxOcO.jpg HTTP/1.1" 304 0
+[10/Jan/2024 12:02:56] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-low-x-zion-williamson-voodoo-25f7f.jpg HTTP/1.1" 304 0
+[10/Jan/2024 12:02:57] "GET /static/images/favicon.png HTTP/1.1" 304 0
+[10/Jan/2024 12:20:14] "GET / HTTP/1.1" 200 10665
+[10/Jan/2024 12:20:14] "GET /static/css/home.css HTTP/1.1" 304 0
+[10/Jan/2024 12:20:14] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-high-not-for-resale-06ab2.jpg HTTP/1.1" 304 0
+[10/Jan/2024 12:20:15] "GET /media/gallery/11.jpg HTTP/1.1" 304 0
+[10/Jan/2024 12:20:15] "GET /media/gallery/krossovki-nike-air-jordan-1-retro-travis-scott-a7d2f_0higpv7.jpg HTTP/1.1" 304 0
+[10/Jan/2024 12:20:15] "GET /media/gallery/4547-adidas-yeezy-boost-350-v2-triple-white-cream-white-3a0ba_0Lci7oL.jpg HTTP/1.1" 304 0
+[10/Jan/2024 12:20:15] "GET /static/images/jumbotron.jpg HTTP/1.1" 304 0
+Not Found: /favicon.ico
+[10/Jan/2024 12:20:16] "GET /favicon.ico HTTP/1.1" 404 4283
+[10/Jan/2024 12:22:41] "GET /shoe/2 HTTP/1.1" 200 14118
+[10/Jan/2024 12:22:42] "GET /static/css/shoe_page.css HTTP/1.1" 304 0
+[10/Jan/2024 12:22:42] "GET /media/images/Air%20Force%201%20Low%20Gum%20Black/2.jpg HTTP/1.1" 200 134578
+[10/Jan/2024 12:22:42] "GET /static/js/modal-window.js HTTP/1.1" 304 0
+[10/Jan/2024 12:22:42] "GET /static/js/size-selection.js HTTP/1.1" 304 0
+[10/Jan/2024 12:22:42] "GET /media/images/Air%20Force%201%20Low%20Gum%20Black/1.jpg HTTP/1.1" 200 126286
+[10/Jan/2024 12:35:53] "GET / HTTP/1.1" 200 10665
+Not Found: /favicon.ico
+[10/Jan/2024 12:36:13] "GET /favicon.ico HTTP/1.1" 404 4283
+Not Found: /http:/api.ipify.org/
+[10/Jan/2024 12:36:16] "GET http://api.ipify.org/?format=json HTTP/1.1" 404 1818
+Not Found: /www.shadowserver.org:443
+[10/Jan/2024 12:36:19] "CONNECT www.shadowserver.org:443 HTTP/1.1" 404 1827
