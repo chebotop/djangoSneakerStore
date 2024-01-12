@@ -6,7 +6,6 @@ import datetime
 from main.models import *
 import logging
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -25,9 +24,6 @@ def index(request):
     recent_shoes = ShoeModel.objects.all().order_by('-created_at')[0:6]
     context = {
         'recent_shoes': recent_shoes,
-        # 'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
-        # 'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
-        # 'adidases': ShoeBrand.objects.get(name="Adidas").models.all(),
     }
     return render(request, 'home.html', context)
 
@@ -37,14 +33,17 @@ def search_view(request):
     shoe_search = ShoeModel.objects.filter(
         Q(name__icontains=query) |
         Q(brand__name__icontains=query)
-        ).order_by('name')
+    ).order_by('name')
     context = {
-    'shoe_search': shoe_search,
+        'shoe_search': shoe_search,
     }
-    def catalog_page(request, brand_filter="all", category_filter="all"):
+
+
+def catalog_page(request, brand_filter="all", category_filter="all"):
     if 'cart' not in request.session:
         cart = Cart.objects.create(total=0)
         request.session['cart'] = cart.id
+
     all_models = ShoeModel.objects.all()
     if request.method == 'GET' and request.GET.get('min'):
         min_price = request.GET['min']
@@ -87,11 +86,12 @@ def add_shoe_page(request):
     # Kicks out user to /admin if they are not logged in as admin
     if 'admin' not in request.session:
         return redirect('/admin')
-    
+
     context = {
         'form': ShoeModelForm()
     }
-    return render(request,"add_shoe_page.html", context)
+    return render(request, "add_shoe_page.html", context)
+
 
 # Inventory Management Page.
 def shoe_list(request):
@@ -131,7 +131,8 @@ def shoe_page(request, shoe_id):
             return HttpResponseBadRequest("No cart found")
 
         cart = Cart.objects.get(id=cart_id)
-        CartItem.objects.create(shoe=shoe, cart=cart, size=selected_size) # Ранее создавал обьект корзины без передачи size
+        CartItem.objects.create(shoe=shoe, cart=cart,
+                                size=selected_size)  # Ранее создавал обьект корзины без передачи size
         refresh_cart_total(cart)
         # Добавить кнопку "перейти в корзину", после добавления товара в корзину"
 
@@ -151,7 +152,7 @@ def shoe_page(request, shoe_id):
 def refresh_cart_total(cart):
     total = 0
     for item in cart.cart_items.all():
-        total+= item.shoe.price
+        total += item.shoe.price
     cart.total = total
     cart.save()
 
@@ -160,7 +161,7 @@ def refresh_cart_total(cart):
 def cart(request):
     if 'cart_id' not in request.session:
         cart = Cart.objects.create(total=0)
-        request.session['cart_id']=cart.id
+        request.session['cart_id'] = cart.id
 
     cart = Cart.objects.get(id=request.session['cart_id'])
     cart_items = cart.cart_items.all()
@@ -193,8 +194,8 @@ def update_quantity(request):
     item = CartItem.objects.get(id=request.POST['item_id'])
     item.quantity = request.POST['new_quantity']
     print(item)
-    #Updates quantity or deletes the CartItem if quantity has been updated to 0.
-    if int(request.POST['new_quantity'])>0:
+    # Updates quantity or deletes the CartItem if quantity has been updated to 0.
+    if int(request.POST['new_quantity']) > 0:
         item.save()
     else:
         item.delete()
@@ -220,18 +221,18 @@ def checkout(request):
         'cart': Cart.objects.get(id=request.session['cart_id']),
     }
 
-    return render(request,'checkout_guest.html',context)
+    return render(request, 'checkout_guest.html', context)
 
 
 # Checkout processing function.
 def checkout_process_guest(request):
     # Creates shipping address.
     shipping_address = Address.objects.create(
-        address = request.POST['address'],
-        address2 = request.POST['address2'],
-        city = request.POST['city'],
-        state = request.POST['state'],
-        zipcode = request.POST['zipcode'],
+        address=request.POST['address'],
+        address2=request.POST['address2'],
+        city=request.POST['city'],
+        state=request.POST['state'],
+        zipcode=request.POST['zipcode'],
     )
     # Checks to see if Billing Address was marked same as Shipping Address.
     if 'same_address' in request.POST:
@@ -242,38 +243,38 @@ def checkout_process_guest(request):
     else:
         # Creates new address and saves the billing first name and last name for credit card.
         billing_address = Address.objects.create(
-            address = request.POST['cc_address'],
-            address2 = request.POST['cc_address2'],
-            city = request.POST['cc_city'],
-            state = request.POST['cc_state'],
-            zipcode = request.POST['cc_zipcode'],
+            address=request.POST['cc_address'],
+            address2=request.POST['cc_address2'],
+            city=request.POST['cc_city'],
+            state=request.POST['cc_state'],
+            zipcode=request.POST['cc_zipcode'],
         )
         cc_first_name = request.POST['cc_first_name']
         cc_last_name = request.POST['cc_last_name']
 
     # Creates guest user. Assigns Shipping Address to user.
     guest_user = User.objects.create(
-        first_name = request.POST['first_name'],
-        last_name = request.POST['last_name'],
-        email = request.POST['email'],
-        password = "",
-        address = shipping_address)
+        first_name=request.POST['first_name'],
+        last_name=request.POST['last_name'],
+        email=request.POST['email'],
+        password="",
+        address=shipping_address)
     # Retrieves the cart from the session cart_id. Creates an Order object with it, the User, and Credit Card
     cart = Cart.objects.get(id=request.session['cart_id'])
     new_order = Order.objects.create(
-        status = "Processing",
-        cart = cart,
-        user = guest_user,
+        status="Processing",
+        cart=cart,
+        user=guest_user,
         # credit_card = credit_card,
     )
 
     # Removes the purchased items from the store inventory.
     for item in cart.cart_items.all():
         shoe = item.shoe
-        shoe.inventory = shoe.inventory-item.quantity
-        shoe.quantity_sold = shoe.quantity_sold+item.quantity
+        shoe.inventory = shoe.inventory - item.quantity
+        shoe.quantity_sold = shoe.quantity_sold + item.quantity
         shoe.save()
-#     # Places order_id in session to retrieve for confirmation page.
+    #     # Places order_id in session to retrieve for confirmation page.
     request.session['order_id'] = new_order.id
 
     # Removes cart from session. The next visit to the store page will create a new cart.
@@ -285,7 +286,7 @@ def checkout_process_guest(request):
 # Order confirmation page.
 def confirmation(request):
     # Retrieves order from session.
-    current_order = Order.objects.get(id = request.session['order_id'])
+    current_order = Order.objects.get(id=request.session['order_id'])
 
     # Formats credit card number to just show last digits.
     # This may be a security vulnerability. Not sure.
@@ -333,4 +334,3 @@ def confirmation(request):
 #         'cc_expiration_date': cc_expiration_date
 #     }
 #     return render(request,"order_details.html", context)
-
