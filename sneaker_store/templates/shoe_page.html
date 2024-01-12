@@ -21,7 +21,7 @@
         <div class="carousel-inner">
          {% for image in shoe_images %}
          <div class="carousel-item {% if forloop.first %}active{% endif %} modal-trigger-image">
-             <img src="{{ image.image.url }}" data-toggle="modal" data-target="#imageModal" onmouseover="setImageSrc(this.src);">
+             <img src="{{ image.image.url }}" data-toggle="modal" data-target="#imageModal" onclick="setImageSrc(this.src);">
          </div>
             <!-- Модальное окно -->
             <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -47,11 +47,11 @@
            {% endfor %}
           </div>
          </div>
-         <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-         </a>
-         <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">
-          <span class="carousel-control-next-icon"></span>
+<!--         <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">-->
+<!--          <span class="carousel-control-prev-icon"></span>-->
+<!--         </a>-->
+<!--         <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">-->
+<!--          <span class="carousel-control-next-icon"></span>-->
          </a>
         </div>
        </div>

@@ -34,7 +34,8 @@ h1 {
 
 .jumbotron {
     background: url('../images/jumbotron.jpg') no-repeat;
-    background-size: cover;
+    background-size: contain;
+    background-color: black;
     background-position: center;
     padding-left: 15px;
     height: 55vh;

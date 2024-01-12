@@ -33,6 +33,9 @@ def index(request):
 
 # Catalog Page, works for Browse all, but also catagories and filters. Default filter is "all".
 def catalog_page(request, brand_filter="all", category_filter="all"):
+    query = request.GET.get('query')
+    if query:
+        shoe_search = ShoeModel.objects.filter(Q(name__icontains=query) | Q(model__icontains=query))
     if 'cart' not in request.session:
         cart = Cart.objects.create(total=0)
         request.session['cart'] = cart.id
@@ -55,6 +58,7 @@ def catalog_page(request, brand_filter="all", category_filter="all"):
     elif category_filter != 'all':
         title = f"Обзор {brand_filter} {category_filter}"
     context = {
+        'shoe_search': shoe_search,
         'selected_title': title,
         'shoes': display_models,
         'brand': brand_filter,

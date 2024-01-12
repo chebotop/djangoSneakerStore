@@ -15,8 +15,10 @@
     float: left;
 }
 .carousel-item .thumb img {
- width: 100%;
- margin: 2px;
+    width: 100%;
+    margin: 2px;
+    background-size: contain;
+
 }
 .carousel-item img {
     width: 100%;
