@@ -14,4 +14,5 @@ urlpatterns = [
     path('checkout_process_guest', views.checkout_process_guest),
     path('confirmation', views.confirmation),
     path('browse/<str:brand_filter>/<str:category_filter>', views.catalog_page, name='catalog_page_filter'),
+    path('browse/search_results', views.catalog_page, name='search_results')
 ]

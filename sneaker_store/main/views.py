@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.http import HttpResponseBadRequest
 from django.contrib import messages
+from django.db.models import Q
 import datetime
 from main.models import *
 import logging
@@ -31,11 +32,16 @@ def index(request):
     return render(request, 'home.html', context)
 
 
-# Catalog Page, works for Browse all, but also catagories and filters. Default filter is "all".
-def catalog_page(request, brand_filter="all", category_filter="all"):
+def search_view(request):
     query = request.GET.get('query')
-    if query:
-        shoe_search = ShoeModel.objects.filter(Q(name__icontains=query) | Q(model__icontains=query))
+    shoe_search = ShoeModel.objects.filter(
+        Q(name__icontains=query) |
+        Q(brand__name__icontains=query)
+        ).order_by('name')
+    context = {
+    'shoe_search': shoe_search,
+    }
+    def catalog_page(request, brand_filter="all", category_filter="all"):
     if 'cart' not in request.session:
         cart = Cart.objects.create(total=0)
         request.session['cart'] = cart.id
@@ -58,7 +64,6 @@ def catalog_page(request, brand_filter="all", category_filter="all"):
     elif category_filter != 'all':
         title = f"Обзор {brand_filter} {category_filter}"
     context = {
-        'shoe_search': shoe_search,
         'selected_title': title,
         'shoes': display_models,
         'brand': brand_filter,
