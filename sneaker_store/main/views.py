@@ -34,9 +34,12 @@ def search_view(request):
         Q(name__icontains=query) |
         Q(brand__name__icontains=query)
     ).order_by('name')
+
     context = {
+        'query': query,
         'shoe_search': shoe_search,
     }
+    return render(request, 'catalog.html', context)
 
 
 def catalog_page(request, brand_filter="all", category_filter="all"):
@@ -82,15 +85,15 @@ def catalog_page(request, brand_filter="all", category_filter="all"):
 
 
 # Add a shoe form page.
-def add_shoe_page(request):
-    # Kicks out user to /admin if they are not logged in as admin
-    if 'admin' not in request.session:
-        return redirect('/admin')
-
-    context = {
-        'form': ShoeModelForm()
-    }
-    return render(request, "add_shoe_page.html", context)
+# def add_shoe_page(request):
+#     # Kicks out user to /admin if they are not logged in as admin
+#     if 'admin' not in request.session:
+#         return redirect('/admin')
+#
+#     context = {
+#         'form': ShoeModelForm()
+#     }
+#     return render(request, "add_shoe_page.html", context)
 
 
 # Inventory Management Page.
