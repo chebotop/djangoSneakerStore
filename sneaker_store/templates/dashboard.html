@@ -1,7 +1,7 @@
 
 {% block head %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{#<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">#}
 {{ block.super }}
 {% endblock %}
 
@@ -11,16 +11,17 @@
     <ul>
     {% for brand_dict in module.children %}
         <li>
-            <a href="{{ brand_dict.brand_url }}">{{ brand_dict.brand.name }}</a>
+            <p href="">{{ brand_dict.brand.name }}
+             </p>
             <ul>
                 {% for category_dict in brand_dict.categories %}
                     <li style="margin-left: 20px;">
-                        <a href="{{ category_dict.category.url }}">{{ category_dict.category.name }} ({{ category_dict.shoes|length }} items)</a>
+                        <a href="{{ category_dict.category_edit }}">{{ category_dict.category.name }} ({{ category_dict.shoes|length }} items)</a>
                         <ul style="margin-left: 40px;">
-                        {% for shoe_dict in category_dict.shoes %}
+                        {% for shoe in category_dict.shoes %}
                             <li>
-                                <img src="{{ shoe_dict.shoe.image.url }}" width="50" height="30">
-                                <a href="{{ shoe_dict.shoe_url }}">{{ shoe_dict.shoe.name }}</a></li>
+                                <img src="{{ shoe.shoe.image.url }}" width="50" height="30">
+                                <a href="{{ shoe.shoe_url }}">{{ shoe.shoe.name }}</a></li>
                         {% empty %}
                             <li>Нет доступной обуви в этой категории</li>
                         {% endfor %}

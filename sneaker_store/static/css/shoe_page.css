@@ -1,0 +1,260 @@
+.main {
+    margin-top: 115px;
+}
+
+/*Carousel start*/
+.carousel {
+ margin-top: 20px;
+}
+.carousel-inner img{
+    padding: 1px 1px;
+}
+.carousel-item .thumb {
+    width: 25%;
+    cursor: pointer;
+    float: left;
+}
+.carousel-item .thumb img {
+    width: 100%;
+    margin: 2px;
+    background-size: contain;
+
+}
+.carousel-item img {
+    width: 100%;
+    height: 450px;
+    object-fit: contain;
+}
+
+.modal-trigger-image {
+    cursor: zoom-in;
+}
+
+.shoeId {
+    font-size: 12px;
+    color: #acacac;
+    padding: 8px 0;
+    display: block;
+    margin-bottom: 0;
+}
+
+/* carousel thumbnail */
+.carousel {
+    margin-top: 20px;
+   }
+   .item .thumb {
+    width: 25%;
+    cursor: pointer;
+    float: left;
+   }
+   .item .thumb img {
+    width: 100%;
+    margin: 2px;
+   }
+   .item img {
+    width: 100%; 
+   }
+   .thumb img {
+       height: 100px;
+       object-fit: cover;
+   }
+/* end thumbnail */
+
+/* Стили для модального окна */
+.modal-dialog {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  height: 100%;
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Стили для контента модального окна */
+.modal-content {
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Стили для тела модального окна */
+.modal-body {
+  padding: 0; /* Убираем отступы */
+}
+
+/* Стили для изображения */
+#modalImage {
+  max-width: 100vh;
+  max-height: 100vh; /* Максимальная высота - 100% от высоты окна просмотра */
+  object-fit: contain; /* Позволяет изображению сохранять пропорции */
+}
+
+.shoeBrand {
+    font-weight: 400;
+    display: block;
+    font-size: 1rem;
+    line-height: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+}
+#shoeDescription {
+    justify-content: center;
+}
+
+
+#would-like {
+    margin-top: 20px
+}
+
+.size-select-row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
+
+.img-align {
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.product-price {
+    display: flex;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.card {
+    border: none !important;
+}
+
+#pageShoeName {
+    margin-top: 100px;
+}
+
+.description {
+    text-align: justify;
+}
+.product-price {
+
+}
+
+.sizes-container {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0 auto;
+}
+
+
+.size-box {
+    position: relative; 
+    background-color: #f5f5f5;
+    margin: 5px;
+    padding: 10px 20px;
+    text-align: center;
+    font-weight: normal;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-container {
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+
+.size-box:hover, .size-box.size-selected {
+    background-color: #40E0D0;
+    color: white;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: 100%;
+    background-color: black;
+    color: #fff;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    opacity: 0;
+    transform: translateX(-50%);
+    transition: opacity 0.3s; visibility: 0.3s;
+    pointer-events: none;
+    text-align: center !important;
+
+}
+
+/* Отображение тултипа при наведении */
+.size-box:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.size-selected {
+    background-color: #40E0D0;
+    color: white;
+}
+
+
+
+@media only screen and (min-width: 775px) {
+    .small-display-size {
+        display: none;
+    }
+    .carousel-flex {
+        flex-wrap: nowrap !important;
+}
+
+}
+
+/* @media only screen and (min-width: 600px) {
+    .sizes-container {
+
+    }
+} */
+@media only screen and (max-width: 775px) {
+.row {
+    display: flex;
+    justify-content: center !important;
+}
+.mobile-select {
+    display: block;
+}
+.sizes-container {
+    display: none;
+}
+.size-box {
+    width: 100%; /* Растягивание элементов на всю ширину контейнера */
+    margin: 5px 0; /* Добавление отступа сверху и снизу для каждого элемента */
+}
+.submit-container {
+    width: 100%; /* Растягивание контейнера кнопки на всю ширину */
+    justify-content: center; /* Центрирование кнопки внутри контейнера */
+}
+.col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+}
+.btn-dark {
+    margin-top: 10px;
+    width: 100%;
+}
+.btn-danger {
+    justify-content: center;
+    width: 100%;
+    background-color: red;
+    color: white;
+    margin-top: 10px;
+}

@@ -144,9 +144,9 @@ def shoe_page(request, shoe_id):
         'sizes': sizes,
         'shoe_images': shoe_images,
         'related_shoes': related_shoes,
-        'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
-        'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
-        'adidases': ShoeBrand.objects.get(name="Adidas").models.all(),
+            # 'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
+            # 'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
+            # 'adidases': ShoeBrand.objects.get(name="Adidas").models.all(),
     }
 
     return render(request, 'shoe_page.html', context)
@@ -172,9 +172,9 @@ def cart(request):
     context = {
         'cart': Cart.objects.get(id=request.session['cart_id']),
         'cart_items': cart_items,
-        'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
-        'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
-        'adidases': ShoeBrand.objects.get(name="Adidas").models.all(),
+        # 'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
+        # 'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
+        # 'adidases': ShoeBrand.objects.get(name="Adidas").models.all(),
     }
 
     return render(request, 'cart.html', context)
@@ -270,17 +270,13 @@ def checkout_process_guest(request):
         user=guest_user,
         # credit_card = credit_card,
     )
-
     # Removes the purchased items from the store inventory.
     for item in cart.cart_items.all():
         shoe = item.shoe
         shoe.inventory = shoe.inventory - item.quantity
         shoe.quantity_sold = shoe.quantity_sold + item.quantity
         shoe.save()
-    #     # Places order_id in session to retrieve for confirmation page.
     request.session['order_id'] = new_order.id
-
-    # Removes cart from session. The next visit to the store page will create a new cart.
     request.session.pop("cart_id")
 
     return redirect('/confirmation')
@@ -288,15 +284,9 @@ def checkout_process_guest(request):
 
 # Order confirmation page.
 def confirmation(request):
-    # Retrieves order from session.
     current_order = Order.objects.get(id=request.session['order_id'])
 
-    # Formats credit card number to just show last digits.
-    # This may be a security vulnerability. Not sure.
     cc_last_digits = current_order.credit_card.number % 10000
-
-    # Because credit card expiration date is stored as a date with the first of the month,
-    # this reformats it as a MM/YY
     cc_expiration_date = current_order.credit_card.expiration_date.strftime('%m/%y')
 
     context = {
@@ -306,34 +296,3 @@ def confirmation(request):
     }
 
     return render(request, 'confirmation.html', context)
-
-# Admin page for viewing all orders.
-# def orders_page(request):
-#     if 'admin' not in request.session:
-#         return render(request, "admin_login.html")
-#
-#     context = {
-#         'orders': Order.objects.all().order_by('-created_at')
-#     }
-#
-#     return render(request, 'orders_page.html', context)
-
-# def update_status(request):
-#     order = Order.objects.get(id=request.POST['order_id'])
-#     order.status = request.POST['status']
-#     order.save()
-#
-#     return redirect('/admin/orders')
-
-# def order_details(request, order_id):
-#     if 'admin' not in request.session:
-#         return redirect('/admin')
-#     order = Order.objects.get(id=order_id)
-#     # Because credit card expiration date is stored as a date with the first of the month,
-#     # this reformats it as a MM/YY
-#     cc_expiration_date = order.credit_card.expiration_date.strftime('%m/%y')
-#     context = {
-#         'order': order,
-#         'cc_expiration_date': cc_expiration_date
-#     }
-#     return render(request,"order_details.html", context)

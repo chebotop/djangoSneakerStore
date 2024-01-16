@@ -1,0 +1,29 @@
+body {
+    padding-top: 70px;
+    background: #eecda3;
+    background: -webkit-linear-gradient(to right, #d3b997, #ef629f);
+    background: linear-gradient(to right, #000000, rgb(127, 228, 241));
+    min-height: 100vh;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between; /* Располагает элементы с равным пространством между ними */
+    align-items: center; /* Выравнивает элементы по центру по вертикали */
+}
+
+.form-update,
+.form-delete {
+    flex: 1; /* Обе формы будут разделять доступное пространство поровну */
+    margin-right: 10px; /* Отступ справа для формы обновления */
+}
+
+.form-update {
+    flex: none; /* Убирает flex-свойство, чтобы форма не растягивалась */
+    margin-right: 5px;
+    margin-bottom: 2px; /* Убирает отступ справа для формы удаления */
+}
+
+input[type='text'] {
+    vertical-align: middle;
+}

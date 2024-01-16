@@ -18,10 +18,13 @@ class ShoeGalleryImagesInline(SortableInlineAdminMixin, admin.StackedInline):  #
             return format_html('<img src="{}" width="70" height="50" />', obj.image.url)
         return format_html('<span class="no-image">No Image</span>')
 
+# class ShoeBrandAdmin(SortableAdminBase, MPTTModelAdmin, admin.ModelAdmin):
+#     list_display = ('brand', )
+
 
 class ShoeModelAdmin(SortableAdminBase, MPTTModelAdmin, admin.ModelAdmin):
     form = ShoeModelForm
-    list_display = ('image_tag', 'brand', 'model', 'price')
+    list_display = ('image_tag', 'brand', 'parent', 'price')
     inlines = [ShoeGalleryImagesInline]
 
     @admin.display(description='Image')
