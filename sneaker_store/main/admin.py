@@ -27,6 +27,15 @@ class ShoeModelAdmin(SortableAdminBase, MPTTModelAdmin, admin.ModelAdmin):
     list_display = ('image_tag', 'brand', 'parent', 'price')
     inlines = [ShoeGalleryImagesInline]
 
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        brand_id = request.GET.get('brand_id')
+        category_id = request.GET.get('category_id')
+        if brand_id and category_id:
+            form.base_fields['brand'].initial = brand_id
+            form.base_fields['parent'].initial = category_id
+        return form
+
     @admin.display(description='Image')
     def image_tag(self, obj):
         if obj.image:

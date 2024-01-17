@@ -15,11 +15,12 @@ class CustomTreeModule(modules.DashboardModule):
             {
                 'brand': brand,
                 'brand_url': reverse('catalog_page_filter', args=[brand, 'all']),
-
                 'brand_edit': reverse('admin:main_shoebrand_change', args=[brand.pk]),
+
                 'categories': [
                     {
                         'category': category,
+                        'category_url': reverse('catalog_page_filter', args=[brand, category]),
                         'category_edit': reverse('admin:main_categorymodel_change', args=[category.pk]),
 
                         'shoes': [

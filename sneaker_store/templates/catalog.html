@@ -44,7 +44,7 @@
                                                         <a href='/browse/{{ brand }}/all' class="text-secondary" data-abc="true">{{ brand }}</a>
                                                         <ul>
                                                             {% for category in brand.categories.all %}
-                                                                <a href='/browse/{{ brand }}/{{ category }}' class="text-secondary" data-abc="true">{{ category }}</a>
+                                                                <p><a href='/browse/{{ brand }}/{{ category }}' class="text-secondary" data-abc="true">{{ category }}</a></p>
                                                             {% endfor %}
                                                         </ul>
                                                     </li>

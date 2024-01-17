@@ -1,7 +1,7 @@
 
 {% block head %}
 {% load static %}
-{#<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">#}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 {{ block.super }}
 {% endblock %}
 
@@ -11,13 +11,24 @@
     <ul>
     {% for brand_dict in module.children %}
         <li>
-            <p href="">{{ brand_dict.brand.name }}
-             </p>
+            <p  >{{ brand_dict.brand.name }}
+                <a href="{{ brand_dict.brand_edit }}"><img src="{% static 'images/admin-icons/edit.png' %}" alt="edit"></a>
+                <a href="{{ brand_dict.brand_url }}"><img src="{% static 'images/admin-icons/foreign.png' %}" alt="foreign" style="width: 16px; height: 16px;"></a>
+
+            </p>
             <ul>
                 {% for category_dict in brand_dict.categories %}
                     <li style="margin-left: 20px;">
-                        <a href="{{ category_dict.category_edit }}">{{ category_dict.category.name }} ({{ category_dict.shoes|length }} items)</a>
+                        <p>
+                            {{ category_dict.category.name }} ({{ category_dict.shoes|length }} items)
+                            <a href="{{ category_dict.category_edit }}">
+                            <img src="{% static 'images/admin-icons/edit.png' %}" alt="edit">
+                            </a>
+
+                            <a href="{{  category_dict.category_url }}"><img src="{% static 'images/admin-icons/foreign.png' %}" alt="foreign" style="width: 16px; height: 16px;"></a>
+                        </p>
                         <ul style="margin-left: 40px;">
+
                         {% for shoe in category_dict.shoes %}
                             <li>
                                 <img src="{{ shoe.shoe.image.url }}" width="50" height="30">
@@ -25,13 +36,15 @@
                         {% empty %}
                             <li>Нет доступной обуви в этой категории</li>
                         {% endfor %}
+                        <a href="{% url 'admin:main_shoemodel_add' %}?brand_id={{ brand_dict.brand.pk }}&category_id={{ category_dict.category.pk }}">
+                            <img src="{% static 'images/admin-icons/add.png' %}" alt="add"> Добавить модель в данную категорию</a>
 
-                        {% for category in standalone_categories %}
-                            <h3>{{ category.name }}</h3>
-                                {% for shoe in category.shoes.all %}
+{#                            {% for category in standalone_categories %}#}
+{#                                <h3>{{ category.name }}</h3>#}
+{#                                {% for shoe in category.shoes.all %}#}
                                     {# вывод обуви #}
-                                {% endfor %}
-                            {% endfor %}
+{#                                {% endfor %}#}
+{#                            {% endfor %}#}
                         </ul>
                 </li>
                 {% endfor %}

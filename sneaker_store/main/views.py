@@ -64,6 +64,7 @@ def catalog_page(request, brand_filter="all", category_filter="all"):
     if brand_filter != 'all' and category_filter == 'all':
         title += f" {brand_filter}"
     elif category_filter != 'all':
+        display_models = display_models.filter(parent__name=category_filter)
         title = f"Обзор {brand_filter} {category_filter}"
     context = {
         'selected_title': title,
@@ -73,11 +74,6 @@ def catalog_page(request, brand_filter="all", category_filter="all"):
         'all_models_names': sorted(set([model.name for model in all_models])),
         'all_brands': [brand for brand in shoebrands],
         'all_models': [model for model in all_models],
-
-        # 'category': category,
-        'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
-        'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
-        'adidases': ShoeBrand.objects.get(name="Adidas").models.all(),
         'max_price': max_price,
         'min_price': min_price,
     }
