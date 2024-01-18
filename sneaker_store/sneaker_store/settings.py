@@ -18,22 +18,13 @@ SCOPE_SHEETS = os.getenv('SCOPE_SHEETS')
 SCOPE_DRIVE = os.getenv('SCOPE_DRIVE')
 TOKEN = os.getenv('TOKEN')
 
-# Кастомная панель в django-admin-tools
 ADMIN_TOOLS_INDEX_DASHBOARD = 'main.dashboard.CustomDashboard'
 
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-()
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-c_=2$^yczi2gdf8bz1yfge6px8o84^*m08t7(u!q=frhpi=k6('
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*',
                  'cb5e-46-101-89-251.ngrok-free.app',
@@ -41,7 +32,7 @@ ALLOWED_HOSTS = ['*',
 
 
 CSRF_TRUSTED_ORIGINS = [
-                        'https://crossboost.ru',
+                         'https://crossboost.ru',
                         ]
 
 
