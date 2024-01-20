@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import ShoeBrand, ShoeModel, ShoeGalleryImages, CategoryModel
+from .models import ShoeBrand, ShoeModel, ShoeGalleryImages, CategoryModel, ShoeSize
 from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin, SortableAdminBase
 from .forms import ShoeModelForm
 from mptt.admin import MPTTModelAdmin

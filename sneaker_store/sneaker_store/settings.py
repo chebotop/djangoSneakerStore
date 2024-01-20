@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'django-insecure-c_=2$^yczi2gdf8bz1yfge6px8o84^*m08t7(u!q=frhpi=k6('
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*',
                  'cb5e-46-101-89-251.ngrok-free.app',
