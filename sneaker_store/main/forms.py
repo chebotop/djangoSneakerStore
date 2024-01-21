@@ -1,5 +1,5 @@
 from django import forms
-from .models import ShoeModel
+from .models import ShoeModel, CategoryModel
 
 
 class ShoeModelForm(forms.ModelForm):
@@ -7,4 +7,10 @@ class ShoeModelForm(forms.ModelForm):
 
     class Meta:
         model = ShoeModel
-        fields = '__all__'  
+        fields = '__all__'
+
+
+class CategoryModelForm(forms.ModelForm):
+    class Meta:
+        category = CategoryModel
+        field = '__all__'

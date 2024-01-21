@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from .models import ShoeBrand, ShoeModel, ShoeGalleryImages, CategoryModel, ShoeSize
 from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin, SortableAdminBase
-from .forms import ShoeModelForm
+from .forms import ShoeModelForm, CategoryModelForm
 from mptt.admin import MPTTModelAdmin
 
 
@@ -17,6 +17,7 @@ class ShoeGalleryImagesInline(SortableInlineAdminMixin, admin.StackedInline):  #
         if obj.image:
             return format_html('<img src="{}" width="70" height="50" />', obj.image.url)
         return format_html('<span class="no-image">No Image</span>')
+
 
 # class ShoeBrandAdmin(SortableAdminBase, MPTTModelAdmin, admin.ModelAdmin):
 #     list_display = ('brand', )
@@ -51,6 +52,19 @@ class ShoeModelAdmin(SortableAdminBase, MPTTModelAdmin, admin.ModelAdmin):
     class Media:
         js = ('js/image-upload.js',)
 
+
+class CategoryModelAdmin(SortableAdminBase, MPTTModelAdmin, admin.ModelAdmin):
+    form = CategoryModelForm
+    list_display = ['name', 'parent']
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        brand_id = request.GET.get('brand_id')
+        if brand_id:
+            form.base_fields['parent'].initial = brand_id
+        return form
+
+
 # Не удалять, пока существует данная модель в базе данных
 # @admin.register(ShoeGalleryImages)
 # class ShoeGalleryImagesAdmin(SortableAdminMixin, admin.ModelAdmin):
@@ -58,7 +72,7 @@ class ShoeModelAdmin(SortableAdminBase, MPTTModelAdmin, admin.ModelAdmin):
 
 
 admin.site.register(ShoeBrand, MPTTModelAdmin)
-admin.site.register(CategoryModel, MPTTModelAdmin)
+admin.site.register(CategoryModel, CategoryModelAdmin)
 admin.site.register(ShoeModel, ShoeModelAdmin)
 
 # admin.site.register(ShoeSize)

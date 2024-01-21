@@ -14,6 +14,7 @@
             <p  >{{ brand_dict.brand.name }}
                 <a href="{{ brand_dict.brand_edit }}"><img src="{% static 'images/admin-icons/edit.png' %}" alt="edit"></a>
                 <a href="{{ brand_dict.brand_url }}"><img src="{% static 'images/admin-icons/foreign.png' %}" alt="foreign" style="width: 16px; height: 16px;"></a>
+                <a href="{% url 'admin:main_categorymodel_add' %}?brand_id={{ brand_dict.brand.pk }}"><img src="{% static 'images/admin-icons/add.png' %}"></a>
 
             </p>
             <ul>

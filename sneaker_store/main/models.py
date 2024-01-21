@@ -40,12 +40,12 @@ class CategoryModel(MPTTModel):
 
 
 class ShoeModel(MPTTModel):
-    name = models.CharField(max_length=45, verbose_name='Имя модели')
+    name = models.CharField(max_length=65, verbose_name='Имя модели')
     brand = models.ForeignKey(ShoeBrand, related_name='models', on_delete=models.CASCADE, max_length=45, verbose_name='Бренд')
     parent = models.ForeignKey(CategoryModel, related_name='shoe_models', null=True, blank=True,
                                on_delete=models.CASCADE, max_length=20, default='', verbose_name='Категория')
     price = models.IntegerField(verbose_name='Цена')
-    desc = models.TextField(verbose_name='Описание к модели')
+    desc = models.TextField(verbose_name='Описание к модели', blank=True, null=True)
     image = models.ImageField(upload_to='gallery', default='', verbose_name='Изображение миниатюры')
     sizes = models.ManyToManyField(ShoeSize, related_name='sizes', verbose_name='Размеры')
     created_at = models.DateTimeField(auto_now_add=True)
