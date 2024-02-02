@@ -55,7 +55,7 @@
                             <a class="dropdown-item" href="/browse/{{ brand }}/{{ category }}">{{ category.name }}</a>
                             {% endfor %}
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/browse/Air Jordan/all">ОБЗОР JORDAN</a>
+                            <a class="dropdown-item" href="/browse/{{ brand }}/all">ОБЗОР {{ brand.name }}</a>
                         </div>
                     </li>
                     {% endfor %}
@@ -79,5 +79,13 @@
         </nav>
     {% endblock %}
         {% block content %}{% endblock %}
-    </body> 
+    </body>
+<script>
+    $(document).ready(function () {
+        $('.dropdown').hover(function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);}, function () {
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+        });
+    });
+</script>
 </html>

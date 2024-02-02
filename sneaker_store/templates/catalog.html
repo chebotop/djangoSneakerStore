@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row">
             <!-- filter column -->
-            <div class="col-lg-3 col-md-3">
+            <div class="col-lg-4 col-md-4">
                 {% if not query %}
                 <div class="container">
                     <div class="row">
@@ -30,7 +30,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="card">
+                            <div class="filter-card">
                                 <article class="filter-group">
                                     <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside1" data-abc="true" aria-expanded="false" class="collapsed">
                                         <i class="icon-control fa fa-chevron-down"></i>
@@ -40,11 +40,22 @@
                                         <div class="card-body">
                                             <ul class="list-menu">
                                                 {% for brand in all_brands %}
-                                                    <li>
-                                                        <a href='/browse/{{ brand }}/all' class="text-secondary" data-abc="true">{{ brand }}</a>
-                                                        <ul>
+                                                    <li class="brand-li">
+                                                        <a class="brand-li-header" data-abc="true" data-target="#brandCategories_{{ forloop.counter }}">{{ brand }}</a>
+                                                        <ul class="categories-ul" id="brandCategories_{{ forloop.counter }}">
                                                             {% for category in brand.categories.all %}
-                                                                <p><a href='/browse/{{ brand }}/{{ category }}' class="text-secondary" data-abc="true">{{ category }}</a></p>
+                                                                <li class="categories-li">
+                                                                    <a class="categories-link" href='/browse/{{ brand }}/{{ category }}' data-abc="true">{{ category }}</a></li>
+
+
+                                                                {% for shoe in shoes %}
+                                                                    {% if shoe.parent == category %}
+                                                                        <li><img src="{{ shoe.image.url }}" style="max-width:40px" alt="shoe image thumbnail">
+                                                                            <a href="/browse/shoe/{{model.id}}" class="text-secondary" data-abc="true">{{ shoe }}</a>
+                                                                        </li>
+                                                                    {% endif %}
+                                                                {% endfor %}
+
                                                             {% endfor %}
                                                         </ul>
                                                     </li>
@@ -60,9 +71,7 @@
                                     <div class="filter-content collapse" id="collapse_aside2">
                                         <div class="card-body">
                                             <ul class="list-menu">
-                                                {% for shoe in shoes %}
-                                                <li><img src="{{ shoe.image.url }}" height="20px" width="30px"><a href="/browse/shoe/{{model.id}}" class="text-secondary" data-abc="true">{{ shoe }}</a></li>
-                                                {% endfor %}
+
                                             </ul>
                                         </div>
                                     </div>
@@ -75,16 +84,16 @@
                                         </a>
                                     </header>
                                     <div class="filter-content collapse" id="collapse_aside3" style="">
-                                        <div class="card-body">
+                                        <div class="price-filter justify-content-center">
                                             <form>
                                                 <div class="form-row">
                                                     <div class="form-group col-md-6 col-12">
                                                         <label>Мин.</label>
-                                                        <input class="form-control w-100" placeholder="₽" name="min" min="0" type="number" value={{min_price}}>
+                                                        <input class="form-control w-75" placeholder="₽" name="min" min="0" type="number" value={{min_price}}>
                                                     </div>
-                                                    <div class="form-group text-right col-md-6 col-12 justify-content-center">
+                                                    <div class="form-group text-right col-md-6 col-12">
                                                         <label>Макс.</label>
-                                                        <input class="form-control w-100" placeholder="₽" name="max" min="0" type="number" value={{max_price}}>
+                                                        <input class="form-control w-75" placeholder="₽" name="max" min="0" type="number" value={{max_price}}>
                                                     </div>
                                                 </div>
                                                 <button href="#" class="highlight-button btn btn-medium button xs-margin-bottom-five" data-abc="true">Применить</button>
@@ -100,28 +109,30 @@
             </div>
             <!-- end filter column -- 
                product grid column -->
-            <div class="col-lg-9 col-md-9">
-                <div class="row wow fadeIn catalog-column">
+            <div class="items col-lg-8 col-md-8">
+                <div class="row wow fadeIn catalog-column justify-content-center">
                     {% if not shoe_search %}
                     {% for shoe in shoes %}
-                    <div class="card border-0 col-lg-3 col-md-6 col-sm-6 mb-5">
+                    <div class="align-content-around card border-0 col-lg-3 col-md-6 col-sm-6 mb-5" id="card">
+                        <div id="card-upper">
                             <a href="/shoe/{{shoe.id}}">
                                 <img src="{{shoe.image.url}}" alt="" width="100%">
                             </a>
-                            <div class="card-body text-center">
-                                <a href="/shoe/{{shoe.id}}" class="text-secondary">
-                                    <h6>{{shoe.model}}</h6>
-                                </a>
+                        </div>
+                            <div class="card-middle text-center">
                                 <h5>
                                     <strong>
                                         <a href="/shoe/{{shoe.id}}" class="text-dark">{{shoe.name}}</a>
                                     </strong>
                                 </h5>
                                 <!-- <h6 class="text-secondary">{{shoe.color}}</h6> -->
-                                <h5 class="font-weight-bold">
-                                    ₽{{shoe.price}}
-                                </h5>
+
                             </div>
+                        <div class="card-bottom">
+                            <h5 class="font-weight-bold">
+                                    ₽{{shoe.price}}
+                            </h5>
+                        </div>
                     </div>
                     {% endfor %}
                     {% else %}
@@ -155,19 +166,8 @@
             <!-- end product grid column -->
         </div>
     </div>
-    <script>
-        if (window.innerWidth >= 775) {
-            const collapseLinks = document.querySelectorAll('[data-toggle="collapse"]');
+<script src="{% static 'js/catalog.js' %}"></script>
+<script src="{% static 'js/size-selection.js' %}"></script>
 
-            collapseLinks.forEach(function (link) {
-                const targetId = link.getAttribute('data-target');
-                const collapseElement = document.querySelector(targetId);
-
-                link.classList.remove('collapsed');
-                link.setAttribute('aria-expanded', 'true');
-                collapseElement.classList.add('show');
-            });
-        }
-    </script>
 </main>
 {% endblock %}

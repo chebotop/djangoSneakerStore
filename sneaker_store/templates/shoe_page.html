@@ -12,11 +12,10 @@
 <main role="main" class="main">
 <div class="container">
   <div class="row carousel-flex">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-6 col-md-offset-2 wrapper">
        <div id="carousel" class="carousel slide" data-interval="false" data-ride="carousel">
-<!--           для чего нужен if image -->
-           {% if shoe_images|length == 0 %}
-               <img src="{{ shoe.image.url }}" style="max-width: 100%;">
+           {% if shoe_images|length == 0  %}
+               <img src="{{ shoe.image.url }}">
            {% endif %}
         <div class="carousel-inner">
          {% for image in shoe_images %}
@@ -47,17 +46,14 @@
            {% endfor %}
           </div>
          </div>
-<!--         <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">-->
-<!--          <span class="carousel-control-prev-icon"></span>-->
-<!--         </a>-->
-<!--         <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">-->
-<!--          <span class="carousel-control-next-icon"></span>-->
-         </a>
+
+
         </div>
        </div>
       </div>
 
-                <div class="shoeContent col-4 col-lg-4 col-md-4 col-sm-8 col-xs-10" id="product">
+
+                <div class="shoeContent col-6" id="product">
                     <div class="shoeName">
                         <p class="shoeId">{{shoe.id}}</p>
                         <p class="shoeBrand">{{shoe.brand.name}}</p>
@@ -128,4 +124,5 @@
 </main>
 <script src="{% static 'js/size-selection.js' %}"></script>
 <script src="{% static 'js/modal-window.js' %}"></script>
+<script src="{% static 'js/carousel-width.js' %}"></script>
 {% endblock %}
