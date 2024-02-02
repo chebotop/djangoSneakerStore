@@ -100,9 +100,9 @@ WSGI_APPLICATION = 'sneaker_store.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DATABASE_NAME', 'default_db_name'),
-        'USER': os.environ.get('DATABASE_USER', 'default_user'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWD', 'default_password'),
+        'NAME': os.environ.get('DATABASE_NAME', 'db_convert'),
+        'USER': os.environ.get('DATABASE_USER', 'django'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWD', '8619204'),
         'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
         'PORT': os.environ.get('DATABASE_PORT', '5432'),
     }
