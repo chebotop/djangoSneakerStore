@@ -1,10 +1,7 @@
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     var categoriesLists = document.querySelectorAll('.categories-ul');
     categoriesLists.forEach(function(list) {
-        list.style.display = 'block';
+        list.style.display = 'none';
     });
 
     var brandListItems = document.querySelectorAll('.brand-li');
@@ -24,16 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-
-
 // document.addEventListener('DOMContentLoaded', () => {
 //   document.querySelector('.brand-li').addEventListener('click', () => {
 //     console.log('Clicked!');
 //   });
 // });
-
-
 
 if (window.innerWidth >= 775) {
     const collapseLinks = document.querySelectorAll('[data-toggle="collapse"]');

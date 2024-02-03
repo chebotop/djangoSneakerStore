@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from .models import ShoeBrand, ShoeModel, ShoeGalleryImages, CategoryModel, ShoeSize
 from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin, SortableAdminBase
-from .forms import ShoeModelForm, CategoryModelForm
+from .forms import ShoeModelForm, CategoryModelForm, ShoeBrandForm
 from mptt.admin import MPTTModelAdmin
 
 
@@ -65,14 +65,23 @@ class CategoryModelAdmin(SortableAdminBase, MPTTModelAdmin, admin.ModelAdmin):
         return form
 
 
-# Не удалять, пока существует данная модель в базе данных
-# @admin.register(ShoeGalleryImages)
-# class ShoeGalleryImagesAdmin(SortableAdminMixin, admin.ModelAdmin):
-#     pass
+class ShoeBrandAdmin(MPTTModelAdmin):
+    form = ShoeBrandForm
+    list_display = ['image_tag', 'name']
+
+    @admin.display(description='Thumbnail')
+    def image_tag(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="55" height="45" />', obj.image.url)
+        return format_html('<span class="no-image">No Image</span>')
 
 
-admin.site.register(ShoeBrand, MPTTModelAdmin)
+admin.site.register(ShoeBrand, ShoeBrandAdmin)
 admin.site.register(CategoryModel, CategoryModelAdmin)
 admin.site.register(ShoeModel, ShoeModelAdmin)
 
 # admin.site.register(ShoeSize)
+# Не удалять, пока существует данная модель в базе данных
+# @admin.register(ShoeGalleryImages)
+# class ShoeGalleryImagesAdmin(SortableAdminMixin, admin.ModelAdmin):
+#     pass

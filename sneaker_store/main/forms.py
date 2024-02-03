@@ -1,5 +1,5 @@
 from django import forms
-from .models import ShoeModel, CategoryModel
+from .models import ShoeModel, CategoryModel, ShoeBrand
 
 
 class ShoeModelForm(forms.ModelForm):
@@ -12,5 +12,13 @@ class ShoeModelForm(forms.ModelForm):
 
 class CategoryModelForm(forms.ModelForm):
     class Meta:
-        category = CategoryModel
-        field = '__all__'
+        model = CategoryModel
+        fields = '__all__'
+
+
+class ShoeBrandForm(forms.ModelForm):
+    image = forms.FileField(required=False, label='Загрузить изображение логотипа')
+
+    class Meta:
+        model = ShoeBrand
+        fields = '__all__'

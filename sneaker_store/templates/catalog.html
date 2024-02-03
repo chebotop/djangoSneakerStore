@@ -22,11 +22,11 @@
     <div class="container">
         <div class="row">
             <!-- filter column -->
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-4 col-md-4 filter-column">
                 {% if not query %}
                 <div class="container">
                     <div class="row">
-                        <h5 class="text-secondary">Фильтр</h5>
+                        <h5 class="text-secondary">Фильтр.</h5>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -41,13 +41,14 @@
                                             <ul class="list-menu">
                                                 {% for brand in all_brands %}
                                                     <li class="brand-li">
-                                                        <a class="brand-li-header" data-abc="true" data-target="#brandCategories_{{ forloop.counter }}">{{ brand }}</a>
+                                                        <a class="brand-li-header" data-abc="true" data-target="#brandCategories_{{ forloop.counter }}">
+                                                            <img src="{{ brand.image.url }}" height="45px%" alt="logo-img">
+                                                            {{ brand }}
+                                                        </a>
                                                         <ul class="categories-ul" id="brandCategories_{{ forloop.counter }}">
                                                             {% for category in brand.categories.all %}
                                                                 <li class="categories-li">
                                                                     <a class="categories-link" href='/browse/{{ brand }}/{{ category }}' data-abc="true">{{ category }}</a></li>
-
-
                                                                 {% for shoe in shoes %}
                                                                     {% if shoe.parent == category %}
                                                                         <li><img src="{{ shoe.image.url }}" style="max-width:40px" alt="shoe image thumbnail">
@@ -60,18 +61,6 @@
                                                         </ul>
                                                     </li>
                                                 {% endfor %}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </article>
-                                <article class="filter-group">
-                                    <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside2" data-abc="true" aria-expanded="false" class="collapsed"> <i class="icon-control fa fa-chevron-down"></i>
-                                            <h6 class="title">Модель</h6>
-                                        </a> </header>
-                                    <div class="filter-content collapse" id="collapse_aside2">
-                                        <div class="card-body">
-                                            <ul class="list-menu">
-
                                             </ul>
                                         </div>
                                     </div>

@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from mptt.models import MPTTModel, TreeForeignKey
 import mptt
+from PIL import Image
 import os
 
 
@@ -11,13 +12,35 @@ class ShoeBrand(MPTTModel):
         ordering = ('tree_id', 'level')
 
     name = models.CharField(max_length=20)
-    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children', editable=False)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,
+                            related_name='children', editable=False)
+    image = models.ImageField(upload_to='brand_images', verbose_name='Лого')
 
     class MPTTMeta:
         order_insertion_by = ['name']
 
     def __str__(self):
         return self.name
+
+    @staticmethod
+    def make_image_square(img_path):
+        with Image.open(img_path) as img:
+            max_size = max(img.width, img.height)
+            new_img = Image.new('RGB', (max_size, max_size),
+                                (255, 255, 255))
+
+            x = (max_size - img.width) // 2
+            y = (max_size - img.height) // 2
+
+            new_img.paste(img, (x, y))
+
+            return new_img
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img_path = self.image.path
+        img = self.make_image_square(img_path)
+        img.save(img_path, 'PNG')
 
 
 class ShoeSize(models.Model):
@@ -30,7 +53,8 @@ class ShoeSize(models.Model):
 
 class CategoryModel(MPTTModel):
     name = models.CharField(null=True, blank=True, max_length=20, default='')
-    parent = models.ForeignKey(ShoeBrand, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Бренд', related_name='categories')
+    parent = models.ForeignKey(ShoeBrand, on_delete=models.CASCADE, null=True, blank=True,
+                               verbose_name='Бренд', related_name='categories')
 
     class MPTTMeta:
         order_insertion_by = ['name']
@@ -41,7 +65,8 @@ class CategoryModel(MPTTModel):
 
 class ShoeModel(MPTTModel):
     name = models.CharField(max_length=65, verbose_name='Имя модели')
-    brand = models.ForeignKey(ShoeBrand, related_name='models', on_delete=models.CASCADE, max_length=45, verbose_name='Бренд')
+    brand = models.ForeignKey(ShoeBrand, related_name='models', on_delete=models.CASCADE,
+                              max_length=45, verbose_name='Бренд')
     parent = models.ForeignKey(CategoryModel, related_name='shoe_models', null=True, blank=True,
                                on_delete=models.CASCADE, max_length=20, default='', verbose_name='Категория')
     price = models.IntegerField(verbose_name='Цена')
