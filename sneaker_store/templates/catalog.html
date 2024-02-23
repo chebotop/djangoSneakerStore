@@ -14,9 +14,6 @@
     <div class="container">
         <div class="row justify-content-center" style="padding-top: 30px">
             <h2 class="text-center">{{ selected_title }}</h2>
-<!--            как бы здесь иметь динамический brand, зависящий от того, есть ли после browse в ссылке соответствующий лейбл,
-                либо осуществлен выбор бренда через клик в левом меню фильтра -->
-
         </div>
     </div>
     <div class="container">
@@ -51,8 +48,10 @@
                                                                     <a class="categories-link" href='/browse/{{ brand }}/{{ category }}' data-abc="true">{{ category }}</a></li>
                                                                 {% for shoe in shoes %}
                                                                     {% if shoe.parent == category %}
-                                                                        <li><img src="{{ shoe.image.url }}" style="max-width:40px" alt="shoe image thumbnail">
-                                                                            <a href="/browse/shoe/{{model.id}}" class="text-secondary" data-abc="true">{{ shoe }}</a>
+                                                                        <li class="shoes-li">
+{#                                                                        data-id="{{shoe.id}}#}
+                                                                            <img src="{{ shoe.image.url }}" style="max-width:40px" alt="shoe image thumbnail">
+                                                                            <a href="/browse/shoe/{{shoe.id}}" class="text-secondary" data-abc="true">{{ shoe }}</a>
                                                                         </li>
                                                                     {% endif %}
                                                                 {% endfor %}
@@ -98,7 +97,7 @@
             </div>
             <!-- end filter column -- 
                product grid column -->
-            <div class="items col-lg-8 col-md-8">
+            <div id="items-div" class="items col-lg-8 col-md-8">
                 <div class="row wow fadeIn catalog-column justify-content-center">
                     {% if not shoe_search %}
                     {% for shoe in shoes %}
@@ -157,6 +156,22 @@
     </div>
 <script src="{% static 'js/catalog.js' %}"></script>
 <script src="{% static 'js/size-selection.js' %}"></script>
+{#<script>#}
+{#$(document).ready(function() {#}
+{#    $('.shoes-li').click(function() {#}
+{#        var shoeId = $(this).data('id'); // Получение ID товара#}
+{#        $.ajax({#}
+{#            url: '{% url "get_data" %}'#}
+{#            success: function(data) {#}
+{#                // Здесь код для обновления содержимого страницы данными о товаре#}
+{#                // Например, можно обновить div с ID 'ajax-response'#}
+{#                $('#items-div').html('<p>Название товара: ' + data.name + '</p>'); // Пример обновления#}
+{#            }#}
+{#        });#}
+{#    });#}
+{# });#}
+{#</script>#}
+
 
 </main>
 {% endblock %}

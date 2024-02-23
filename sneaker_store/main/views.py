@@ -1,8 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
-from django.http import HttpResponseBadRequest
-from django.contrib import messages
+from django.http import HttpResponseBadRequest, JsonResponse
 from django.db.models import Q
-import datetime
 from main.models import *
 import logging
 

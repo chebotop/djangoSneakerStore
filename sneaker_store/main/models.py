@@ -34,6 +34,18 @@ class ShoeBrand(MPTTModel):
 
             new_img.paste(img, (x, y))
 
+            # make image transparent
+            datas = new_img.getdata()
+            new_data = []
+
+            for item in datas:
+                if item[0] == 255 and item[1] == 255 and item[2] == 255:
+                    new_data.append((255, 255, 255, 0))
+                else:
+                    new_data.append(item)
+
+            new_img.putdata(new_data)
+
             return new_img
 
     def save(self, *args, **kwargs):
