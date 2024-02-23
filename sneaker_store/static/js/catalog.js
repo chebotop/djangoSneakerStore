@@ -29,7 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (targetList) {
                     targetList.style.display = targetList.style.display === 'none' ? 'block' : 'none';
-                    event.target.classList.toggle('open');
+                    if (event.target.classList.contains('brand-li-header')) {
+                        event.target.classList.toggle('open');
+                    }
                 }
             }
         });
@@ -52,3 +54,23 @@ if (window.innerWidth >= 775) {
         collapseElement.classList.add('show');
     });
 }
+$(document).ready(function() {
+    $('body').on('click', '.categories-li', function(e) {
+        console.log('Клик сработал');
+        e.preventDefault();
+        var url = $(this).data('id'); // Получение ID товара
+        console.log(url);
+        $.ajax({
+            url: url,
+            headers: {'Ajax-Request': 'true'},
+            type: 'GET',
+            dataType: 'html',
+            success: function(data) {
+                $('#items-div').html(data); // Пример обновления
+            },
+            // error: function(xhr, status, error) {
+            //     console.error(error);
+            // }
+        });
+    });
+});

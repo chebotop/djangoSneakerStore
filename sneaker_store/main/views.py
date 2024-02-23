@@ -40,11 +40,15 @@ def search_view(request):
     return render(request, 'catalog.html', context)
 
 
+def get_data(request):
+    data = {"html": "<div>Новый контент</div>"}
+    return JsonResponse(data)
+
+
 def catalog_page(request, brand_filter="all", category_filter="all"):
     if 'cart' not in request.session:
         cart = Cart.objects.create(total=0)
         request.session['cart'] = cart.id
-
     all_models = ShoeModel.objects.all()
     if request.method == 'GET' and request.GET.get('min'):
         min_price = request.GET['min']
@@ -75,7 +79,12 @@ def catalog_page(request, brand_filter="all", category_filter="all"):
         'max_price': max_price,
         'min_price': min_price,
     }
-    return render(request, 'catalog.html', context)
+    if request.headers.get('Ajax-Request') == 'true':
+        html = render_to_string('catalog_right_side.html', context)
+
+        return JsonResponse({'html': html})
+    else:
+        return render(request, 'catalog.html', context)
 
 
 # Add a shoe form page.
@@ -138,9 +147,9 @@ def shoe_page(request, shoe_id):
         'sizes': sizes,
         'shoe_images': shoe_images,
         'related_shoes': related_shoes,
-            # 'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
-            # 'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
-            # 'adidases': ShoeBrand.objects.get(name="Adidas").models.all(),
+        # 'air_jordans': ShoeBrand.objects.get(name="Air Jordan").models.all(),
+        # 'nikes': ShoeBrand.objects.get(name="Nike").models.all(),
+        # 'adidases': ShoeBrand.objects.get(name="Adidas").models.all(),
     }
 
     return render(request, 'shoe_page.html', context)

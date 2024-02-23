@@ -14,6 +14,6 @@ urlpatterns = [
     path('checkout_process_guest', views.checkout_process_guest),
     path('confirmation', views.confirmation),
     path('browse/<str:brand_filter>/<str:category_filter>', views.catalog_page, name='catalog_page_filter'),
+    path('ajax/get_data/', views.get_data, name='get_data'),
     path('browse/search_results', views.search_view, name='search_results'),
-    # path('ajax/get_data/', views.get_data, name='get_data'),
 ]

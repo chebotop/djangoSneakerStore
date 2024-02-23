@@ -1,3 +1,14 @@
+from django.test import TestCase, Client
+from django.urls import reverse
+from .main import *
+
+class AjaxTest(TestCase):
+    def test_ajax_request(self):
+        client = Client(HTTP_AJAX_REQUEST='true')
+        response = client.get(reverse('catalog_page'))  # Используйте reverse для получения URL из имени представления
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('html' in response.json())  # Проверьте, что ответ содержит ключ 'html'
+
 # import sqlite3
 
 # # Подключение к базе данных SQLite

@@ -181,6 +181,8 @@ h6 {
     display: block;
     padding: 12px 10px 12px 5px;
     border-top: solid 1px teal;
+    cursor: pointer;
+
 }
 .categories-li:hover {
     background-color: teal;
@@ -193,7 +195,6 @@ h6 {
 }
 .shoes-li {
     margin-bottom: 5px;
-    cursor: pointer;
 }
 
 
