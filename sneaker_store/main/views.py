@@ -1,8 +1,11 @@
+from django.template.loader import render_to_string
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.http import HttpResponseBadRequest, JsonResponse
 from django.db.models import Q
 from main.models import *
 import logging
+import datetime
+
 
 logger = logging.getLogger(__name__)
 
@@ -80,9 +83,9 @@ def catalog_page(request, brand_filter="all", category_filter="all"):
         'min_price': min_price,
     }
     if request.headers.get('Ajax-Request') == 'true':
-        html = render_to_string('catalog_right_side.html', context)
-
-        return JsonResponse({'html': html})
+        html = render_to_string('catalog_grid_column.html', context)
+        # response = "Everything is OK"
+        return HttpResponse(html)
     else:
         return render(request, 'catalog.html', context)
 
@@ -222,9 +225,11 @@ def checkout(request):
     # Returns user to home is cart is empty.
     if not cart.cart_items.exists():
         return redirect("/")
+    current_year = datetime.datetime.now().year
 
     context = {
         'cart': Cart.objects.get(id=request.session['cart_id']),
+        'current_year': current_year,
     }
 
     return render(request, 'checkout_guest.html', context)
@@ -240,6 +245,7 @@ def checkout_process_guest(request):
         state=request.POST['state'],
         zipcode=request.POST['zipcode'],
     )
+
     # Checks to see if Billing Address was marked same as Shipping Address.
     if 'same_address' in request.POST:
         billing_address = shipping_address
@@ -281,6 +287,7 @@ def checkout_process_guest(request):
         shoe.save()
     request.session['order_id'] = new_order.id
     request.session.pop("cart_id")
+
 
     return redirect('/confirmation')
 

@@ -123,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    } ,
+    },
 ]
 
 # Internationalization
@@ -160,6 +160,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# CORS
 CORS_ORIGIN_ALLOW_ALL = True
 # +++++++++++++++++++++++++++
 # +++++++++++++++++++++++++++
@@ -168,7 +169,40 @@ CORS_ORIGIN_ALLOW_ALL = True
 # --------------------------
 # !!!!!!!!!!!!!!!!!!!!!!!!!!
 CORS_ORIGIN_WHITELIST = [
-    '*']
+    "https://crossboost.ru",
+    "https://api.crossboost.ru",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000"
+    ]
+ORS_ALLOWED_ORIGINS = [
+    "https://crossboost.ru",
+    "https://api.crossboost.ru",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000"
+]
+CORS_EXPOSE_HEADERS = [
+    'Ajax-Request',
+]
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+CORS_ALLOW_HEADERS = [
+    'Ajax-Request',
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
 # LOGGING = {
 #     'version': 1,

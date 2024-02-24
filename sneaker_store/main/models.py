@@ -9,15 +9,17 @@ import os
 class ShoeBrand(MPTTModel):
     class Meta:
         db_table = 'brand'
-        ordering = ('tree_id', 'level')
+        ordering = ('tree_id', 'level', 'order')
 
     name = models.CharField(max_length=20)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,
                             related_name='children', editable=False)
     image = models.ImageField(upload_to='brand_images', verbose_name='Лого')
 
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+
     class MPTTMeta:
-        order_insertion_by = ['name']
+        order_insertion_by = ['order', 'name']
 
     def __str__(self):
         return self.name

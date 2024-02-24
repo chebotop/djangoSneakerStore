@@ -1,18 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // var images = document.querySelectorAll('img[id^="sourceImage_"]');
-    // images.forEach(function(img) {
-    //     var canvasId = 'brandCanvas_' + img.id.split('_')[1];
-    //     var canvas = document.getElementById(canvasId);
-    //     if (canvas) {
-    //         var context = canvas.getContext('2d');
-    //         var image = new Image();
-    //         image.src = img.src;
-    //         image.onload = function() {
-    //             canvas.width = image.width;
-    //             context.drawImage(image, 0, 0);
-    //         };
-    //     }
-    // });
 
     var categoriesLists = document.querySelectorAll('.categories-ul');
     categoriesLists.forEach(function(list) {
@@ -66,11 +52,15 @@ $(document).ready(function() {
             type: 'GET',
             dataType: 'html',
             success: function(data) {
+                console.log('AJAX query is successful')
                 $('#items-div').html(data); // Пример обновления
             },
-            // error: function(xhr, status, error) {
-            //     console.error(error);
-            // }
+            error: function(xhr, status, error) {
+                console.error(error);
+                console.error("Ответ сервера:", xhr.responseText); // Добавлено для отладки
+                $('#items-div').html("<p>Произошла ошибка при получении данных. Попробуйте еще раз.</p>"); // Выводим сообщение об ошибке
+
+            }
         });
     });
 });
