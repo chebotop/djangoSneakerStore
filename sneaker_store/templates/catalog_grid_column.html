@@ -1,0 +1,56 @@
+ product grid column -->
+            <div id="items-div" class="items col-lg-8 col-md-8">
+                <div class="row wow fadeIn catalog-column justify-content-center">
+                    {% if not shoe_search %}
+                    {% for shoe in shoes %}
+                    <div class="align-content-around card border-0 col-lg-3 col-md-6 col-sm-6 mb-5" id="card">
+                        <div id="card-upper">
+                            <a href="/shoe/{{shoe.id}}">
+                                <img src="{{shoe.image.url}}" alt="" width="100%">
+                            </a>
+                        </div>
+                            <div class="card-middle text-center">
+                                <h5>
+                                    <strong>
+                                        <a href="/shoe/{{shoe.id}}" class="text-dark">{{shoe.name}}</a>
+                                    </strong>
+                                </h5>
+                                <!-- <h6 class="text-secondary">{{shoe.color}}</h6> -->
+
+                            </div>
+                        <div class="card-bottom">
+                            <h5 class="font-weight-bold">
+                                    ₽{{shoe.price}}
+                            </h5>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div>
+                        <h6>Результаты поиска для "{{ query }}"</h6>
+                    </div>
+                    {% for shoe in shoe_search %}
+                        <div class="card border-0 col-lg-3 col-md-6 col-sm-6 mb-5">
+                            <a href="/shoe/{{shoe.id}}">
+                                <img src="{{shoe.image.url}}" alt="" width="100%">
+                            </a>
+                            <div class="card-body text-center">
+                                <a href="/shoe/{{shoe.id}}" class="text-secondary">
+                                    <h6>{{shoe.model}}</h6>
+                                </a>
+                                <h5>
+                                    <strong>
+                                        <a href="/shoe/{{shoe.id}}" class="text-dark">{{shoe.name}}</a>
+                                    </strong>
+                                </h5>
+                                <!-- <h6 class="text-secondary">{{shoe.color}}</h6> -->
+                                <h5 class="font-weight-bold">
+                                    ₽{{shoe.price}}
+                                </h5>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <!-- end product grid column -->
